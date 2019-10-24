@@ -179,17 +179,23 @@
     
 <div class="card">
     
+    <div class="card-image">
+        <a href="/2016/10/23/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="image is-7by1">
+            <img class="thumbnail" src="http://pztz2ptv6.bkt.clouddn.com//relengxing-pic/20191023223729_XXL7o6_%E6%A0%91%E8%8E%93%E6%B4%BE.jpeg" alt="树莓派3搭建linux服务器">
+        </a>
+    </div>
+    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-10-23T11:47:19.000Z">2016-10-23</time>
+                <time class="level-item has-text-grey" datetime="2016-10-23T14:27:55.000Z">2016-10-23</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 minutes read (About 411 words)
+                    3 minutes read (About 442 words)
                 </span>
                 
                 
@@ -405,13 +411,13 @@
             
             <a href="/2016/10/23/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="树莓派3搭建linux服务器">
+                    <img class="thumbnail" src="http://pztz2ptv6.bkt.clouddn.com//relengxing-pic/20191023223729_XXL7o6_%E6%A0%91%E8%8E%93%E6%B4%BE.jpeg" alt="树莓派3搭建linux服务器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2016-10-23T11:47:19.000Z">2016-10-23</time></div>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2016-10-23T14:27:55.000Z">2016-10-23</time></div>
                     <a href="/2016/10/23/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">树莓派3搭建linux服务器</a>
                     <p class="is-size-7 is-uppercase">
                         
@@ -525,13 +531,13 @@
             
             <a href="/2016/10/23/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="树莓派3搭建linux服务器">
+                    <img class="thumbnail" src="http://pztz2ptv6.bkt.clouddn.com//relengxing-pic/20191023223729_XXL7o6_%E6%A0%91%E8%8E%93%E6%B4%BE.jpeg" alt="树莓派3搭建linux服务器">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2016-10-23T11:47:19.000Z">2016-10-23</time></div>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2016-10-23T14:27:55.000Z">2016-10-23</time></div>
                     <a href="/2016/10/23/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title has-link-black-ter is-size-6 has-text-weight-normal">树莓派3搭建linux服务器</a>
                     <p class="is-size-7 is-uppercase">
                         
@@ -646,31 +652,38 @@
                 
                 </div>
             
+
+
+
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span></br>
+            <script>
+                var now = new Date(); 
+                function createtime() { 
+                    var grt= new Date("12/28/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                    now.setTime(now.getTime()+250); 
+                    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                } 
+            setInterval("createtime()",250);
+            </script>
+        
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            本站访客数<span id="busuanzi_value_site_uv"></span>人次
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+
+
+
             </div>
         </div>
     </div>
-    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
-    <script>
-        var now = new Date(); 
-        function createtime() { 
-            var grt= new Date("12/28/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
-            now.setTime(now.getTime()+250); 
-            days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
-            hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
-            if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
-            mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
-            seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
-            snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
-            document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
-            document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
-        } 
-    setInterval("createtime()",250);
-    </script>
 
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    本站总访问量<span id="busuanzi_value_site_pv"></span>次
-    本站访客数<span id="busuanzi_value_site_uv"></span>人次
-    本文总阅读量<span id="busuanzi_value_page_pv"></span>次
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
