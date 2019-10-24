@@ -236,10 +236,22 @@
     <div class="card-content">
         <h3 class="title is-5 has-text-weight-normal">Comments</h3>
         
-<div class="notification is-danger">
-    You forgot to set the <code>owner</code>, <code>admin</code>, <code>repo</code>, <code>client_id</code>, or <code>client_secret</code> for Gittalk.
-    Please set it in <code>_config.yml</code>.
-</div>
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '23470f956d3db70be30b',
+        clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
+        id: '633245fffc73d879b85cfe7ae471cbfe',
+        repo: 'relengxing.github.io',
+        owner: 'relengxing',
+        admin: "relengxing",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
 
     </div>
 </div>
