@@ -188,21 +188,10 @@
     <div class="card-content">
         <h3 class="title is-5 has-text-weight-normal">Comments</h3>
         
-<div id="comment-container"></div>
-<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
-<script src="https://billts.site/js/gitment.js"></script>
-<script>
-	var gitment = new Gitment({
-		id: 'a7224db13f3a49096aa27c1876d1a947',
-		owner: 'relengxing',
-		repo: 'relengxing.github.io',
-		oauth: {
-			client_id: '23470f956d3db70be30b',
-			client_secret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
-		},
-	})
-	gitment.render('comment-container')
-</script>
+<div class="notification is-danger">
+    You forgot to set the <code>owner</code>, <code>admin</code>, <code>repo</code>, <code>client_id</code>, or <code>client_secret</code> for Gittalk.
+    Please set it in <code>_config.yml</code>.
+</div>
 
     </div>
 </div>
