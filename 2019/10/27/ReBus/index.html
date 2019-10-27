@@ -8,19 +8,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>树莓派3搭建linux服务器 - relengxing blog</title>
+<title>ReBus - relengxing blog</title>
 
 
-    <meta name="description" content="前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。">
-<meta name="keywords" content="linux,树莓派">
+    <meta name="description" content="ReBus说明ReBus 是一个模仿 RxBus 写的，基于 reactor3 的事件总线RxBus 一般是 Android 端使用的，ReBus 一般是后端使用的RxBus 参考链接： https:&#x2F;&#x2F;github.com&#x2F;relengxing&#x2F;RxBusReBus 源码链接： https:&#x2F;&#x2F;github.com&#x2F;relengxing&#x2F;ReBus 推荐直接看 RxBus 的解析，这边只贴代码，">
+<meta name="keywords" content="Java,SpringBoot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派3搭建linux服务器">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;24&#x2F;%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8&#x2F;index.html">
+<meta property="og:title" content="ReBus">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;27&#x2F;ReBus&#x2F;index.html">
 <meta property="og:site_name" content="relengxing blog">
-<meta property="og:description" content="前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。">
+<meta property="og:description" content="ReBus说明ReBus 是一个模仿 RxBus 写的，基于 reactor3 的事件总线RxBus 一般是 Android 端使用的，ReBus 一般是后端使用的RxBus 参考链接： https:&#x2F;&#x2F;github.com&#x2F;relengxing&#x2F;RxBusReBus 源码链接： https:&#x2F;&#x2F;github.com&#x2F;relengxing&#x2F;ReBus 推荐直接看 RxBus 的解析，这边只贴代码，">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-10-24T13:37:53.213Z">
+<meta property="og:updated_time" content="2019-10-27T08:35:45.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -81,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/eva06.jpg" alt="树莓派3搭建linux服务器" height="28">
+                <img src="/images/eva06.jpg" alt="ReBus" height="28">
             
             </a>
         </div>
@@ -137,13 +137,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-24T13:29:08.000Z">2019-10-24</time>
+                <time class="level-item has-text-grey" datetime="2019-10-27T08:20:47.000Z">2019-10-27</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 380 个字)
+                    3 分钟 读完 (大约 471 个字)
                 </span>
                 
                 
@@ -157,19 +157,20 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                树莓派3搭建linux服务器
+                ReBus
             
         </h1>
         <div class="content">
-            <p>前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。</p>
-<a id="more"></a>
+            <h1 id="ReBus"><a href="#ReBus" class="headerlink" title="ReBus"></a>ReBus</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>ReBus 是一个模仿 RxBus 写的，基于 reactor3 的事件总线<br>RxBus 一般是 Android 端使用的，<br>ReBus 一般是后端使用的<br>RxBus 参考链接： <a href="https://github.com/relengxing/RxBus" target="_blank" rel="noopener">https://github.com/relengxing/RxBus</a><br>ReBus 源码链接： <a href="https://github.com/relengxing/ReBus" target="_blank" rel="noopener">https://github.com/relengxing/ReBus</a></p>
+<p>推荐直接看 RxBus 的解析，这边只贴代码，因为思想是一模一样的，只是底层的包不一样，封装完后用法也是一样的。</p>
+<h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><p>ReBus 代码</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.relenxing.config;</span><br><span class="line"><span class="hljs-keyword">import</span> com.relenxing.domain.Event;</span><br><span class="line"><span class="hljs-keyword">import</span> reactor.core.publisher.Flux;</span><br><span class="line"><span class="hljs-keyword">import</span> reactor.core.publisher.ReplayProcessor;</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReBus</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 事件总线的核心。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ReplayProcessor&lt;Event&gt; bus;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 构造函数，初始化</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">ReBus</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        bus = ReplayProcessor.create();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 单例模式</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ReBus <span class="hljs-title">getDefault</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> HelperHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 延迟初始化，这里是利用了 Java 的语言特性，内部类只有在使用的时候，才会去加载，</span></span><br><span class="line"><span class="hljs-comment">     * 从而初始化内部静态变量。关于线程安全，这是 Java 运行环境自动给你保证的，</span></span><br><span class="line"><span class="hljs-comment">     * 在加载的时候，会自动隐形的同步。在访问对象的时候，</span></span><br><span class="line"><span class="hljs-comment">     * 不需要同步 Java 虚拟机又会自动给你取消同步，所以效率非常高。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelperHolder</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ReBus instance = <span class="hljs-keyword">new</span> ReBus();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 发送普通事件</span></span><br><span class="line"><span class="hljs-comment">    */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">post</span><span class="hljs-params">(Event event)</span></span>&#123;</span><br><span class="line">        bus.onNext(event);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span>  Flux&lt;Event&gt; <span class="hljs-title">on</span><span class="hljs-params">(String type)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> bus.filter(e -&gt; e.getEventName().equals(type));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>组装就不说了。。成品如下<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%A0%91%E8%8E%93%E6%B4%BE.jpeg" alt="树莓派"><br>几个要下载的东西:<br>链接：<a href="http://pan.baidu.com/s/1o8FC0xO" target="_blank" rel="noopener">http://pan.baidu.com/s/1o8FC0xO</a> 密码：psww<br>这个是系统<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/UbuntuServer.jpg" alt="系统"><br>把他解压出来是一个.img 文件。</p>
-<p>这个软件安装一下。<br><code>Win32DiskImager-0.9.5-install.exe</code><br>内存卡，读卡器准备好</p>
-<p>然后就写到系统里面<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%AD%A5%E9%AA%A4.jpg" alt="步骤"></p>
-<p>写完以后就可以插到树莓派上了，网线端接路由器的 LAN 口，电脑和树莓派在同一个局域网下。<br>上电，等开好机</p>
-<p>在路由器管理页面下可以找到<br>我的是 192.168.0.104</p>
-<p>然后就可以用 xshell 连接了<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/Xshell%E8%BF%9E%E6%8E%A5.jpg" alt="Xshell连接"><br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%99%BB%E5%BD%95.jpg" alt="登录"><br>然后就登录成功了<br>我这里是用有线连接的，无线的没有去做了<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F.jpg" alt="成功"><br>OK,大功告成，然后可以开始装各种软件的开发环境了。</p>
+<p>Event 代码：</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.relenxing.domain;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Event</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> String eventName;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> T event;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Event</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Event</span><span class="hljs-params">(String eventName, T event)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.eventName = eventName;</span><br><span class="line">        <span class="hljs-keyword">this</span>.event = event;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getEventName</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> eventName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setEventName</span><span class="hljs-params">(String eventName)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.eventName = eventName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getEvent</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> event;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setEvent</span><span class="hljs-params">(T event)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.event = event;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>demo</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.relenxing;</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"123"</span>, <span class="hljs-string">"123"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"456"</span>, <span class="hljs-string">"swdw"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"123"</span>, <span class="hljs-string">"312"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"456"</span>, <span class="hljs-string">"2f2"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"123"</span>, <span class="hljs-string">"12f"</span>));</span><br><span class="line"></span><br><span class="line">       ReBus.getDefault().on(<span class="hljs-string">"123"</span>).map(Event::getEvent).subscribe(System.out::println);</span><br><span class="line">       ReBus.getDefault().on(<span class="hljs-string">"456"</span>).map(Event::getEvent).subscribe(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -177,7 +178,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/linux/" rel="tag">linux</a>, <a class="has-link-grey -link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a>
+                    <a class="has-link-grey -link" href="/tags/Java/" rel="tag">Java</a>, <a class="has-link-grey -link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a>
                 </div>
             </div>
         </div>
@@ -224,16 +225,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/27/ReBus/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/27/RxBus/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">ReBus</span>
+                <span class="level-item">RxBus</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/24/%E5%8D%9A%E5%AE%A2%E8%AF%B4%E6%98%8E/">
-                <span class="level-item">博客说明</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                <span class="level-item">树莓派3搭建linux服务器</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -254,7 +255,7 @@
     var gitalk = new Gitalk({
         clientID: '23470f956d3db70be30b',
         clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
-        id: '63243894c4c70316cf861681c794eb7b',
+        id: 'ec0d226fc50d7bca69f282ed521ace37',
         repo: 'relengxing.github.io',
         owner: 'relengxing',
         admin: "relengxing",
@@ -779,7 +780,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/eva06.jpg" alt="树莓派3搭建linux服务器" height="28">
+                    <img src="/images/eva06.jpg" alt="ReBus" height="28">
                 
                 </a>
                 <p class="is-size-7">

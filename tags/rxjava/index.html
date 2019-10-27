@@ -8,19 +8,15 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>树莓派3搭建linux服务器 - relengxing blog</title>
+<title>标签: rxjava - relengxing blog</title>
 
 
-    <meta name="description" content="前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。">
-<meta name="keywords" content="linux,树莓派">
-<meta property="og:type" content="article">
-<meta property="og:title" content="树莓派3搭建linux服务器">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;24&#x2F;%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8&#x2F;index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="relengxing blog">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;rxjava&#x2F;index.html">
 <meta property="og:site_name" content="relengxing blog">
-<meta property="og:description" content="前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-10-24T13:37:53.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -81,7 +77,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/eva06.jpg" alt="树莓派3搭建linux服务器" height="28">
+                <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
             
             </a>
         </div>
@@ -130,56 +126,107 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">rxjava</a></li>
+        </ul>
+        </nav>
+    </div>
+</div>
+
+    
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-24T13:29:08.000Z">2019-10-24</time>
+                <time class="level-item has-text-grey" datetime="2019-10-27T08:40:31.000Z">2019-10-27</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 380 个字)
+                    10 分钟 读完 (大约 1442 个字)
                 </span>
                 
-                
-                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
-                    <i class="far fa-eye"></i>
-                    <span id="busuanzi_value_page_pv">0</span>次访问
-                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                树莓派3搭建linux服务器
+                <a class="has-link-black-ter" href="/2019/10/27/RxBus/">RxBus</a>
             
         </h1>
         <div class="content">
-            <p>前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。</p>
-<a id="more"></a>
+            <p>参考：用 RxJava 实现事件总线(Event Bus)<br><a href="http://www.jianshu.com/p/ca090f6e2fe2" target="_blank" rel="noopener">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
+<p>我这篇基本上就是按照上面那篇写的，对 Sticky 那一块进行了一些修改。<br>写下来让自己记得更深刻。这篇文章面向有 RxJava 基础的人，要是 HelloWorld 都没写过建议先看基础部分。</p>
+<p>Git 地址：<br><a href="https://github.com/relengxing/RxBus" target="_blank" rel="noopener">https://github.com/relengxing/RxBus</a></p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
+<li>新建工程</li>
+<li>添加 rxjava 和 rxandroid 依赖</li>
+<li>完成以下界面</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/2188564-7ecf70697afbb76e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="界面"></p>
+<ol start="4">
+<li>编写 RxBus 文件</li>
+<li>编写其他代码</li>
+</ol>
+<hr>
+<p>RxBus 是一个全局使用的总线，应该使用单例模式。<br>单例模式的具体写法可以自己研究下。<br>参考代码：<br><a href="http://www.race604.com/java-double-checked-singleton/" target="_blank" rel="noopener">http://www.race604.com/java-double-checked-singleton/</a></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">* Created by relengxing on 2016/8/12.</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RxBus</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">RxBus</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> RxBus <span class="hljs-title">getDefault</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> HelperHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelperHolder</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> RxBus instance = <span class="hljs-keyword">new</span> RxBus();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>组装就不说了。。成品如下<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%A0%91%E8%8E%93%E6%B4%BE.jpeg" alt="树莓派"><br>几个要下载的东西:<br>链接：<a href="http://pan.baidu.com/s/1o8FC0xO" target="_blank" rel="noopener">http://pan.baidu.com/s/1o8FC0xO</a> 密码：psww<br>这个是系统<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/UbuntuServer.jpg" alt="系统"><br>把他解压出来是一个.img 文件。</p>
-<p>这个软件安装一下。<br><code>Win32DiskImager-0.9.5-install.exe</code><br>内存卡，读卡器准备好</p>
-<p>然后就写到系统里面<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%AD%A5%E9%AA%A4.jpg" alt="步骤"></p>
-<p>写完以后就可以插到树莓派上了，网线端接路由器的 LAN 口，电脑和树莓派在同一个局域网下。<br>上电，等开好机</p>
-<p>在路由器管理页面下可以找到<br>我的是 192.168.0.104</p>
-<p>然后就可以用 xshell 连接了<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/Xshell%E8%BF%9E%E6%8E%A5.jpg" alt="Xshell连接"><br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%99%BB%E5%BD%95.jpg" alt="登录"><br>然后就登录成功了<br>我这里是用有线连接的，无线的没有去做了<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F.jpg" alt="成功"><br>OK,大功告成，然后可以开始装各种软件的开发环境了。</p>
+<h3 id="事件总线"><a href="#事件总线" class="headerlink" title="事件总线"></a>事件总线</h3><p>那么需要一根总线来传输数据。<br>这根总线就是 RxJava 中的 Subject。</p>
+<blockquote>
+<p>Subject 可以看成是一个桥梁或者代理，在某些 ReactiveX 实现中（ 如 RxJava） ，<strong>它同时充当了 Observer 和 Observable 的角色</strong>。因为它是一个 Observer，它可以订阅一个或多个 Observable；又因为它是一个 Observable，它可以转发它收到(Observe)的数据，也可以发射新的数据。</p>
+</blockquote>
+<p>在 RxJava 中<br>针对不同的场景一共有四种类型的 Subject。</p>
+<ul>
+<li>AsyncSubject</li>
+<li>BehaviorSubject</li>
+<li>PublishSubject</li>
+<li>ReplaySubject<br>关于这四种类型的具体说明参考：<a href="http://www.jianshu.com/p/d382c3f862d5" target="_blank" rel="noopener">RxJava：Subject 介绍</a></li>
+</ul>
+<p>这里使用的是 PublishSubject<br>PublishSubject：只会把在订阅发生的时间点之后来自原始 Observable 的数据发射给观察者；<br>又因为线程安全的问题，需要把 PublishSubject 转化为一个线程安全的 Subject，这部分内容也在<a href="http://www.jianshu.com/p/d382c3f862d5" target="_blank" rel="noopener">RxJava：Subject 介绍</a>最后一部分串行化中有介绍。<br>最后代码写成如下：</p>
+<pre><code>private final Subject&lt;Object,Object&gt; bus;
+private RxBus() {
+    bus = new SerializedSubject&lt;&gt;(PublishSubject.create());
+}</code></pre><p>总线有了，还差事件发布者（被观察者）和事件接受者（观察者）。</p>
+<h3 id="发送事件"><a href="#发送事件" class="headerlink" title="发送事件"></a>发送事件</h3><p>将事件 post 至 Subject，此时 Subject 作为 Observer 接收到事件（onNext），然后会发射给所有订阅该 Subject 的订阅者。<br>因为使用的是 PublishSubject，所以必须先订阅事件再发送事件才能介绍到，否则这些发送的事件会遗失。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">post</span><span class="hljs-params">(Object object)</span></span>&#123;</span><br><span class="line">    bus.onNext(object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/linux/" rel="tag">linux</a>, <a class="has-link-grey -link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a>
-                </div>
-            </div>
+<h3 id="接收事件"><a href="#接收事件" class="headerlink" title="接收事件"></a>接收事件</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">Observable&lt;T&gt; <span class="hljs-title">toObservable</span><span class="hljs-params">(Class&lt;T&gt; eventType)</span></span>&#123;</span><br><span class="line">   <span class="hljs-keyword">return</span> bus.ofType(eventType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ofType 是 filter 操作符的一个特殊形式。它过滤一个 Observable 只返回指定类型的数据。ofType 默认不在任何特定的调度器上指定 。</p>
+</blockquote>
+<p>有一点需要注意的是，在接收事件的地方不需要接收事件或者生命周期结束的时候一定要取消订阅，防止内存泄漏。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (!rxSubscription2.isUnsubscribed()) &#123;</span><br><span class="line">    rxSubscription2.unsubscribe();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="支持-Sticky-事件"><a href="#支持-Sticky-事件" class="headerlink" title="支持 Sticky 事件"></a>支持 Sticky 事件</h1><blockquote>
+<p>在 Android 开发中，Sticky 事件只指事件消费者在事件发布之后才注册的也能接收到该事件的特殊类型。Android 中就有这样的实例，也就是 Sticky Broadcast，即粘性广播。正常情况下如果发送者发送了某个广播，而接收者在这个广播发送后才注册自己的 Receiver，这时接收者便无法接收到刚才的广播，为此 Android 引入了 StickyBroadcast，在广播发送结束后会保存刚刚发送的广播（Intent），这样当接收者注册完 Receiver 后就可以接收到刚才已经发布的广播。这就使得我们可以预先处理一些事件，让有消费者时再把这些事件投递给消费者。</p>
+</blockquote>
+<p>参考：<a href="http://www.jianshu.com/p/71ab00a2677b" target="_blank" rel="noopener">深入 RxBus：［支持 Sticky 事件］</a></p>
+<p>关于方案选择不再详述了，参考上面的链接。<br>同样使用的是 ConcurrentHashMap<br>参考资料中使用的是</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Map&lt;Class&lt;?&gt;, Object&gt; mStickyEventMap;</span><br></pre></td></tr></table></figure>
+
+<p>那么同一个类只会有一个对象保留，后面发送的对象会把前面的对象覆盖掉。<br>而我希望一个新的对象不会覆盖老的对象，需要自己手动来删除。<br>所以这个地方改成</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ConcurrentHashMap&lt;Class&lt;?&gt;,List&lt;Object&gt;&gt; map;</span><br></pre></td></tr></table></figure>
+
+<p>Sticky 事件和普通事件使用的是同一个 Bus,所以接收者接收的是同一个对象时，当他们都订阅了事件时是没有区别的。</p>
+<h3 id="发送-Sticky-事件"><a href="#发送-Sticky-事件" class="headerlink" title="发送 Sticky 事件"></a>发送 Sticky 事件</h3><p>这个其实就是在发送普通时间之前把这个事件写入到刚刚的 map 中去。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postSticky</span><span class="hljs-params">(Object object)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (mStickyEventMap)&#123;</span><br><span class="line">        List list = mStickyEventMap.get(object.getClass());</span><br><span class="line">        <span class="hljs-keyword">if</span> (list == <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            list = <span class="hljs-keyword">new</span> ArrayList();</span><br><span class="line">       &#125;</span><br><span class="line">        list.add(object);</span><br><span class="line">        mStickyEventMap.put(object.getClass(),list);</span><br><span class="line">    &#125;</span><br><span class="line">    post(object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="接收-Sticky-事件"><a href="#接收-Sticky-事件" class="headerlink" title="接收 Sticky 事件"></a>接收 Sticky 事件</h3><p>这个就是先查看 map 中是否有这个事件，有的话使用.merginWith 一起发出来。</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">Observable&lt;T&gt; <span class="hljs-title">toObservableSticky</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Class&lt;T&gt; eventType)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (mStickyEventMap)&#123;</span><br><span class="line">        Observable&lt;T&gt; observable = bus.ofType(eventType);</span><br><span class="line">        <span class="hljs-keyword">final</span> List list =  mStickyEventMap.get(eventType);</span><br><span class="line">        <span class="hljs-keyword">if</span> (list != <span class="hljs-keyword">null</span> &amp;&amp; !list.isEmpty()) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> observable.mergeWith(Observable.create(<span class="hljs-keyword">new</span> Observable.OnSubscribe&lt;T&gt;()&#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">call</span><span class="hljs-params">(Subscriber&lt;? <span class="hljs-keyword">super</span> T&gt; subscriber)</span> </span>&#123;</span><br><span class="line">                  <span class="hljs-keyword">for</span> (Object obj :list) &#123;</span><br><span class="line">                      subscriber.onNext(eventType.cast(obj));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;));</span><br><span class="line">        &#125;<span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> observable;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还写了一些常用方法，例如 post 一个事件的时候覆盖同类事件，接收事件时消耗掉事件，代码在简书上写起来还是有点麻烦，详情看 GitHub，地址：<a href="https://github.com/relengxing/RxBus" target="_blank" rel="noopener">https://github.com/relengxing/RxBus</a><br>要使用的时候把 RxBus 文件直接复制到工程即可。<br>如果有 BUG 可以在评论区告诉我。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2188564-c8fdc8129972449b.gif?imageMogr2/auto-orient/strip" alt="动画图"></p>
+
         </div>
         
         
@@ -189,83 +236,11 @@
 
 
 
-<div class="card">
-    <div class="card-content">
-        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
-        <div class="buttons is-centered">
-            
-                
-<a class="button is-info donate">
-    <span class="icon is-small">
-        <i class="fab fa-alipay"></i>
-    </span>
-    <span>支付宝</span>
-    <div class="qrcode"><img src="/images/zhifubao.jpg" alt="支付宝"></div>
-</a>
-
-                
-                
-<a class="button is-success donate">
-    <span class="icon is-small">
-        <i class="fab fa-weixin"></i>
-    </span>
-    <span>微信</span>
-    <div class="qrcode"><img src="/images/weixin.jpg" alt="微信"></div>
-</a>
-
-                
-        </div>
-    </div>
-</div>
 
 
 
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
-        
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/27/ReBus/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">ReBus</span>
-            </a>
-        </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/24/%E5%8D%9A%E5%AE%A2%E8%AF%B4%E6%98%8E/">
-                <span class="level-item">博客说明</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
-    </div>
-</div>
 
 
-
-<div class="card">
-    <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">评论</h3>
-        
-<div id="comment-container"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
-<script>
-    var gitalk = new Gitalk({
-        clientID: '23470f956d3db70be30b',
-        clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
-        id: '63243894c4c70316cf861681c794eb7b',
-        repo: 'relengxing.github.io',
-        owner: 'relengxing',
-        admin: "relengxing",
-        createIssueManually: false,
-        distractionFreeMode: false
-    })
-    gitalk.render('comment-container')
-</script>
-
-    </div>
-</div>
 </div>
                 
 
@@ -779,7 +754,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/eva06.jpg" alt="树莓派3搭建linux服务器" height="28">
+                    <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
                 
                 </a>
                 <p class="is-size-7">
