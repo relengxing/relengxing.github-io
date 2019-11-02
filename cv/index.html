@@ -19,7 +19,7 @@
 <meta property="og:description" content="个人信息姓名：李超生日：1993-04-13籍贯：湖南-郴州学校：中国计量学院专业：机械电子工程学历：本科  联系方式手机：15658109965邮箱：relengxing@outlook.comQQ：670656469微信：15658109965  我的技能 精通 Java，熟悉 SpringBoot、Mybatis 等开发框架熟悉微服务，熟悉 SpringCloud 熟悉 Python，">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-10-28T13:30:51.087Z">
+<meta property="og:updated_time" content="2019-11-02T15:41:18.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -150,7 +150,7 @@
 <h3 id="我的技能"><a href="#我的技能" class="headerlink" title="我的技能"></a>我的技能</h3><ul>
 <li>精通 Java，熟悉 SpringBoot、Mybatis 等开发框架<br>熟悉微服务，熟悉 SpringCloud</li>
 <li>熟悉 Python，熟悉 Pandas，主要是数据处理方向</li>
-<li>熟悉 JS、HTML、CSS、Jquery、Bootstrap 等前端知识</li>
+<li>熟悉 JS、HTML、CSS、jQuery、Bootstrap 等前端知识</li>
 <li>熟悉 MySQL，Redis，Mongodb，RabbitMQ</li>
 <li>熟悉 Linux<br>能完成生产环境搭建及服务器运维</li>
 <li>熟悉 Docker、Kubernetes<br>经历公司容器化发展，能进行容器化开发和运维</li>
@@ -172,6 +172,13 @@
 <li><strong>学历</strong>：本科</li>
 </ul>
 <hr>
+<h3 id="个人介绍"><a href="#个人介绍" class="headerlink" title="个人介绍"></a>个人介绍</h3><ul>
+<li>五年软件开发经验，三年 Java 开发经验，基础扎实，涉猎广泛。</li>
+<li>学习能力强，能快速上手新技术，具备主动学习精神。</li>
+<li>思路清晰，具有良好的方案设计能力，解决问题能力强。</li>
+<li>沟通能力强，具有良好的团队合作精神。</li>
+</ul>
+<hr>
 <h3 id="社交主页"><a href="#社交主页" class="headerlink" title="社交主页"></a>社交主页</h3><ul>
 <li><strong>博客</strong>：<a href="https://relengxing.github.io/" target="_blank" rel="noopener">https://relengxing.github.io/</a></li>
 <li><strong>Github</strong>：<a href="https://github.com/relengxing" target="_blank" rel="noopener">https://github.com/relengxing</a></li>
@@ -179,9 +186,9 @@
 </ul>
 <hr>
 <h3 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验"></a>项目经验</h3><ul>
-<li><p><strong>项目名称</strong>: ETL pipeline<br><strong>时间</strong>：2019.01 – 2019.10<br><strong>负责内容</strong>：Python 软件开发<br><strong>项目介绍</strong>：此项目包含多个模块，流程是：客户上传文件到 FTP 服务器或者 Google Drive,此模块会根据配置扫描 FTP 服务器和 Google Drive，如果有符合规则的文件则进过简单的处理后上传到 Google Storage,并触发 Data Proc 任务，Data Proc 会对数据去重并写入 Big Query，然后预处理模块会对数据进行检查，检查出异常数据和缺失数据，并对数据进行修复，最后提取数据，写入到数据仓库中，方便报告使用。</p>
+<li><p><strong>项目名称</strong>: ETL pipeline<br><strong>时间</strong>：2019.01 – 2019.10<br><strong>负责内容</strong>：Python 软件开发<br><strong>项目介绍</strong>：此项目包含多个模块，流程是：客户上传文件到 FTP 服务器或者 Google Drive,触发器会根据配置扫描 FTP 服务器和 Google Drive，如果有符合规则的文件则进过简单的处理后上传到 Google Storage,并触发 Data Proc 任务，Data Proc 会对数据去重并写入 Big Query，然后预处理模块会对数据进行处理，检查出异常数据和缺失数据，并对数据进行修复，写入到 Big Query 中，这部分数据会供预测算法使用，最后还会提取数据，写入到数据仓库中，方便报告使用。</p>
 </li>
-<li><p><strong>项目名称</strong>：Kuberobot<br><strong>时间</strong>：2018.11 – 2018.12<br><strong>负责内容</strong>：PJAVA 软件开发<br><strong>项目介绍</strong>：此项目是一个 Kubernetes 任务发布系统，公司的任务统一发布到 redis， 由 kuberobot 根据优先级发布到 kubernetes，并发送运行结果到 Slack 上，支持自动扩容和手动扩容。</p>
+<li><p><strong>项目名称</strong>：Kuberobot<br><strong>时间</strong>：2018.11 – 2018.12<br><strong>负责内容</strong>：Java 软件开发<br><strong>项目介绍</strong>：此项目是一个 Kubernetes 任务发布系统，公司的任务统一发布到 redis，kuberobot 会根据任务优先级把任务发布到 kubernetes，并发送运行结果到 Slack 上，会根据任务队列的长度对 Kubernetes 进行扩缩容，支持自动扩容和手动扩容。</p>
 <!-- <details>
 <summary>Percolata 2019年架构图，展开查看</summary>
 <pre>
@@ -189,9 +196,9 @@
 </pre>
 </details> -->
 </li>
-<li><p><strong>项目名称</strong>：Admin portal<br><strong>时间</strong>：2017.08 – 2019.09<br><strong>负责内容</strong>：JAVA 软件开发<br><strong>项目介绍</strong>：此项目是一个对客户店铺和设备进行管理的项目，数据展示，记录所有客户操作，使用的是 SpringBoot。</p>
+<li><p><strong>项目名称</strong>：Admin portal<br><strong>时间</strong>：2017.08 – 2019.09<br><strong>负责内容</strong>：Java 软件开发<br><strong>项目介绍</strong>：此项目是一个对客户店铺和设备进行管理的项目，提供数据展示（例如：设备存活率，历史 data hole 等），设备配置，数据导入等功能，后端使用的是 SpringBoot，前端使用的是 JQuery，Bootstrap。</p>
 </li>
-<li><p><strong>项目名称</strong>：Staffum<br><strong>时间</strong>：2017.02 – 2018.10<br><strong>负责内容</strong>：JAVA 软件开发<br><strong>项目介绍</strong>：此项目是我加入 Percolata 接手的项目，主要是对零售商的数据进行管理（店铺数据，员工数据，销售数据，人流量数据），提供数据展示，排班系统（手动排班和自动排班），请假系统。我负责的是整个项目的运维，新需求开发，新版本开发。第一个版本使用 Springboot,第二个版本使用的是 SpringCloud。</p>
+<li><p><strong>项目名称</strong>：Staffum<br><strong>时间</strong>：2017.02 – 2018.10<br><strong>负责内容</strong>：Java 软件开发<br><strong>项目介绍</strong>：此项目是我加入 Percolata 接手的项目，主要是对零售商的数据进行管理（店铺数据，员工数据，销售数据，人流量数据），提供数据展示，排班（手动排班和自动排班），请假等功能。我负责的是整个项目的维护，新需求开发，新版本开发。第一个版本后端使用 Springboot,管理员前端使用的是 angular，员工前端使用的是 React Native，第二个版本后端使用的是 SpringCloud，前端使用的是 ionic。</p>
 <!-- <details>
 <summary>Percolata 2017年架构图，展开查看</summary>
 <pre>
@@ -207,7 +214,7 @@
 </li>
 <li><p><strong>项目名称</strong>：蓝牙转串口模块<br><strong>时间</strong>：2015.01 – 2015.01<br><strong>负责内容</strong>：单片机软件开发<br><strong>项目介绍</strong>：此项目是基于 SCH16L 单片机和 HC-06 蓝牙模块开发的。单片机通过一个串口和蓝牙模块进行通讯，另一个串口连接表记。可以通过给蓝牙发送数据和另一端的表记进行通讯。单片机可以识别是数据还是命令码，命令码可以对波特率等参数进行修改。</p>
 </li>
-<li><p><strong>项目名称</strong>：爬壁机器人<br><strong>时间</strong>：2013.10 – 2014.05<br><strong>负责内容</strong>：JAVA 软件开发，Golang 软件开发<br><strong>项目介绍</strong>：这是一个大学时做的项目，是可以在垂直墙面上运动的机器人，该项目还参与了挑战杯，获得挑战杯校一等奖。我是机械部分的负责人，负责机械部分设计，三维制图，并参与了电机驱动部分的软件开发。</p>
+<li><p><strong>项目名称</strong>：爬壁机器人<br><strong>时间</strong>：2013.10 – 2014.05<br><strong>负责内容</strong>：Solidworks 三维制图，电机驱动开发<br><strong>项目介绍</strong>：这是一个大学时做的项目，是可以在垂直墙面上运动的机器人，该项目还参与了挑战杯，获得挑战杯校一等奖。我是机械部分的负责人，负责机械部分设计，三维制图，并参与了电机驱动部分的软件开发。</p>
 </li>
 </ul>
 
