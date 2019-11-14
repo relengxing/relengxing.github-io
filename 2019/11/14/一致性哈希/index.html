@@ -8,15 +8,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: linux - relengxing blog</title>
+<title>一致性哈希 - relengxing blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="relengxing blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;linux&#x2F;index.html">
+    <meta name="description" content="背景这块就简单说一下，一致性哈希是为了解决简单哈希带来的问题。 以 redis 分布式缓存场景为例有大概一百万张图片要分在 4 台机器上，后来数据量变多了，需要增加一台机器。">
+<meta name="keywords" content="分布式,哈希,一致性哈希">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一致性哈希">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;14&#x2F;%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C&#x2F;index.html">
 <meta property="og:site_name" content="relengxing blog">
+<meta property="og:description" content="背景这块就简单说一下，一致性哈希是为了解决简单哈希带来的问题。 以 redis 分布式缓存场景为例有大概一百万张图片要分在 4 台机器上，后来数据量变多了，需要增加一台机器。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2019-11-14T12:34:51.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -77,7 +81,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                <img src="/images/eva06.jpg" alt="一致性哈希" height="28">
             
             </a>
         </div>
@@ -126,54 +130,62 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">linux</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-24T13:29:08.000Z">2019-10-24</time>
+                <time class="level-item has-text-grey" datetime="2019-11-14T11:52:25.000Z">2019-11-14</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 380 个字)
+                    5 分钟 读完 (大约 738 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/">树莓派3搭建linux服务器</a>
+                一致性哈希
             
         </h1>
         <div class="content">
-            <p>前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。</p>
+            <p>背景这块就简单说一下，一致性哈希是为了解决简单哈希带来的问题。</p>
+<p>以 redis 分布式缓存场景为例<br>有大概一百万张图片要分在 4 台机器上，后来数据量变多了，需要增加一台机器。</p>
+<a id="more"></a>
+
+<h2 id="简单哈希"><a href="#简单哈希" class="headerlink" title="简单哈希"></a>简单哈希</h2><p>简单哈希的做法是，首先计算哈希值，然后进行取模运算<br><code>hash(图片名称) % N</code><br>那么每张图片都会对应到一台机器上，很好的解决了图片分散存储的问题。</p>
+<p>但是，当我们需要增加一台服务器的时候就出问题了。 取模运算的结果不一样了，在对应的机器上找不到缓存，大量缓存在同一时间失效，造成了缓存的雪崩</p>
+<p>为了解决这个问题，发明了一致性哈希算法。</p>
+<h2 id="一致性哈希"><a href="#一致性哈希" class="headerlink" title="一致性哈希"></a>一致性哈希</h2><p>一致性哈希也是取模算法，但是不是对服务器数量，而是对 2^32 取模。<br>为什么是 2^32?<br>因为，java 中 int 的最大值是 2^31-1 最小值是-2^31,2^32 刚好是无符号整形的最大值；</p>
+<p>简单来说，一致性 Hash 算法将整个哈希值空间组织成一个虚拟的圆环，假设某哈希函数 H 的值空间为 0 ～ 2^32-1（即哈希值是一个 32 位无符号整形）<br>哈希算法合理的话，图片应该是大致均匀分布在这个虚拟的圆环上。<br><code>hash(图片名称) % 2^32</code></p>
+<p>同时服务器也需要进行哈希<br><code>hash（服务器A的IP地址） % 2^32</code></p>
+<p>图片和服务器都哈希取模完后，就能确定此数据在环上的位置，从此位置沿环顺时针“行走”，第一台遇到的服务器就是其应该定位到的服务器</p>
+<p>假设此时有 C 服务器发生故障，那么原 B~C 的数据会重新定位到 D 服务器，其他服务器的数据则不受影响。<br>增加一台一起也是一样，只有一部分内容会受到影响。具有较好的容错性和可扩展性。</p>
+<h3 id="一致性哈希的其他问题及解决方案"><a href="#一致性哈希的其他问题及解决方案" class="headerlink" title="一致性哈希的其他问题及解决方案"></a>一致性哈希的其他问题及解决方案</h3><h4 id="数据倾斜问题"><a href="#数据倾斜问题" class="headerlink" title="数据倾斜问题"></a>数据倾斜问题</h4><p>数据倾斜问题指的是，当服务器进行哈希取模的时候，没有平均分配到数据环上。比如 ABCD 全都在右半区，那么 A 节点受到的压力会是最大的，其他节点受到的压力会小一些。<br>解决方案是 增加虚拟节点：<br>即 对每一个节点计算多个哈希值。<br>在实际应用中，通常将虚拟节点数设置为 32 甚至更大，因此即使很少的服务节点也能做到相对均匀的数据分布。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
+        <div class="level is-size-7 is-uppercase">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/#more">阅读更多</a>
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" rel="tag">一致性哈希</a>, <a class="has-link-grey -link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a>, <a class="has-link-grey -link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a>
                 </div>
             </div>
         </div>
+        
         
         
     </div>
@@ -181,11 +193,76 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zhifubao.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/weixin.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                <span class="level-item">树莓派3搭建linux服务器</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '23470f956d3db70be30b',
+        clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
+        id: '0a5978eff26f96145be9d9df144882e0',
+        repo: 'relengxing.github.io',
+        owner: 'relengxing',
+        admin: "relengxing",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
 </div>
                 
 
@@ -807,7 +884,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                    <img src="/images/eva06.jpg" alt="一致性哈希" height="28">
                 
                 </a>
                 <p class="is-size-7">
