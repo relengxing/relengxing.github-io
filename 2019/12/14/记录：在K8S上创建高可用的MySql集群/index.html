@@ -11,15 +11,15 @@
 <title>记录：在K8S上创建高可用的MySql集群 - relengxing blog</title>
 
 
-    <meta name="description" content="参考文章：https:&#x2F;&#x2F;jeremy-xu.oschina.io&#x2F;2019&#x2F;08&#x2F;kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4&#x2F;https:&#x2F;&#x2F;kubedb.com&#x2F;docs&#x2F;0.12.0&#x2F;guides&#x2F;mysql&#x2F;clustering&#x2F;overview&#x2F; 按照博主的">
+    <meta name="description" content="更新 1问题查了下，看了下作者的更新记录https:&#x2F;&#x2F;github.com&#x2F;kubedb&#x2F;mysql&#x2F;commit&#x2F;1db0fa511d31f32bf36b4dcdc07733d3853f3d18关键的几行 1234myips=$(hostname -I)first=$&amp;#123;myips%% *&amp;#125;# Now use this IP with CIDR notationexport">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记录：在K8S上创建高可用的MySql集群">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;14&#x2F;%E8%AE%B0%E5%BD%95%EF%BC%9A%E5%9C%A8K8S%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84MySql%E9%9B%86%E7%BE%A4&#x2F;index.html">
 <meta property="og:site_name" content="relengxing blog">
-<meta property="og:description" content="参考文章：https:&#x2F;&#x2F;jeremy-xu.oschina.io&#x2F;2019&#x2F;08&#x2F;kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4&#x2F;https:&#x2F;&#x2F;kubedb.com&#x2F;docs&#x2F;0.12.0&#x2F;guides&#x2F;mysql&#x2F;clustering&#x2F;overview&#x2F; 按照博主的">
+<meta property="og:description" content="更新 1问题查了下，看了下作者的更新记录https:&#x2F;&#x2F;github.com&#x2F;kubedb&#x2F;mysql&#x2F;commit&#x2F;1db0fa511d31f32bf36b4dcdc07733d3853f3d18关键的几行 1234myips=$(hostname -I)first=$&amp;#123;myips%% *&amp;#125;# Now use this IP with CIDR notationexport">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-14T09:46:36.888Z">
+<meta property="og:updated_time" content="2019-12-14T11:52:59.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -142,7 +142,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 分钟 读完 (大约 541 个字)
+                    4 分钟 读完 (大约 657 个字)
                 </span>
                 
                 
@@ -160,7 +160,17 @@
             
         </h1>
         <div class="content">
-            <p>参考文章：<br><a href="https://jeremy-xu.oschina.io/2019/08/kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/" target="_blank" rel="noopener">https://jeremy-xu.oschina.io/2019/08/kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</a><br><a href="https://kubedb.com/docs/0.12.0/guides/mysql/clustering/overview/" target="_blank" rel="noopener">https://kubedb.com/docs/0.12.0/guides/mysql/clustering/overview/</a></p>
+            <h2 id="更新-1"><a href="#更新-1" class="headerlink" title="更新 1"></a>更新 1</h2><p>问题查了下，看了下作者的更新记录<br><a href="https://github.com/kubedb/mysql/commit/1db0fa511d31f32bf36b4dcdc07733d3853f3d18" target="_blank" rel="noopener">https://github.com/kubedb/mysql/commit/1db0fa511d31f32bf36b4dcdc07733d3853f3d18</a><br>关键的几行</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myips=$(hostname -I)</span><br><span class="line">first=$&#123;myips%% *&#125;</span><br><span class="line"># Now use this IP with CIDR notation</span><br><span class="line">export whitelist=&quot;$&#123;first&#125;/16&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后我确认了下我的 IP：<br>mysql-0:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP:                 10.9.12.246</span><br></pre></td></tr></table></figure>
+
+<p>mysql-2:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP:                 10.10.11.2</span><br></pre></td></tr></table></figure>
+
+<p>这里 kubernetes 内网 IP 的第二个数不一样，作者的掩码是/16，我这里需要/24<br>我觉得这个问题应该在 kubernetes 这里找解决方案</p>
+<h2 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h2><p>参考文章：<br><a href="https://jeremy-xu.oschina.io/2019/08/kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/" target="_blank" rel="noopener">https://jeremy-xu.oschina.io/2019/08/kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</a><br><a href="https://kubedb.com/docs/0.12.0/guides/mysql/clustering/overview/" target="_blank" rel="noopener">https://kubedb.com/docs/0.12.0/guides/mysql/clustering/overview/</a></p>
 <p>按照博主的文章，确实搭建成功了。但是在后续改进的时候遇到了问题，目前还没有解决，先记录下来，以后解决了再修改。</p>
 <a id="more"></a>
 
