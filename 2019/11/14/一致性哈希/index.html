@@ -20,7 +20,7 @@
 <meta property="og:description" content="背景这块就简单说一下，一致性哈希是为了解决简单哈希带来的问题。 以 redis 分布式缓存场景为例有大概一百万张图片要分在 4 台机器上，后来数据量变多了，需要增加一台机器。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-11-14T12:34:51.121Z">
+<meta property="og:updated_time" content="2019-11-14T13:32:55.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -143,7 +143,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 738 个字)
+                    5 分钟 读完 (大约 755 个字)
                 </span>
                 
                 
@@ -174,6 +174,7 @@
 <p>图片和服务器都哈希取模完后，就能确定此数据在环上的位置，从此位置沿环顺时针“行走”，第一台遇到的服务器就是其应该定位到的服务器</p>
 <p>假设此时有 C 服务器发生故障，那么原 B~C 的数据会重新定位到 D 服务器，其他服务器的数据则不受影响。<br>增加一台一起也是一样，只有一部分内容会受到影响。具有较好的容错性和可扩展性。</p>
 <h3 id="一致性哈希的其他问题及解决方案"><a href="#一致性哈希的其他问题及解决方案" class="headerlink" title="一致性哈希的其他问题及解决方案"></a>一致性哈希的其他问题及解决方案</h3><h4 id="数据倾斜问题"><a href="#数据倾斜问题" class="headerlink" title="数据倾斜问题"></a>数据倾斜问题</h4><p>数据倾斜问题指的是，当服务器进行哈希取模的时候，没有平均分配到数据环上。比如 ABCD 全都在右半区，那么 A 节点受到的压力会是最大的，其他节点受到的压力会小一些。<br>解决方案是 增加虚拟节点：<br>即 对每一个节点计算多个哈希值。<br>在实际应用中，通常将虚拟节点数设置为 32 甚至更大，因此即使很少的服务节点也能做到相对均匀的数据分布。</p>
+<p>怎么计算出多个节点<br><code>Hash(192.168.1.1#1”);  // cache A1</code><br><code>Hash(192.168.1.1#2”);  // cache A2</code></p>
 
         </div>
         
@@ -226,6 +227,13 @@
 
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/12/14/%E8%AE%B0%E5%BD%95%EF%BC%9A%E5%9C%A8K8S%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84MySql%E9%9B%86%E7%BE%A4/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">记录：在K8S上创建高可用的MySql集群</span>
+            </a>
+        </div>
         
         
         <div class="level-end">
@@ -307,7 +315,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        5
                     </p>
                 </div>
             </div>
@@ -433,6 +441,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/14/%E8%AE%B0%E5%BD%95%EF%BC%9A%E5%9C%A8K8S%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84MySql%E9%9B%86%E7%BE%A4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="记录：在K8S上创建高可用的MySql集群">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-14T09:33:51.000Z">2019-12-14</time></div>
+                    <a href="/2019/12/14/%E8%AE%B0%E5%BD%95%EF%BC%9A%E5%9C%A8K8S%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84MySql%E9%9B%86%E7%BE%A4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记录：在K8S上创建高可用的MySql集群</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/14/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="一致性哈希">
@@ -517,6 +544,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
@@ -662,6 +700,25 @@
         
         <article class="media">
             
+            <a href="/2019/12/14/%E8%AE%B0%E5%BD%95%EF%BC%9A%E5%9C%A8K8S%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84MySql%E9%9B%86%E7%BE%A4/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="记录：在K8S上创建高可用的MySql集群">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-14T09:33:51.000Z">2019-12-14</time></div>
+                    <a href="/2019/12/14/%E8%AE%B0%E5%BD%95%EF%BC%9A%E5%9C%A8K8S%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84MySql%E9%9B%86%E7%BE%A4/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记录：在K8S上创建高可用的MySql集群</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/11/14/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="一致性哈希">
@@ -746,6 +803,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/11/">
