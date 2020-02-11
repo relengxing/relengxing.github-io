@@ -19,7 +19,7 @@
 <meta property="og:description" content="更新 2">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-14T12:55:33.972Z">
+<meta property="og:updated_time" content="2019-12-14T12:56:55.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -163,7 +163,7 @@
             <h2 id="更新-2"><a href="#更新-2" class="headerlink" title="更新 2"></a>更新 2</h2><a id="more"></a>
 
 <p>查看了 kubernetes 的资料和配置<br>Pod CIDR 10.9.12.0/24<br>Pod CIDR 10.9.13.0/24<br>Pod CIDR 10.10.11.0/24</p>
-<p>这里不连续的原因是， Mysql-0 和 Mysql-1 使用的两台机器是常年开着的，没有关闭过<br>而 Mysql-2 使用的机器是刚刚创建的，而我们的集群有个特点，就是频繁的创建和删除节点。 这里猜测 kubernetes 在分配 ip 的时候是顺序分配的,如果分配完了再从头开始分配，把已经释放的从新分配。</p>
+<p>这里不连续的原因是， Mysql-0 和 Mysql-1 使用的两台机器是常年开着的，没有关闭过<br>而 Mysql-2 使用的机器是刚刚创建的，而我们的集群有个特点，就是频繁的创建和删除节点。 这里猜测 kubernetes 在分配 ip 的时候是顺序分配的,如果分配完了再从头开始分配，把已经释放的重新分配。</p>
 <p>由于我们使用的是 Google kubernetes，很多东西是无法更改的。<br>所以解决方案我认为有：</p>
 <ol>
 <li>重新创建一个 nodepool,把 mysql 部署在这个新创建的 nodepool 上，这样新的机器大概率 IP 连续。</li>
@@ -960,7 +960,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2019 relengxing&nbsp;</br>
+                &copy; 2020 relengxing&nbsp;</br>
                 <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                         href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
 
