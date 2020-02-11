@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<script src="/js/src/click.js"></script>
 <html  lang="zh">
 <head>
     <meta charset="utf-8" />
@@ -73,7 +72,6 @@
 
 
 <link rel="stylesheet" href="/css/style.css">
-    <script data-ad-client="ca-pub-1244996510802231" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body class="is-3-column">
     <nav class="navbar navbar-main">
@@ -109,7 +107,7 @@
             <div class="navbar-end">
                 
                     
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/relengxing">
                         
                         <i class="fab fa-github"></i>
                         
@@ -164,16 +162,16 @@
             <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>ReBus 是一个模仿 RxBus 写的，基于 reactor3 的事件总线</p>
 <a id="more"></a>
 
-<p>RxBus 一般是 Android 端使用的，<br>ReBus 一般是后端使用的<br>RxBus 参考链接： <a href="https://github.com/relengxing/RxBus" target="_blank" rel="noopener">https://github.com/relengxing/RxBus</a><br>ReBus 源码链接： <a href="https://github.com/relengxing/ReBus" target="_blank" rel="noopener">https://github.com/relengxing/ReBus</a></p>
+<p>RxBus 一般是 Android 端使用的，<br>ReBus 一般是后端使用的<br>RxBus 参考链接： <a href="https://github.com/relengxing/RxBus">https://github.com/relengxing/RxBus</a><br>ReBus 源码链接： <a href="https://github.com/relengxing/ReBus">https://github.com/relengxing/ReBus</a></p>
 <p>推荐直接看 RxBus 的解析，这边只贴代码，因为思想是一模一样的，只是底层的包不一样，封装完后用法也是一样的。</p>
 <h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><p>ReBus 代码</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.relenxing.config;</span><br><span class="line"><span class="hljs-keyword">import</span> com.relenxing.domain.Event;</span><br><span class="line"><span class="hljs-keyword">import</span> reactor.core.publisher.Flux;</span><br><span class="line"><span class="hljs-keyword">import</span> reactor.core.publisher.ReplayProcessor;</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReBus</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 事件总线的核心。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ReplayProcessor&lt;Event&gt; bus;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 构造函数，初始化</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">ReBus</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        bus = ReplayProcessor.create();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 单例模式</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ReBus <span class="hljs-title">getDefault</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> HelperHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 延迟初始化，这里是利用了 Java 的语言特性，内部类只有在使用的时候，才会去加载，</span></span><br><span class="line"><span class="hljs-comment">     * 从而初始化内部静态变量。关于线程安全，这是 Java 运行环境自动给你保证的，</span></span><br><span class="line"><span class="hljs-comment">     * 在加载的时候，会自动隐形的同步。在访问对象的时候，</span></span><br><span class="line"><span class="hljs-comment">     * 不需要同步 Java 虚拟机又会自动给你取消同步，所以效率非常高。</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelperHolder</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> ReBus instance = <span class="hljs-keyword">new</span> ReBus();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 发送普通事件</span></span><br><span class="line"><span class="hljs-comment">    */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">post</span><span class="hljs-params">(Event event)</span></span>&#123;</span><br><span class="line">        bus.onNext(event);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span>  Flux&lt;Event&gt; <span class="hljs-title">on</span><span class="hljs-params">(String type)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> bus.filter(e -&gt; e.getEventName().equals(type));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.relenxing.config;</span><br><span class="line"><span class="keyword">import</span> com.relenxing.domain.Event;</span><br><span class="line"><span class="keyword">import</span> reactor.core.publisher.Flux;</span><br><span class="line"><span class="keyword">import</span> reactor.core.publisher.ReplayProcessor;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReBus</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 事件总线的核心。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReplayProcessor&lt;Event&gt; bus;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构造函数，初始化</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ReBus</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        bus = ReplayProcessor.create();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 单例模式</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ReBus <span class="title">getDefault</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> HelperHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 延迟初始化，这里是利用了 Java 的语言特性，内部类只有在使用的时候，才会去加载，</span></span><br><span class="line"><span class="comment">     * 从而初始化内部静态变量。关于线程安全，这是 Java 运行环境自动给你保证的，</span></span><br><span class="line"><span class="comment">     * 在加载的时候，会自动隐形的同步。在访问对象的时候，</span></span><br><span class="line"><span class="comment">     * 不需要同步 Java 虚拟机又会自动给你取消同步，所以效率非常高。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">HelperHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">final</span> ReBus instance = <span class="keyword">new</span> ReBus();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 发送普通事件</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">post</span><span class="params">(Event event)</span></span>&#123;</span><br><span class="line">        bus.onNext(event);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  Flux&lt;Event&gt; <span class="title">on</span><span class="params">(String type)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bus.filter(e -&gt; e.getEventName().equals(type));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Event 代码：</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.relenxing.domain;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Event</span>&lt;<span class="hljs-title">T</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> serialVersionUID = <span class="hljs-number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> String eventName;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> T event;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Event</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Event</span><span class="hljs-params">(String eventName, T event)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.eventName = eventName;</span><br><span class="line">        <span class="hljs-keyword">this</span>.event = event;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getEventName</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> eventName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setEventName</span><span class="hljs-params">(String eventName)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.eventName = eventName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getEvent</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> event;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setEvent</span><span class="hljs-params">(T event)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">this</span>.event = event;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.relenxing.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Event</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String eventName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> T event;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Event</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Event</span><span class="params">(String eventName, T event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.eventName = eventName;</span><br><span class="line">        <span class="keyword">this</span>.event = event;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEventName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> eventName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEventName</span><span class="params">(String eventName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.eventName = eventName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getEvent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> event;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEvent</span><span class="params">(T event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.event = event;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>demo</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.relenxing;</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"123"</span>, <span class="hljs-string">"123"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"456"</span>, <span class="hljs-string">"swdw"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"123"</span>, <span class="hljs-string">"312"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"456"</span>, <span class="hljs-string">"2f2"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="hljs-keyword">new</span> Event&lt;&gt;(<span class="hljs-string">"123"</span>, <span class="hljs-string">"12f"</span>));</span><br><span class="line"></span><br><span class="line">       ReBus.getDefault().on(<span class="hljs-string">"123"</span>).map(Event::getEvent).subscribe(System.out::println);</span><br><span class="line">       ReBus.getDefault().on(<span class="hljs-string">"456"</span>).map(Event::getEvent).subscribe(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.relenxing;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       ReBus.getDefault().post(<span class="keyword">new</span> Event&lt;&gt;(<span class="string">"123"</span>, <span class="string">"123"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="keyword">new</span> Event&lt;&gt;(<span class="string">"456"</span>, <span class="string">"swdw"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="keyword">new</span> Event&lt;&gt;(<span class="string">"123"</span>, <span class="string">"312"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="keyword">new</span> Event&lt;&gt;(<span class="string">"456"</span>, <span class="string">"2f2"</span>));</span><br><span class="line">       ReBus.getDefault().post(<span class="keyword">new</span> Event&lt;&gt;(<span class="string">"123"</span>, <span class="string">"12f"</span>));</span><br><span class="line"></span><br><span class="line">       ReBus.getDefault().on(<span class="string">"123"</span>).map(Event::getEvent).subscribe(System.out::println);</span><br><span class="line">       ReBus.getDefault().on(<span class="string">"456"</span>).map(Event::getEvent).subscribe(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -252,8 +250,8 @@
         <h3 class="title is-5 has-text-weight-normal">评论</h3>
         
 <div id="comment-container"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js"></script>
 <script>
     var gitalk = new Gitalk({
         clientID: '23470f956d3db70be30b',
@@ -313,9 +311,11 @@
                     <p class="heading">
                         文章
                     </p>
-                    <p class="title has-text-weight-normal">
-                        5
-                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            5
+                        </p>
+                    </a>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
@@ -323,9 +323,11 @@
                     <p class="heading">
                         分类
                     </p>
-                    <p class="title has-text-weight-normal">
-                        0
-                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            0
+                        </p>
+                    </a>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
@@ -333,15 +335,17 @@
                     <p class="heading">
                         标签
                     </p>
-                    <p class="title has-text-weight-normal">
-                        9
-                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            9
+                        </p>
+                    </a>
                 </div>
             </div>
         </nav>
         
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/relengxing" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/relengxing" target="_blank" rel="noopener">
                 关注我</a>
         </div>
         
@@ -349,14 +353,14 @@
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank"
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
                 title="Github" href="https://github.com/relengxing">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
                 title="RSS" href="/">
                 
                 <i class="fas fa-rss"></i>
@@ -379,7 +383,7 @@
         <ul class="menu-list">
         
             <li>
-                <a class="level is-mobile" href="https://github.com/relengxing" target="_blank">
+                <a class="level is-mobile" href="https://github.com/relengxing" target="_blank" rel="noopener">
                     <span class="level-left">
                         <span class="level-item">github</span>
                     </span>
@@ -390,7 +394,7 @@
             </li>
         
             <li>
-                <a class="level is-mobile" href="https://www.jianshu.com/u/d7acd6530ab6" target="_blank">
+                <a class="level is-mobile" href="https://www.jianshu.com/u/d7acd6530ab6" target="_blank" rel="noopener">
                     <span class="level-left">
                         <span class="level-item">简书</span>
                     </span>
@@ -946,81 +950,81 @@
         </div>
     </section>
     <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/eva06.jpg" alt="ReBus" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2020 relengxing&nbsp;</br>
-                <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
-
-                  <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span></br>
-                  <script>
-                      var now = new Date(); 
-                      function createtime() { 
-                          var grt= new Date("12/28/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
-                          now.setTime(now.getTime()+250); 
-                          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
-                          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
-                          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
-                          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
-                          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
-                          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
-                          document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
-                          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
-                      } 
-                  setInterval("createtime()",250);
-                  </script>
+  <div class="container">
+      <div class="level">
+          <div class="level-start has-text-centered-mobile">
+              <a class="footer-logo is-block has-mb-6" href="/">
               
-                  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-                  本站总访问量<span id="busuanzi_value_site_pv"></span>次</br>
-                  本站访客数<span id="busuanzi_value_site_uv"></span>人次</br>
-                  本文总阅读量<span id="busuanzi_value_page_pv"></span>次</br>
+                  <img src="/images/eva06.jpg" alt="ReBus" height="28">
+              
+              </a>
+              <p class="is-size-7">
+              &copy; 2020 relengxing&nbsp;</br>
+              <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                      href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
+
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span></br>
+                <script>
+                    var now = new Date(); 
+                    function createtime() { 
+                        var grt= new Date("12/28/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                        now.setTime(now.getTime()+250); 
+                        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                    } 
+                setInterval("createtime()",250);
+                </script>
             
-                
-                <br>
-                <span id="busuanzi_container_site_uv">
-                共<span id="busuanzi_value_site_uv">0</span>个访客
-                </span>
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次</br>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人次</br>
+                本文总阅读量<span id="busuanzi_value_page_pv"></span>次</br>
+          
+              
+              <br>
+              <span id="busuanzi_container_site_uv">
+              共<span id="busuanzi_value_site_uv">0</span>个访客
+              </span>
+              
+              </p>
+          </div>
+          <div class="level-end">
+          
+              <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+              
+              <p class="control">
+                  <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
+                      
+                      <i class="fab fa-github"></i>
+                      
+                  </a>
+              </p>
+              
+              </div>
+          
 
-
-
-
-
-
-            </div>
-        </div>
-    </div>
+          </div>
+      </div>
+  </div>
 
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
 <script>moment.locale("zh-CN");</script>
 
+
 <script>
 var IcarusThemeSettings = {
+    site: {
+        url: 'http://yoursite.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
     article: {
         highlight: {
             clipboard: true,
@@ -1031,25 +1035,25 @@ var IcarusThemeSettings = {
 </script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
 
-    
-    
+
+
 <script src="/js/animation.js"></script>
 
-    
-    
+
+
 <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
 <script src="/js/gallery.js" defer></script>
 
-    
-    
+
+
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
             my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
@@ -1064,8 +1068,8 @@ var IcarusThemeSettings = {
     });
 </script>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     MathJax.Hub.Config({
@@ -1087,24 +1091,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-    
-    
+
+
 <a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script src="/js/main.js" defer></script>
@@ -1140,6 +1144,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+
 <!-- 雪花特效 -->
 <script type="text/javascript">
   var windowWidth = $(window).width();
@@ -1147,6 +1152,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
   }
 </script>
-
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

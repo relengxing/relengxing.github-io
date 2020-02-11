@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<script src="/js/src/click.js"></script>
 <html  lang="zh">
 <head>
     <meta charset="utf-8" />
@@ -73,7 +72,6 @@
 
 
 <link rel="stylesheet" href="/css/style.css">
-    <script data-ad-client="ca-pub-1244996510802231" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body class="is-3-column">
     <nav class="navbar navbar-main">
@@ -109,7 +107,7 @@
             <div class="navbar-end">
                 
                     
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/relengxing">
                         
                         <i class="fab fa-github"></i>
                         
@@ -161,11 +159,11 @@
             
         </h1>
         <div class="content">
-            <p>参考：用 RxJava 实现事件总线(Event Bus)<br><a href="http://www.jianshu.com/p/ca090f6e2fe2" target="_blank" rel="noopener">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
+            <p>参考：用 RxJava 实现事件总线(Event Bus)<br><a href="http://www.jianshu.com/p/ca090f6e2fe2">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
 <p>我这篇基本上就是按照上面那篇写的，对 Sticky 那一块进行了一些修改。<br>写下来让自己记得更深刻。这篇文章面向有 RxJava 基础的人，要是 HelloWorld 都没写过建议先看基础部分。</p>
 <a id="more"></a>
 
-<p>Git 地址：<br><a href="https://github.com/relengxing/RxBus" target="_blank" rel="noopener">https://github.com/relengxing/RxBus</a></p>
+<p>Git 地址：<br><a href="https://github.com/relengxing/RxBus">https://github.com/relengxing/RxBus</a></p>
 <h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><ol>
 <li>新建工程</li>
 <li>添加 rxjava 和 rxandroid 依赖</li>
@@ -177,8 +175,8 @@
 <li>编写其他代码</li>
 </ol>
 <hr>
-<p>RxBus 是一个全局使用的总线，应该使用单例模式。<br>单例模式的具体写法可以自己研究下。<br>参考代码：<br><a href="http://www.race604.com/java-double-checked-singleton/" target="_blank" rel="noopener">http://www.race604.com/java-double-checked-singleton/</a></p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">* Created by relengxing on 2016/8/12.</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RxBus</span> </span>&#123;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">RxBus</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> RxBus <span class="hljs-title">getDefault</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> HelperHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelperHolder</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> RxBus instance = <span class="hljs-keyword">new</span> RxBus();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>RxBus 是一个全局使用的总线，应该使用单例模式。<br>单例模式的具体写法可以自己研究下。<br>参考代码：<br><a href="http://www.race604.com/java-double-checked-singleton/">http://www.race604.com/java-double-checked-singleton/</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Created by relengxing on 2016/8/12.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RxBus</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">RxBus</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RxBus <span class="title">getDefault</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> HelperHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">HelperHolder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RxBus instance = <span class="keyword">new</span> RxBus();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="事件总线"><a href="#事件总线" class="headerlink" title="事件总线"></a>事件总线</h3><p>那么需要一根总线来传输数据。<br>这根总线就是 RxJava 中的 Subject。</p>
 <blockquote>
@@ -189,42 +187,42 @@
 <li>AsyncSubject</li>
 <li>BehaviorSubject</li>
 <li>PublishSubject</li>
-<li>ReplaySubject<br>关于这四种类型的具体说明参考：<a href="http://www.jianshu.com/p/d382c3f862d5" target="_blank" rel="noopener">RxJava：Subject 介绍</a></li>
+<li>ReplaySubject<br>关于这四种类型的具体说明参考：<a href="http://www.jianshu.com/p/d382c3f862d5">RxJava：Subject 介绍</a></li>
 </ul>
-<p>这里使用的是 PublishSubject<br>PublishSubject：只会把在订阅发生的时间点之后来自原始 Observable 的数据发射给观察者；<br>又因为线程安全的问题，需要把 PublishSubject 转化为一个线程安全的 Subject，这部分内容也在<a href="http://www.jianshu.com/p/d382c3f862d5" target="_blank" rel="noopener">RxJava：Subject 介绍</a>最后一部分串行化中有介绍。<br>最后代码写成如下：</p>
+<p>这里使用的是 PublishSubject<br>PublishSubject：只会把在订阅发生的时间点之后来自原始 Observable 的数据发射给观察者；<br>又因为线程安全的问题，需要把 PublishSubject 转化为一个线程安全的 Subject，这部分内容也在<a href="http://www.jianshu.com/p/d382c3f862d5">RxJava：Subject 介绍</a>最后一部分串行化中有介绍。<br>最后代码写成如下：</p>
 <pre><code>private final Subject&lt;Object,Object&gt; bus;
 private RxBus() {
     bus = new SerializedSubject&lt;&gt;(PublishSubject.create());
 }</code></pre><p>总线有了，还差事件发布者（被观察者）和事件接受者（观察者）。</p>
 <h3 id="发送事件"><a href="#发送事件" class="headerlink" title="发送事件"></a>发送事件</h3><p>将事件 post 至 Subject，此时 Subject 作为 Observer 接收到事件（onNext），然后会发射给所有订阅该 Subject 的订阅者。<br>因为使用的是 PublishSubject，所以必须先订阅事件再发送事件才能介绍到，否则这些发送的事件会遗失。</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">post</span><span class="hljs-params">(Object object)</span></span>&#123;</span><br><span class="line">    bus.onNext(object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">post</span><span class="params">(Object object)</span></span>&#123;</span><br><span class="line">    bus.onNext(object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="接收事件"><a href="#接收事件" class="headerlink" title="接收事件"></a>接收事件</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">Observable&lt;T&gt; <span class="hljs-title">toObservable</span><span class="hljs-params">(Class&lt;T&gt; eventType)</span></span>&#123;</span><br><span class="line">   <span class="hljs-keyword">return</span> bus.ofType(eventType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="接收事件"><a href="#接收事件" class="headerlink" title="接收事件"></a>接收事件</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">Observable&lt;T&gt; <span class="title">toObservable</span><span class="params">(Class&lt;T&gt; eventType)</span></span>&#123;</span><br><span class="line">   <span class="keyword">return</span> bus.ofType(eventType);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>ofType 是 filter 操作符的一个特殊形式。它过滤一个 Observable 只返回指定类型的数据。ofType 默认不在任何特定的调度器上指定 。</p>
 </blockquote>
 <p>有一点需要注意的是，在接收事件的地方不需要接收事件或者生命周期结束的时候一定要取消订阅，防止内存泄漏。</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (!rxSubscription2.isUnsubscribed()) &#123;</span><br><span class="line">    rxSubscription2.unsubscribe();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!rxSubscription2.isUnsubscribed()) &#123;</span><br><span class="line">    rxSubscription2.unsubscribe();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="支持-Sticky-事件"><a href="#支持-Sticky-事件" class="headerlink" title="支持 Sticky 事件"></a>支持 Sticky 事件</h1><blockquote>
 <p>在 Android 开发中，Sticky 事件只指事件消费者在事件发布之后才注册的也能接收到该事件的特殊类型。Android 中就有这样的实例，也就是 Sticky Broadcast，即粘性广播。正常情况下如果发送者发送了某个广播，而接收者在这个广播发送后才注册自己的 Receiver，这时接收者便无法接收到刚才的广播，为此 Android 引入了 StickyBroadcast，在广播发送结束后会保存刚刚发送的广播（Intent），这样当接收者注册完 Receiver 后就可以接收到刚才已经发布的广播。这就使得我们可以预先处理一些事件，让有消费者时再把这些事件投递给消费者。</p>
 </blockquote>
-<p>参考：<a href="http://www.jianshu.com/p/71ab00a2677b" target="_blank" rel="noopener">深入 RxBus：［支持 Sticky 事件］</a></p>
+<p>参考：<a href="http://www.jianshu.com/p/71ab00a2677b">深入 RxBus：［支持 Sticky 事件］</a></p>
 <p>关于方案选择不再详述了，参考上面的链接。<br>同样使用的是 ConcurrentHashMap<br>参考资料中使用的是</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Map&lt;Class&lt;?&gt;, Object&gt; mStickyEventMap;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Map&lt;Class&lt;?&gt;, Object&gt; mStickyEventMap;</span><br></pre></td></tr></table></figure>
 
 <p>那么同一个类只会有一个对象保留，后面发送的对象会把前面的对象覆盖掉。<br>而我希望一个新的对象不会覆盖老的对象，需要自己手动来删除。<br>所以这个地方改成</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ConcurrentHashMap&lt;Class&lt;?&gt;,List&lt;Object&gt;&gt; map;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> ConcurrentHashMap&lt;Class&lt;?&gt;,List&lt;Object&gt;&gt; map;</span><br></pre></td></tr></table></figure>
 
 <p>Sticky 事件和普通事件使用的是同一个 Bus,所以接收者接收的是同一个对象时，当他们都订阅了事件时是没有区别的。</p>
 <h3 id="发送-Sticky-事件"><a href="#发送-Sticky-事件" class="headerlink" title="发送 Sticky 事件"></a>发送 Sticky 事件</h3><p>这个其实就是在发送普通时间之前把这个事件写入到刚刚的 map 中去。</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postSticky</span><span class="hljs-params">(Object object)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (mStickyEventMap)&#123;</span><br><span class="line">        List list = mStickyEventMap.get(object.getClass());</span><br><span class="line">        <span class="hljs-keyword">if</span> (list == <span class="hljs-keyword">null</span>) &#123;</span><br><span class="line">            list = <span class="hljs-keyword">new</span> ArrayList();</span><br><span class="line">       &#125;</span><br><span class="line">        list.add(object);</span><br><span class="line">        mStickyEventMap.put(object.getClass(),list);</span><br><span class="line">    &#125;</span><br><span class="line">    post(object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postSticky</span><span class="params">(Object object)</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (mStickyEventMap)&#123;</span><br><span class="line">        List list = mStickyEventMap.get(object.getClass());</span><br><span class="line">        <span class="keyword">if</span> (list == <span class="keyword">null</span>) &#123;</span><br><span class="line">            list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">       &#125;</span><br><span class="line">        list.add(object);</span><br><span class="line">        mStickyEventMap.put(object.getClass(),list);</span><br><span class="line">    &#125;</span><br><span class="line">    post(object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="接收-Sticky-事件"><a href="#接收-Sticky-事件" class="headerlink" title="接收 Sticky 事件"></a>接收 Sticky 事件</h3><p>这个就是先查看 map 中是否有这个事件，有的话使用.merginWith 一起发出来。</p>
-<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> &lt;T&gt; <span class="hljs-function">Observable&lt;T&gt; <span class="hljs-title">toObservableSticky</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Class&lt;T&gt; eventType)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">synchronized</span> (mStickyEventMap)&#123;</span><br><span class="line">        Observable&lt;T&gt; observable = bus.ofType(eventType);</span><br><span class="line">        <span class="hljs-keyword">final</span> List list =  mStickyEventMap.get(eventType);</span><br><span class="line">        <span class="hljs-keyword">if</span> (list != <span class="hljs-keyword">null</span> &amp;&amp; !list.isEmpty()) &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> observable.mergeWith(Observable.create(<span class="hljs-keyword">new</span> Observable.OnSubscribe&lt;T&gt;()&#123;</span><br><span class="line">            <span class="hljs-meta">@Override</span></span><br><span class="line">            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">call</span><span class="hljs-params">(Subscriber&lt;? <span class="hljs-keyword">super</span> T&gt; subscriber)</span> </span>&#123;</span><br><span class="line">                  <span class="hljs-keyword">for</span> (Object obj :list) &#123;</span><br><span class="line">                      subscriber.onNext(eventType.cast(obj));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;));</span><br><span class="line">        &#125;<span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">return</span> observable;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">Observable&lt;T&gt; <span class="title">toObservableSticky</span><span class="params">(<span class="keyword">final</span> Class&lt;T&gt; eventType)</span></span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (mStickyEventMap)&#123;</span><br><span class="line">        Observable&lt;T&gt; observable = bus.ofType(eventType);</span><br><span class="line">        <span class="keyword">final</span> List list =  mStickyEventMap.get(eventType);</span><br><span class="line">        <span class="keyword">if</span> (list != <span class="keyword">null</span> &amp;&amp; !list.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> observable.mergeWith(Observable.create(<span class="keyword">new</span> Observable.OnSubscribe&lt;T&gt;()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">call</span><span class="params">(Subscriber&lt;? <span class="keyword">super</span> T&gt; subscriber)</span> </span>&#123;</span><br><span class="line">                  <span class="keyword">for</span> (Object obj :list) &#123;</span><br><span class="line">                      subscriber.onNext(eventType.cast(obj));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;));</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> observable;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>还写了一些常用方法，例如 post 一个事件的时候覆盖同类事件，接收事件时消耗掉事件，代码在简书上写起来还是有点麻烦，详情看 GitHub，地址：<a href="https://github.com/relengxing/RxBus" target="_blank" rel="noopener">https://github.com/relengxing/RxBus</a><br>要使用的时候把 RxBus 文件直接复制到工程即可。<br>如果有 BUG 可以在评论区告诉我。</p>
+<p>还写了一些常用方法，例如 post 一个事件的时候覆盖同类事件，接收事件时消耗掉事件，代码在简书上写起来还是有点麻烦，详情看 GitHub，地址：<a href="https://github.com/relengxing/RxBus">https://github.com/relengxing/RxBus</a><br>要使用的时候把 RxBus 文件直接复制到工程即可。<br>如果有 BUG 可以在评论区告诉我。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/2188564-c8fdc8129972449b.gif?imageMogr2/auto-orient/strip" alt="动画图"></p>
 
         </div>
@@ -297,8 +295,8 @@ private RxBus() {
         <h3 class="title is-5 has-text-weight-normal">评论</h3>
         
 <div id="comment-container"></div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.css">
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1.4.1/dist/gitalk.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js"></script>
 <script>
     var gitalk = new Gitalk({
         clientID: '23470f956d3db70be30b',
@@ -358,9 +356,11 @@ private RxBus() {
                     <p class="heading">
                         文章
                     </p>
-                    <p class="title has-text-weight-normal">
-                        5
-                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            5
+                        </p>
+                    </a>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
@@ -368,9 +368,11 @@ private RxBus() {
                     <p class="heading">
                         分类
                     </p>
-                    <p class="title has-text-weight-normal">
-                        0
-                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            0
+                        </p>
+                    </a>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
@@ -378,15 +380,17 @@ private RxBus() {
                     <p class="heading">
                         标签
                     </p>
-                    <p class="title has-text-weight-normal">
-                        9
-                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            9
+                        </p>
+                    </a>
                 </div>
             </div>
         </nav>
         
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/relengxing" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/relengxing" target="_blank" rel="noopener">
                 关注我</a>
         </div>
         
@@ -394,14 +398,14 @@ private RxBus() {
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank"
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
                 title="Github" href="https://github.com/relengxing">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
                 title="RSS" href="/">
                 
                 <i class="fas fa-rss"></i>
@@ -424,7 +428,7 @@ private RxBus() {
         <ul class="menu-list">
         
             <li>
-                <a class="level is-mobile" href="https://github.com/relengxing" target="_blank">
+                <a class="level is-mobile" href="https://github.com/relengxing" target="_blank" rel="noopener">
                     <span class="level-left">
                         <span class="level-item">github</span>
                     </span>
@@ -435,7 +439,7 @@ private RxBus() {
             </li>
         
             <li>
-                <a class="level is-mobile" href="https://www.jianshu.com/u/d7acd6530ab6" target="_blank">
+                <a class="level is-mobile" href="https://www.jianshu.com/u/d7acd6530ab6" target="_blank" rel="noopener">
                     <span class="level-left">
                         <span class="level-item">简书</span>
                     </span>
@@ -991,81 +995,81 @@ private RxBus() {
         </div>
     </section>
     <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/eva06.jpg" alt="RxBus" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2020 relengxing&nbsp;</br>
-                <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
-
-                  <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span></br>
-                  <script>
-                      var now = new Date(); 
-                      function createtime() { 
-                          var grt= new Date("12/28/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
-                          now.setTime(now.getTime()+250); 
-                          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
-                          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
-                          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
-                          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
-                          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
-                          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
-                          document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
-                          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
-                      } 
-                  setInterval("createtime()",250);
-                  </script>
+  <div class="container">
+      <div class="level">
+          <div class="level-start has-text-centered-mobile">
+              <a class="footer-logo is-block has-mb-6" href="/">
               
-                  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-                  本站总访问量<span id="busuanzi_value_site_pv"></span>次</br>
-                  本站访客数<span id="busuanzi_value_site_uv"></span>人次</br>
-                  本文总阅读量<span id="busuanzi_value_page_pv"></span>次</br>
+                  <img src="/images/eva06.jpg" alt="RxBus" height="28">
+              
+              </a>
+              <p class="is-size-7">
+              &copy; 2020 relengxing&nbsp;</br>
+              <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                      href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
+
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span></br>
+                <script>
+                    var now = new Date(); 
+                    function createtime() { 
+                        var grt= new Date("12/28/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                        now.setTime(now.getTime()+250); 
+                        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                    } 
+                setInterval("createtime()",250);
+                </script>
             
-                
-                <br>
-                <span id="busuanzi_container_site_uv">
-                共<span id="busuanzi_value_site_uv">0</span>个访客
-                </span>
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次</br>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人次</br>
+                本文总阅读量<span id="busuanzi_value_page_pv"></span>次</br>
+          
+              
+              <br>
+              <span id="busuanzi_container_site_uv">
+              共<span id="busuanzi_value_site_uv">0</span>个访客
+              </span>
+              
+              </p>
+          </div>
+          <div class="level-end">
+          
+              <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+              
+              <p class="control">
+                  <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
+                      
+                      <i class="fab fa-github"></i>
+                      
+                  </a>
+              </p>
+              
+              </div>
+          
 
-
-
-
-
-
-            </div>
-        </div>
-    </div>
+          </div>
+      </div>
+  </div>
 
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
 <script>moment.locale("zh-CN");</script>
 
+
 <script>
 var IcarusThemeSettings = {
+    site: {
+        url: 'http://yoursite.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
     article: {
         highlight: {
             clipboard: true,
@@ -1076,25 +1080,25 @@ var IcarusThemeSettings = {
 </script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
 
-    
-    
+
+
 <script src="/js/animation.js"></script>
 
-    
-    
+
+
 <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
 <script src="/js/gallery.js" defer></script>
 
-    
-    
+
+
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
             my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
@@ -1109,8 +1113,8 @@ var IcarusThemeSettings = {
     });
 </script>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     MathJax.Hub.Config({
@@ -1132,24 +1136,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-    
-    
+
+
 <a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script src="/js/main.js" defer></script>
@@ -1185,6 +1189,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+
 <!-- 雪花特效 -->
 <script type="text/javascript">
   var windowWidth = $(window).width();
@@ -1192,6 +1197,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
   }
 </script>
-
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>

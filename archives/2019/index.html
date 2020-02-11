@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<script src="/js/src/click.js"></script>
 <html  lang="zh">
 <head>
     <meta charset="utf-8" />
@@ -69,7 +68,6 @@
 
 
 <link rel="stylesheet" href="/css/style.css">
-    <script data-ad-client="ca-pub-1244996510802231" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body class="is-3-column">
     <nav class="navbar navbar-main">
@@ -105,7 +103,7 @@
             <div class="navbar-end">
                 
                     
-                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
+                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/relengxing">
                         
                         <i class="fab fa-github"></i>
                         
@@ -228,9 +226,11 @@
                     <p class="heading">
                         文章
                     </p>
-                    <p class="title has-text-weight-normal">
-                        5
-                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            5
+                        </p>
+                    </a>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
@@ -238,9 +238,11 @@
                     <p class="heading">
                         分类
                     </p>
-                    <p class="title has-text-weight-normal">
-                        0
-                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            0
+                        </p>
+                    </a>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
@@ -248,15 +250,17 @@
                     <p class="heading">
                         标签
                     </p>
-                    <p class="title has-text-weight-normal">
-                        9
-                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            9
+                        </p>
+                    </a>
                 </div>
             </div>
         </nav>
         
         <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/relengxing" target="_blank">
+            <a class="level-item button is-link is-rounded" href="https://github.com/relengxing" target="_blank" rel="noopener">
                 关注我</a>
         </div>
         
@@ -264,14 +268,14 @@
         
         <div class="level is-mobile">
             
-            <a class="level-item button is-white is-marginless" target="_blank"
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
                 title="Github" href="https://github.com/relengxing">
                 
                 <i class="fab fa-github"></i>
                 
             </a>
             
-            <a class="level-item button is-white is-marginless" target="_blank"
+            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
                 title="RSS" href="/">
                 
                 <i class="fas fa-rss"></i>
@@ -294,7 +298,7 @@
         <ul class="menu-list">
         
             <li>
-                <a class="level is-mobile" href="https://github.com/relengxing" target="_blank">
+                <a class="level is-mobile" href="https://github.com/relengxing" target="_blank" rel="noopener">
                     <span class="level-left">
                         <span class="level-item">github</span>
                     </span>
@@ -305,7 +309,7 @@
             </li>
         
             <li>
-                <a class="level is-mobile" href="https://www.jianshu.com/u/d7acd6530ab6" target="_blank">
+                <a class="level is-mobile" href="https://www.jianshu.com/u/d7acd6530ab6" target="_blank" rel="noopener">
                     <span class="level-left">
                         <span class="level-item">简书</span>
                     </span>
@@ -861,81 +865,81 @@
         </div>
     </section>
     <footer class="footer">
-    <div class="container">
-        <div class="level">
-            <div class="level-start has-text-centered-mobile">
-                <a class="footer-logo is-block has-mb-6" href="/">
-                
-                    <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
-                
-                </a>
-                <p class="is-size-7">
-                &copy; 2020 relengxing&nbsp;</br>
-                <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
-
-                  <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span></br>
-                  <script>
-                      var now = new Date(); 
-                      function createtime() { 
-                          var grt= new Date("12/28/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
-                          now.setTime(now.getTime()+250); 
-                          days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
-                          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
-                          if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
-                          mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
-                          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
-                          snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
-                          document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
-                          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
-                      } 
-                  setInterval("createtime()",250);
-                  </script>
+  <div class="container">
+      <div class="level">
+          <div class="level-start has-text-centered-mobile">
+              <a class="footer-logo is-block has-mb-6" href="/">
               
-                  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-                  本站总访问量<span id="busuanzi_value_site_pv"></span>次</br>
-                  本站访客数<span id="busuanzi_value_site_uv"></span>人次</br>
-                  本文总阅读量<span id="busuanzi_value_page_pv"></span>次</br>
+                  <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+              
+              </a>
+              <p class="is-size-7">
+              &copy; 2020 relengxing&nbsp;</br>
+              <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                      href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
+
+                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span></br>
+                <script>
+                    var now = new Date(); 
+                    function createtime() { 
+                        var grt= new Date("12/28/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                        now.setTime(now.getTime()+250); 
+                        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                    } 
+                setInterval("createtime()",250);
+                </script>
             
-                
-                <br>
-                <span id="busuanzi_container_site_uv">
-                共<span id="busuanzi_value_site_uv">0</span>个访客
-                </span>
-                
-                </p>
-            </div>
-            <div class="level-end">
-            
-                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-                
-                <p class="control">
-                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                </p>
-                
-                </div>
-            
+                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次</br>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人次</br>
+                本文总阅读量<span id="busuanzi_value_page_pv"></span>次</br>
+          
+              
+              <br>
+              <span id="busuanzi_container_site_uv">
+              共<span id="busuanzi_value_site_uv">0</span>个访客
+              </span>
+              
+              </p>
+          </div>
+          <div class="level-end">
+          
+              <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+              
+              <p class="control">
+                  <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
+                      
+                      <i class="fab fa-github"></i>
+                      
+                  </a>
+              </p>
+              
+              </div>
+          
 
-
-
-
-
-
-            </div>
-        </div>
-    </div>
+          </div>
+      </div>
+  </div>
 
 </footer>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
 <script>moment.locale("zh-CN");</script>
 
+
 <script>
 var IcarusThemeSettings = {
+    site: {
+        url: 'http://yoursite.com',
+        external_link: {"enable":true,"exclude":[]}
+    },
     article: {
         highlight: {
             clipboard: true,
@@ -946,25 +950,25 @@ var IcarusThemeSettings = {
 </script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
 
-    
-    
+
+
 <script src="/js/animation.js"></script>
 
-    
-    
+
+
 <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
 <script src="/js/gallery.js" defer></script>
 
-    
-    
+
+
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
             my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
@@ -979,8 +983,8 @@ var IcarusThemeSettings = {
     });
 </script>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     MathJax.Hub.Config({
@@ -1002,24 +1006,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-    
-    
+
+
 <a id="back-to-top" title="回到顶端" href="javascript:;">
     <i class="fas fa-chevron-up"></i>
 </a>
 <script src="/js/back-to-top.js" defer></script>
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script src="/js/main.js" defer></script>
@@ -1055,6 +1059,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <link rel="stylesheet" href="/css/search.css">
 <link rel="stylesheet" href="/css/insight.css">
     
+
 <!-- 雪花特效 -->
 <script type="text/javascript">
   var windowWidth = $(window).width();
@@ -1062,6 +1067,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
   }
 </script>
-
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>
