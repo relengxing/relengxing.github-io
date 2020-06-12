@@ -7,15 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: 分布式 - relengxing blog</title>
+<title>keepalive_docker_nginx实践 - relengxing blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="relengxing blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;%E5%88%86%E5%B8%83%E5%BC%8F&#x2F;index.html">
+    <meta name="description" content="我的本地环境，一台 Unbuntu 18.04 系统的物理机想实践下 虚拟 ip，keepalive就一台机器，所以用 docker 来实践一下。 关于虚拟 ip, 可以看下这篇文章https:&#x2F;&#x2F;www.gitos.org&#x2F;2019&#x2F;08&#x2F;19&#x2F;vip-ha.html 关于 docker, keepalive 基本按这篇文章https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;6a8f38b807">
+<meta property="og:type" content="article">
+<meta property="og:title" content="keepalive_docker_nginx实践">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;06&#x2F;12&#x2F;keepalive-docker-nginx%E5%AE%9E%E8%B7%B5&#x2F;index.html">
 <meta property="og:site_name" content="relengxing blog">
+<meta property="og:description" content="我的本地环境，一台 Unbuntu 18.04 系统的物理机想实践下 虚拟 ip，keepalive就一台机器，所以用 docker 来实践一下。 关于虚拟 ip, 可以看下这篇文章https:&#x2F;&#x2F;www.gitos.org&#x2F;2019&#x2F;08&#x2F;19&#x2F;vip-ha.html 关于 docker, keepalive 基本按这篇文章https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;6a8f38b807">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-06-12T02:54:35.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -75,7 +78,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                <img src="/images/eva06.jpg" alt="keepalive_docker_nginx实践" height="28">
             
             </a>
         </div>
@@ -124,55 +127,80 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">分布式</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-14T11:52:25.000Z">2019-11-14</time>
+                <time class="level-item has-text-grey" datetime="2020-06-12T02:27:41.000Z">2020-06-12</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 755 个字)
+                    5 分钟 读完 (大约 713 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/11/14/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">一致性哈希</a>
+                keepalive_docker_nginx实践
             
         </h1>
         <div class="content">
-            <p>背景这块就简单说一下，一致性哈希是为了解决简单哈希带来的问题。</p>
-<p>以 redis 分布式缓存场景为例<br>有大概一百万张图片要分在 4 台机器上，后来数据量变多了，需要增加一台机器。</p>
+            <p>我的本地环境，一台 Unbuntu 18.04 系统的物理机<br>想实践下 虚拟 ip，keepalive<br>就一台机器，所以用 docker 来实践一下。</p>
+<p>关于虚拟 ip, 可以看下这篇文章<br><a href="https://www.gitos.org/2019/08/19/vip-ha.html">https://www.gitos.org/2019/08/19/vip-ha.html</a></p>
+<p>关于 docker, keepalive 基本按这篇文章<br><a href="https://www.jianshu.com/p/6a8f38b8076d">https://www.jianshu.com/p/6a8f38b8076d</a></p>
+<p>修改 dockerfile，减少重复下载环境</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos:latest</span><br><span class="line"><span class="keyword">MAINTAINER</span> relengxing&lt;relengxing@outlook.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y gcc openssl-devel popt-devel</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y net-tools</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y vim</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y keepalived</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y nginx</span></span><br></pre></td></tr></table></figure>
+
+<p>启动 centos 容器<br>–privileged=true 获取特权<br>/sbin/init：这个地方是实测 /bin/bash，会有权限没有。因为我还实验了下手动加虚拟 ip</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --name centos_master -itd --privileged=true relengxing/centos:v1 /sbin/init</span><br><span class="line">docker run --name centos_slave -itd --privileged=true relengxing/centos:v1 /sbin/init</span><br></pre></td></tr></table></figure>
+
+<p>可以进容器查看 ip 地址</p>
+<p>Master 节点<br><code>ifconfig</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt; mtu 1500</span><br><span class="line">inet 172.17.0.3 netmask 255.255.0.0 broadcast 172.17.255.255</span><br><span class="line">ether 02:42:ac:11:00:03 txqueuelen 0 (Ethernet)</span><br></pre></td></tr></table></figure>
+
+<p>在容器外则通过 docker network<br>docker network ls<br>docker network inspect d8c58097a4c3</p>
+<p>ifconfig eth0:0 172.17.0.88 netmask 255.255.0.0 up<br>ifconfig eth0:0 down</p>
+<p>修改<code>/etc/keepalived/keepalived.conf</code>的内容</p>
+<p>主节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;</span><br><span class="line">     xuad@xuad.com</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from root@xuad.com</span><br><span class="line">   smtp_server mail.xuad.com</span><br><span class="line">   smtp_connect_timeout 30</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line">   vrrp_strict</span><br><span class="line">   vrrp_garp_interval 0</span><br><span class="line">   vrrp_gna_interval 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script chk_nginx &#123;</span><br><span class="line">    script &quot;/etc/keepalived/nginx_pid.sh&quot;   # 检查nginx状态的脚本</span><br><span class="line">    interval 2</span><br><span class="line">    weight 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER     #备份服务器上将MASTER改为BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 101       #备份服务上将100改为小于100，可配置成90</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        172.17.0.99    #有多个vip可在下面继续增加</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>备份节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;</span><br><span class="line">     xuad@xuad.com</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from root@xuad.com</span><br><span class="line">   smtp_server mail.xuad.com</span><br><span class="line">   smtp_connect_timeout 30</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line">   vrrp_strict</span><br><span class="line">   vrrp_garp_interval 0</span><br><span class="line">   vrrp_gna_interval 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script chk_nginx &#123;</span><br><span class="line">    script &quot;/etc/keepalived/nginx_pid.sh&quot;   # 检查nginx状态的脚本</span><br><span class="line">    interval 2</span><br><span class="line">    weight 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP     #备份服务器上将MASTER改为BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 99       #备份服务上将100改为小于100，可配置成90</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        172.17.0.99    #有多个vip可在下面继续增加</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>nginx_pid.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检测nginx是否存活的脚本</span></span><br><span class="line">A=`ps -ef | grep nginx | grep -v grep | wc -l`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$A</span> -eq 0 ];<span class="keyword">then</span></span><br><span class="line">  nginx</span><br><span class="line">  sleep 2</span><br><span class="line">  <span class="keyword">if</span> [ `ps -ef | grep nginx | grep -v grep | wc -l` -eq 0 ];<span class="keyword">then</span></span><br><span class="line">      <span class="comment">#killall keepalived</span></span><br><span class="line">      ps -ef|grep keepalived|grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>修改 nginx 显示的页面，我就修改了这一行，标示是主机还是备份机</p>
+<p>主节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;strong&gt;nginx  master Node&lt;/strong&gt; HTTP server after it has been</span><br></pre></td></tr></table></figure>
+
+<p>从节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;strong&gt;nginx  Slave Node&lt;/strong&gt; HTTP server after it has been</span><br></pre></td></tr></table></figure>
+
+<p>然后在主机运行<br><code>curl 172.17.0.99</code><br>显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">   &lt;strong&gt;nginx   master Node&lt;/strong&gt; HTTP server after it has been</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>关闭主节点后<br>然后在主机运行<br><code>curl 172.17.0.99</code><br>显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">   &lt;strong&gt;nginx   slave Node&lt;/strong&gt; HTTP server after it has been</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>遇到一个问题没有解决</p>
+<p>在主节点运行<br><code>nginx -s stop</code> 推出 nginx 后，没有切换到从节点，必须关闭主节点。</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/11/14/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -180,11 +208,76 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zhifubao.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/weixin.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/12/14/%E8%AE%B0%E5%BD%95%EF%BC%9A%E5%9C%A8K8S%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84MySql%E9%9B%86%E7%BE%A4/">
+                <span class="level-item">记录：在K8S上创建高可用的MySql集群</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '23470f956d3db70be30b',
+        clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
+        id: '9e1ee208739de423f7d402c2cd14b2cd',
+        repo: 'relengxing.github.io',
+        owner: 'relengxing',
+        admin: "relengxing",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
 </div>
                 
 
@@ -894,7 +987,7 @@
           <div class="level-start has-text-centered-mobile">
               <a class="footer-logo is-block has-mb-6" href="/">
               
-                  <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                  <img src="/images/eva06.jpg" alt="keepalive_docker_nginx实践" height="28">
               
               </a>
               <p class="is-size-7">
