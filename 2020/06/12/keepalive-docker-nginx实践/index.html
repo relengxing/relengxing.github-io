@@ -18,7 +18,7 @@
 <meta property="og:description" content="我的本地环境，一台 Unbuntu 18.04 系统的物理机想实践下 虚拟 ip，keepalive就一台机器，所以用 docker 来实践一下。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-06-12T02:59:07.961Z">
+<meta property="og:updated_time" content="2020-06-12T06:12:24.702Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -140,7 +140,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 714 个字)
+                    5 分钟 读完 (大约 805 个字)
                 </span>
                 
                 
@@ -200,6 +200,10 @@
 
 <p>遇到一个问题没有解决</p>
 <p>在主节点运行<br><code>nginx -s stop</code> 推出 nginx 后，没有切换到从节点，必须关闭主节点。</p>
+<p>更新：<br>这个问题看了下<br>是 nginx 检测脚本的问题<br>修改为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 如果进程中没有nginx则将keepalived进程kill掉</span></span><br><span class="line">A=`ps -C nginx --no-header |wc -l`      <span class="comment">## 查看是否有 nginx进程 把值赋给变量A</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$A</span> -eq 0 ];<span class="keyword">then</span>                    <span class="comment">## 如果没有进程值得为 零</span></span><br><span class="line">    systemctl stop keepalived.service           <span class="comment">## 则结束 keepalived 进程</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p>成功了</p>
 
         </div>
         
