@@ -7,19 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>树莓派3搭建linux服务器 - relengxing blog</title>
+<title>搭建elasticsearch_kibana - relengxing blog</title>
 
 
-    <meta name="description" content="前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。">
-<meta name="keywords" content="linux,树莓派">
+    <meta name="description" content="docker network create elkdocker run -d –name elasticsearch –net elk -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” elasticsearch:6.5.4docker run -d –name kibana –net elk -p 5601:5601 kibana">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树莓派3搭建linux服务器">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;24&#x2F;%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8&#x2F;index.html">
+<meta property="og:title" content="搭建elasticsearch_kibana">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;06&#x2F;13&#x2F;%E6%90%AD%E5%BB%BAelasticsearch-kibana&#x2F;index.html">
 <meta property="og:site_name" content="relengxing blog">
-<meta property="og:description" content="前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。">
+<meta property="og:description" content="docker network create elkdocker run -d –name elasticsearch –net elk -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” elasticsearch:6.5.4docker run -d –name kibana –net elk -p 5601:5601 kibana">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-10-24T13:37:53.213Z">
+<meta property="og:updated_time" content="2020-06-13T07:43:18.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -79,7 +78,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/eva06.jpg" alt="树莓派3搭建linux服务器" height="28">
+                <img src="/images/eva06.jpg" alt="搭建elasticsearch_kibana" height="28">
             
             </a>
         </div>
@@ -135,13 +134,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-10-24T13:29:08.000Z">2019-10-24</time>
+                <time class="level-item has-text-grey" datetime="2020-06-13T07:42:41.000Z">2020-06-13</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 380 个字)
+                    几秒 读完 (大约 28 个字)
                 </span>
                 
                 
@@ -155,29 +154,12 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                树莓派3搭建linux服务器
+                搭建elasticsearch_kibana
             
         </h1>
         <div class="content">
-            <p>前段时间租了三个月阿里云，感觉太贵了，就买了个树莓派 3，准备搭建一个 linux 操作系统，当服务器用用，大概花费不到 300。电源 5V×2.5A，一般情况下不用这么高的电流，功耗其实很低的。</p>
-<a id="more"></a>
+            <p>docker network create elk<br>docker run -d –name elasticsearch –net elk -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” elasticsearch:6.5.4<br>docker run -d –name kibana –net elk -p 5601:5601 kibana:6.5.4</p>
 
-<p>组装就不说了。。成品如下<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%A0%91%E8%8E%93%E6%B4%BE.jpeg" alt="树莓派"><br>几个要下载的东西:<br>链接：<a href="http://pan.baidu.com/s/1o8FC0xO">http://pan.baidu.com/s/1o8FC0xO</a> 密码：psww<br>这个是系统<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/UbuntuServer.jpg" alt="系统"><br>把他解压出来是一个.img 文件。</p>
-<p>这个软件安装一下。<br><code>Win32DiskImager-0.9.5-install.exe</code><br>内存卡，读卡器准备好</p>
-<p>然后就写到系统里面<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%AD%A5%E9%AA%A4.jpg" alt="步骤"></p>
-<p>写完以后就可以插到树莓派上了，网线端接路由器的 LAN 口，电脑和树莓派在同一个局域网下。<br>上电，等开好机</p>
-<p>在路由器管理页面下可以找到<br>我的是 192.168.0.104</p>
-<p>然后就可以用 xshell 连接了<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/Xshell%E8%BF%9E%E6%8E%A5.jpg" alt="Xshell连接"><br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%99%BB%E5%BD%95.jpg" alt="登录"><br>然后就登录成功了<br>我这里是用有线连接的，无线的没有去做了<br><img src="/2019/10/24/%E6%A0%91%E8%8E%93%E6%B4%BE3%E6%90%AD%E5%BB%BAlinux%E6%9C%8D%E5%8A%A1%E5%99%A8/%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F.jpg" alt="成功"><br>OK,大功告成，然后可以开始装各种软件的开发环境了。</p>
-
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/linux/" rel="tag">linux</a>, <a class="has-link-grey -link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" rel="tag">树莓派</a>
-                </div>
-            </div>
         </div>
         
         
@@ -222,16 +204,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/14/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">一致性哈希</span>
+                <span class="level-item">mybatis拦截器实现日志</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2017/09/08/ReBus/">
-                <span class="level-item">ReBus</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/">
+                <span class="level-item">搭建docker_registry</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -252,7 +234,7 @@
     var gitalk = new Gitalk({
         clientID: '23470f956d3db70be30b',
         clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
-        id: '63243894c4c70316cf861681c794eb7b',
+        id: '442e12e80ee0c33171b7545d0d68744b',
         repo: 'relengxing.github.io',
         owner: 'relengxing',
         admin: "relengxing",
@@ -973,7 +955,7 @@
           <div class="level-start has-text-centered-mobile">
               <a class="footer-logo is-block has-mb-6" href="/">
               
-                  <img src="/images/eva06.jpg" alt="树莓派3搭建linux服务器" height="28">
+                  <img src="/images/eva06.jpg" alt="搭建elasticsearch_kibana" height="28">
               
               </a>
               <p class="is-size-7">
