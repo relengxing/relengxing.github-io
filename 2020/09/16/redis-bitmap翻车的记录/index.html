@@ -7,15 +7,18 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: rxjava - relengxing blog</title>
+<title>redis_bitmap翻车的记录.md - relengxing blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="relengxing blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;rxjava&#x2F;index.html">
+    <meta name="description" content="今天做一个需求，广告页，要求一天仅显示一次。 数据是存在redis的，当时想着用bitmap可以节约空间，一个用户仅需要 1 bit。但是实际使用中，遇到了几个坑。userId是long型的。bitmap只能用int。 这里把long hash成 int，能解决，但是有hash碰撞的风险。不过就算发生了hash碰撞也无所谓，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis_bitmap翻车的记录.md">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;09&#x2F;16&#x2F;redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95&#x2F;index.html">
 <meta property="og:site_name" content="relengxing blog">
+<meta property="og:description" content="今天做一个需求，广告页，要求一天仅显示一次。 数据是存在redis的，当时想着用bitmap可以节约空间，一个用户仅需要 1 bit。但是实际使用中，遇到了几个坑。userId是long型的。bitmap只能用int。 这里把long hash成 int，能解决，但是有hash碰撞的风险。不过就算发生了hash碰撞也无所谓，">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-09-16T08:57:32.901Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
 
@@ -75,7 +78,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                <img src="/images/eva06.jpg" alt="redis_bitmap翻车的记录.md" height="28">
             
             </a>
         </div>
@@ -124,55 +127,51 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
-    <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">rxjava</a></li>
-        </ul>
-        </nav>
-    </div>
-</div>
-
-    
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
 <div class="card">
     
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-08-13T08:20:47.000Z">2016-08-13</time>
+                <time class="level-item has-text-grey" datetime="2020-09-16T08:45:37.000Z">2020-09-16</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1443 个字)
+                    2 分钟 读完 (大约 299 个字)
                 </span>
                 
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
                 
             </div>
         </div>
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2016/08/13/RxBus/">RxBus</a>
+                redis_bitmap翻车的记录.md
             
         </h1>
         <div class="content">
-            <p>参考：用 RxJava 实现事件总线(Event Bus)<br><a href="http://www.jianshu.com/p/ca090f6e2fe2">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
-<p>我这篇基本上就是按照上面那篇写的，对 Sticky 那一块进行了一些修改。<br>写下来让自己记得更深刻。这篇文章面向有 RxJava 基础的人，要是 HelloWorld 都没写过建议先看基础部分。</p>
+            <p>今天做一个需求，广告页，要求一天仅显示一次。</p>
+<p>数据是存在redis的，当时想着用bitmap可以节约空间，一个用户仅需要 1 bit。<br>但是实际使用中，遇到了几个坑。userId是long型的。bitmap只能用int。</p>
+<p>这里把long hash成 int，能解决，但是有hash碰撞的风险。不过就算发生了hash碰撞也无所谓，</p>
+<a id="more"></a>
+
+<p>然后按这个方案继续。能成功，一切正常。</p>
+<p>但是无意中去redis看的时候，这个key 的 大小有 100M。<br>只存一个用户也是100M。<br>然后我还是按不同的商户存不同的bitmap。<br>还好是在测试环境发现了，如果上了生产，就可以直接找工作了。。。</p>
+<p>这里分析一下。</p>
+<p>bitmap缺失可以节约空间，一个用户最多是256M,一亿个用户也是256M。</p>
+<p>但是我们用户少啊。。用这个方案就不太合适了</p>
+<p>然后 我们的用户Id是雪花算法Id，不是连续的，其实用bitmap也不适合</p>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2016/08/13/RxBus/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -180,11 +179,76 @@
 
 
 
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zhifubao.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/weixin.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
 
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/">
+                <span class="level-item">注解实现字段自动解密</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
 
 
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
+        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '23470f956d3db70be30b',
+        clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
+        id: 'b98dea87ef8be30d927e06b7ee2cdb0f',
+        repo: 'relengxing.github.io',
+        owner: 'relengxing',
+        admin: "relengxing",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
+    </div>
+</div>
 </div>
                 
 
@@ -938,7 +1002,7 @@
           <div class="level-start has-text-centered-mobile">
               <a class="footer-logo is-block has-mb-6" href="/">
               
-                  <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                  <img src="/images/eva06.jpg" alt="redis_bitmap翻车的记录.md" height="28">
               
               </a>
               <p class="is-size-7">
