@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
 
-<meta name="generator" content="Hexo 4.0.0" />
+<meta name="generator" content="Hexo 5.4.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
@@ -13,14 +13,16 @@
     <meta name="description" content="更新 2">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记录：在K8S上创建高可用的MySql集群">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;14&#x2F;%E8%AE%B0%E5%BD%95%EF%BC%9A%E5%9C%A8K8S%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84MySql%E9%9B%86%E7%BE%A4&#x2F;index.html">
+<meta property="og:url" content="http://yoursite.com/2019/12/14/%E8%AE%B0%E5%BD%95%EF%BC%9A%E5%9C%A8K8S%E4%B8%8A%E5%88%9B%E5%BB%BA%E9%AB%98%E5%8F%AF%E7%94%A8%E7%9A%84MySql%E9%9B%86%E7%BE%A4/index.html">
 <meta property="og:site_name" content="relengxing blog">
 <meta property="og:description" content="更新 2">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2019-12-14T12:56:55.885Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="article:published_time" content="2019-12-14T09:33:51.000Z">
+<meta property="article:modified_time" content="2019-12-14T12:56:55.885Z">
+<meta property="article:author" content="relengxing">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
 
@@ -158,7 +160,7 @@
             
         </h1>
         <div class="content">
-            <h2 id="更新-2"><a href="#更新-2" class="headerlink" title="更新 2"></a>更新 2</h2><a id="more"></a>
+            <h2 id="更新-2"><a href="#更新-2" class="headerlink" title="更新 2"></a>更新 2</h2><span id="more"></span>
 
 <p>查看了 kubernetes 的资料和配置<br>Pod CIDR 10.9.12.0/24<br>Pod CIDR 10.9.13.0/24<br>Pod CIDR 10.10.11.0/24</p>
 <p>这里不连续的原因是， Mysql-0 和 Mysql-1 使用的两台机器是常年开着的，没有关闭过<br>而 Mysql-2 使用的机器是刚刚创建的，而我们的集群有个特点，就是频繁的创建和删除节点。 这里猜测 kubernetes 在分配 ip 的时候是顺序分配的,如果分配完了再从头开始分配，把已经释放的重新分配。</p>
@@ -169,10 +171,10 @@
 <li>寻找其他 MySql 高可用部署的解决方案</li>
 </ol>
 <p>我准备就创建一个 nodepool，因为从我的个人实际情况出发，这是最简单有效，最快速的解决方案，然后问题也和提了 issue，希望作者会进行优化。</p>
-<h2 id="更新-1"><a href="#更新-1" class="headerlink" title="更新 1"></a>更新 1</h2><p>问题查了下，看了下作者的更新记录<br><a href="https://github.com/kubedb/mysql/commit/1db0fa511d31f32bf36b4dcdc07733d3853f3d18">https://github.com/kubedb/mysql/commit/1db0fa511d31f32bf36b4dcdc07733d3853f3d18</a><br>关键的几行</p>
+<h2 id="更新-1"><a href="#更新-1" class="headerlink" title="更新 1"></a>更新 1</h2><p>问题查了下，看了下作者的更新记录<br><a target="_blank" rel="noopener" href="https://github.com/kubedb/mysql/commit/1db0fa511d31f32bf36b4dcdc07733d3853f3d18">https://github.com/kubedb/mysql/commit/1db0fa511d31f32bf36b4dcdc07733d3853f3d18</a><br>关键的几行</p>
 <!--more-->
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myips=$(hostname -I)</span><br><span class="line">first=$&#123;myips%% *&#125;</span><br><span class="line"># Now use this IP with CIDR notation</span><br><span class="line">export whitelist=&quot;$&#123;first&#125;/16&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myips&#x3D;$(hostname -I)</span><br><span class="line">first&#x3D;$&#123;myips%% *&#125;</span><br><span class="line"># Now use this IP with CIDR notation</span><br><span class="line">export whitelist&#x3D;&quot;$&#123;first&#125;&#x2F;16&quot;</span><br></pre></td></tr></table></figure>
 
 <p>然后我确认了下我的 IP：<br>mysql-0:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP:                 10.9.12.246</span><br></pre></td></tr></table></figure>
@@ -181,18 +183,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IP:                 10.10.11.2</span><br></pre></td></tr></table></figure>
 
 <p>这里 kubernetes 内网 IP 的第二个数不一样，作者的掩码是/16，我这里需要/8<br>我觉得这个问题应该在 kubernetes 这里找解决方案</p>
-<h2 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h2><p>参考文章：<br><a href="https://jeremy-xu.oschina.io/2019/08/kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/">https://jeremy-xu.oschina.io/2019/08/kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</a><br><a href="https://kubedb.com/docs/0.12.0/guides/mysql/clustering/overview/">https://kubedb.com/docs/0.12.0/guides/mysql/clustering/overview/</a></p>
+<h2 id="原文"><a href="#原文" class="headerlink" title="原文"></a>原文</h2><p>参考文章：<br><a target="_blank" rel="noopener" href="https://jeremy-xu.oschina.io/2019/08/kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/">https://jeremy-xu.oschina.io/2019/08/kubernetes%E4%B8%AD%E9%83%A8%E7%BD%B2mysql%E9%AB%98%E5%8F%AF%E7%94%A8%E9%9B%86%E7%BE%A4/</a><br><a target="_blank" rel="noopener" href="https://kubedb.com/docs/0.12.0/guides/mysql/clustering/overview/">https://kubedb.com/docs/0.12.0/guides/mysql/clustering/overview/</a></p>
 <p>按照博主的文章，确实搭建成功了。但是在后续改进的时候遇到了问题，目前还没有解决，先记录下来，以后解决了再修改。</p>
 <!--more-->
 
 <p>我使用的是 google 的 kubernetes,这里使用的是一台四核的机器，三个节点全部部署在同一台机器上，上面还有一些其他的服务，基本上单节点分配不到一个核。<br>在另一台单核的 VM 上使用 sysbench 进行测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sysbench /usr/share/sysbench/oltp_read_write.lua --time=180 --mysql-host=mysqlip --mysql-port=3306 --mysql-user=root --mysql-password=mysqlmima --mysql-db=demo --table-size=50000 --tables=8 --threads=8 prepare</span><br><span class="line"></span><br><span class="line">sysbench /usr/share/sysbench/oltp_read_write.lua --time=180 --mysql-host=mysqlip --mysql-port=3306 --mysql-user=root --mysql-password=mysqlmima --mysql-db=demo --table-size=50000 --tables=8 --threads=8 run &gt;&gt; k8smysql.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sysbench &#x2F;usr&#x2F;share&#x2F;sysbench&#x2F;oltp_read_write.lua --time&#x3D;180 --mysql-host&#x3D;mysqlip --mysql-port&#x3D;3306 --mysql-user&#x3D;root --mysql-password&#x3D;mysqlmima --mysql-db&#x3D;demo --table-size&#x3D;50000 --tables&#x3D;8 --threads&#x3D;8 prepare</span><br><span class="line"></span><br><span class="line">sysbench &#x2F;usr&#x2F;share&#x2F;sysbench&#x2F;oltp_read_write.lua --time&#x3D;180 --mysql-host&#x3D;mysqlip --mysql-port&#x3D;3306 --mysql-user&#x3D;root --mysql-password&#x3D;mysqlmima --mysql-db&#x3D;demo --table-size&#x3D;50000 --tables&#x3D;8 --threads&#x3D;8 run &gt;&gt; k8smysql.log</span><br></pre></td></tr></table></figure>
 
 <p>第一次直接挂了，改小数据量后重新测试得到测试报告</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">sysbench 1.0.19 (using bundled LuaJIT 2.1.0-beta2)</span><br><span class="line"></span><br><span class="line">Running the test with following options:</span><br><span class="line">Number of threads: 8</span><br><span class="line">Initializing random number generator from current time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Initializing worker threads...</span><br><span class="line"></span><br><span class="line">Threads started!</span><br><span class="line"></span><br><span class="line">FATAL: mysql_stmt_execute() returned error 2013 (Lost connection to MySQL server during query) for query &apos;SELECT c FROM sbtest7 WHERE id=?&apos;</span><br><span class="line">FATAL: `thread_run&apos; function failed: /usr/share/sysbench/oltp_common.lua:419: SQL error, errno = 2013, state = &apos;HY000&apos;: Lost connection to MySQL server during query</span><br><span class="line">sysbench 1.0.19 (using bundled LuaJIT 2.1.0-beta2)</span><br><span class="line"></span><br><span class="line">Running the test with following options:</span><br><span class="line">Number of threads: 8</span><br><span class="line">Initializing random number generator from current time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Initializing worker threads...</span><br><span class="line"></span><br><span class="line">Threads started!</span><br><span class="line"></span><br><span class="line">SQL statistics:</span><br><span class="line">    queries performed:</span><br><span class="line">        read:                            310646</span><br><span class="line">        write:                           68981</span><br><span class="line">        other:                           64143</span><br><span class="line">        total:                           443770</span><br><span class="line">    transactions:                        22187  (123.19 per sec.)</span><br><span class="line">    queries:                             443770 (2463.94 per sec.)</span><br><span class="line">    ignored errors:                      2      (0.01 per sec.)</span><br><span class="line">    reconnects:                          0      (0.00 per sec.)</span><br><span class="line"></span><br><span class="line">General statistics:</span><br><span class="line">    total time:                          180.1038s</span><br><span class="line">    total number of events:              22187</span><br><span class="line"></span><br><span class="line">Latency (ms):</span><br><span class="line">         min:                                   22.81</span><br><span class="line">         avg:                                   64.91</span><br><span class="line">         max:                                  370.94</span><br><span class="line">         95th percentile:                      139.85</span><br><span class="line">         sum:                              1440248.80</span><br><span class="line"></span><br><span class="line">Threads fairness:</span><br><span class="line">    events (avg/stddev):           2773.3750/1495.23</span><br><span class="line">    execution time (avg/stddev):   180.0311/0.04</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">sysbench 1.0.19 (using bundled LuaJIT 2.1.0-beta2)</span><br><span class="line"></span><br><span class="line">Running the test with following options:</span><br><span class="line">Number of threads: 8</span><br><span class="line">Initializing random number generator from current time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Initializing worker threads...</span><br><span class="line"></span><br><span class="line">Threads started!</span><br><span class="line"></span><br><span class="line">FATAL: mysql_stmt_execute() returned error 2013 (Lost connection to MySQL server during query) for query &#39;SELECT c FROM sbtest7 WHERE id&#x3D;?&#39;</span><br><span class="line">FATAL: &#96;thread_run&#39; function failed: &#x2F;usr&#x2F;share&#x2F;sysbench&#x2F;oltp_common.lua:419: SQL error, errno &#x3D; 2013, state &#x3D; &#39;HY000&#39;: Lost connection to MySQL server during query</span><br><span class="line">sysbench 1.0.19 (using bundled LuaJIT 2.1.0-beta2)</span><br><span class="line"></span><br><span class="line">Running the test with following options:</span><br><span class="line">Number of threads: 8</span><br><span class="line">Initializing random number generator from current time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Initializing worker threads...</span><br><span class="line"></span><br><span class="line">Threads started!</span><br><span class="line"></span><br><span class="line">SQL statistics:</span><br><span class="line">    queries performed:</span><br><span class="line">        read:                            310646</span><br><span class="line">        write:                           68981</span><br><span class="line">        other:                           64143</span><br><span class="line">        total:                           443770</span><br><span class="line">    transactions:                        22187  (123.19 per sec.)</span><br><span class="line">    queries:                             443770 (2463.94 per sec.)</span><br><span class="line">    ignored errors:                      2      (0.01 per sec.)</span><br><span class="line">    reconnects:                          0      (0.00 per sec.)</span><br><span class="line"></span><br><span class="line">General statistics:</span><br><span class="line">    total time:                          180.1038s</span><br><span class="line">    total number of events:              22187</span><br><span class="line"></span><br><span class="line">Latency (ms):</span><br><span class="line">         min:                                   22.81</span><br><span class="line">         avg:                                   64.91</span><br><span class="line">         max:                                  370.94</span><br><span class="line">         95th percentile:                      139.85</span><br><span class="line">         sum:                              1440248.80</span><br><span class="line"></span><br><span class="line">Threads fairness:</span><br><span class="line">    events (avg&#x2F;stddev):           2773.3750&#x2F;1495.23</span><br><span class="line">    execution time (avg&#x2F;stddev):   180.0311&#x2F;0.04</span><br></pre></td></tr></table></figure>
 
 <p>说实话性能一般，所以准备使用更好的机器继续测试性能，让单个节点使用两个核。</p>
-<p>这一步的时候出问题了，集群起不来。<br>查了一下，发现有人也遇到了同样的问题，作者说解决了，但是我今天实测还是出了这个问题。<br><a href="https://github.com/kubedb/project/issues/529">https://github.com/kubedb/project/issues/529</a><br>目前没有找到很好的解决方案，在 github 上提了新的 issue<br><a href="https://github.com/kubedb/project/issues/702">https://github.com/kubedb/project/issues/702</a><br>希望可以得到解决。</p>
+<p>这一步的时候出问题了，集群起不来。<br>查了一下，发现有人也遇到了同样的问题，作者说解决了，但是我今天实测还是出了这个问题。<br><a target="_blank" rel="noopener" href="https://github.com/kubedb/project/issues/529">https://github.com/kubedb/project/issues/529</a><br>目前没有找到很好的解决方案，在 github 上提了新的 issue<br><a target="_blank" rel="noopener" href="https://github.com/kubedb/project/issues/702">https://github.com/kubedb/project/issues/702</a><br>希望可以得到解决。</p>
 
         </div>
         
@@ -325,7 +327,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            12
+                            15
                         </p>
                     </a>
                 </div>
@@ -456,6 +458,63 @@
         
         <article class="media">
             
+            <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="记录一次线上宕机的问题2020_02_20.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-22T09:22:37.000Z">2021-02-22</time></div>
+                    <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记录一次线上宕机的问题2020_02_20.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="多路复用IO.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-24T11:34:48.000Z">2021-01-24</time></div>
+                    <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">多路复用IO.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-04T03:14:45.310Z">2020-12-04</time></div>
+                    <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="redis_bitmap翻车的记录.md">
@@ -492,63 +551,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mybatis拦截器实现日志">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-22T07:58:23.000Z">2020-06-22</time></div>
-                    <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mybatis拦截器实现日志</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="搭建elasticsearch_kibana">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T07:42:41.000Z">2020-06-13</time></div>
-                    <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" class="title has-link-black-ter is-size-6 has-text-weight-normal">搭建elasticsearch_kibana</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="搭建docker_registry">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T08:50:28.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" class="title has-link-black-ter is-size-6 has-text-weight-normal">搭建docker_registry</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -559,6 +561,39 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/09/">
@@ -748,6 +783,63 @@
         
         <article class="media">
             
+            <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="记录一次线上宕机的问题2020_02_20.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-22T09:22:37.000Z">2021-02-22</time></div>
+                    <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记录一次线上宕机的问题2020_02_20.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="多路复用IO.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-24T11:34:48.000Z">2021-01-24</time></div>
+                    <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">多路复用IO.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-04T03:14:45.310Z">2020-12-04</time></div>
+                    <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="redis_bitmap翻车的记录.md">
@@ -784,63 +876,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mybatis拦截器实现日志">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-22T07:58:23.000Z">2020-06-22</time></div>
-                    <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mybatis拦截器实现日志</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="搭建elasticsearch_kibana">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T07:42:41.000Z">2020-06-13</time></div>
-                    <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" class="title has-link-black-ter is-size-6 has-text-weight-normal">搭建elasticsearch_kibana</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="搭建docker_registry">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T08:50:28.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" class="title has-link-black-ter is-size-6 has-text-weight-normal">搭建docker_registry</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -851,6 +886,39 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/09/">
@@ -1037,7 +1105,7 @@
               
               </a>
               <p class="is-size-7">
-              &copy; 2020 relengxing&nbsp;</br>
+              &copy; 2021 relengxing&nbsp;</br>
               <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                       href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
 
@@ -1131,7 +1199,7 @@ var IcarusThemeSettings = {
 
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update
             my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>

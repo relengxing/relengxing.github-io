@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
 
-<meta name="generator" content="Hexo 4.0.0" />
+<meta name="generator" content="Hexo 5.4.0" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
@@ -13,14 +13,16 @@
     <meta name="description" content="我的本地环境，一台 Unbuntu 18.04 系统的物理机想实践下 虚拟 ip，keepalive就一台机器，所以用 docker 来实践一下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="keepalive_docker_nginx实践">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;06&#x2F;12&#x2F;keepalive-docker-nginx%E5%AE%9E%E8%B7%B5&#x2F;index.html">
+<meta property="og:url" content="http://yoursite.com/2020/06/12/keepalive-docker-nginx%E5%AE%9E%E8%B7%B5/index.html">
 <meta property="og:site_name" content="relengxing blog">
 <meta property="og:description" content="我的本地环境，一台 Unbuntu 18.04 系统的物理机想实践下 虚拟 ip，keepalive就一台机器，所以用 docker 来实践一下。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
-<meta property="og:updated_time" content="2020-06-12T06:12:24.702Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="article:published_time" content="2020-06-12T02:27:41.000Z">
+<meta property="article:modified_time" content="2020-06-12T06:12:24.702Z">
+<meta property="article:author" content="relengxing">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
 
 
 
@@ -159,44 +161,44 @@
         </h1>
         <div class="content">
             <p>我的本地环境，一台 Unbuntu 18.04 系统的物理机<br>想实践下 虚拟 ip，keepalive<br>就一台机器，所以用 docker 来实践一下。</p>
-<a id="more"></a>
+<span id="more"></span>
 
-<p>关于虚拟 ip, 可以看下这篇文章<br><a href="https://www.gitos.org/2019/08/19/vip-ha.html">https://www.gitos.org/2019/08/19/vip-ha.html</a></p>
-<p>关于 docker, keepalive 基本按这篇文章<br><a href="https://www.jianshu.com/p/6a8f38b8076d">https://www.jianshu.com/p/6a8f38b8076d</a></p>
+<p>关于虚拟 ip, 可以看下这篇文章<br><a target="_blank" rel="noopener" href="https://www.gitos.org/2019/08/19/vip-ha.html">https://www.gitos.org/2019/08/19/vip-ha.html</a></p>
+<p>关于 docker, keepalive 基本按这篇文章<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6a8f38b8076d">https://www.jianshu.com/p/6a8f38b8076d</a></p>
 <p>修改 dockerfile，减少重复下载环境</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos:latest</span><br><span class="line"><span class="keyword">MAINTAINER</span> relengxing&lt;relengxing@outlook.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y gcc openssl-devel popt-devel</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y net-tools</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y vim</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y keepalived</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum install -y nginx</span></span><br></pre></td></tr></table></figure>
 
 <p>启动 centos 容器<br>–privileged=true 获取特权<br>/sbin/init：这个地方是实测 /bin/bash，会有权限没有。因为我还实验了下手动加虚拟 ip</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --name centos_master -itd --privileged=true relengxing/centos:v1 /sbin/init</span><br><span class="line">docker run --name centos_slave -itd --privileged=true relengxing/centos:v1 /sbin/init</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --name centos_master -itd --privileged&#x3D;true relengxing&#x2F;centos:v1 &#x2F;sbin&#x2F;init</span><br><span class="line">docker run --name centos_slave -itd --privileged&#x3D;true relengxing&#x2F;centos:v1 &#x2F;sbin&#x2F;init</span><br></pre></td></tr></table></figure>
 
 <p>可以进容器查看 ip 地址</p>
 <p>Master 节点<br><code>ifconfig</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt; mtu 1500</span><br><span class="line">inet 172.17.0.3 netmask 255.255.0.0 broadcast 172.17.255.255</span><br><span class="line">ether 02:42:ac:11:00:03 txqueuelen 0 (Ethernet)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eth0: flags&#x3D;4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt; mtu 1500</span><br><span class="line">inet 172.17.0.3 netmask 255.255.0.0 broadcast 172.17.255.255</span><br><span class="line">ether 02:42:ac:11:00:03 txqueuelen 0 (Ethernet)</span><br></pre></td></tr></table></figure>
 
 <p>在容器外则通过 docker network<br>docker network ls<br>docker network inspect d8c58097a4c3</p>
 <p>ifconfig eth0:0 172.17.0.88 netmask 255.255.0.0 up<br>ifconfig eth0:0 down</p>
 <p>修改<code>/etc/keepalived/keepalived.conf</code>的内容</p>
 <p>主节点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;</span><br><span class="line">     xuad@xuad.com</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from root@xuad.com</span><br><span class="line">   smtp_server mail.xuad.com</span><br><span class="line">   smtp_connect_timeout 30</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line">   vrrp_strict</span><br><span class="line">   vrrp_garp_interval 0</span><br><span class="line">   vrrp_gna_interval 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script chk_nginx &#123;</span><br><span class="line">    script &quot;/etc/keepalived/nginx_pid.sh&quot;   # 检查nginx状态的脚本</span><br><span class="line">    interval 2</span><br><span class="line">    weight 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER     #备份服务器上将MASTER改为BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 101       #备份服务上将100改为小于100，可配置成90</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        172.17.0.99    #有多个vip可在下面继续增加</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;</span><br><span class="line">     xuad@xuad.com</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from root@xuad.com</span><br><span class="line">   smtp_server mail.xuad.com</span><br><span class="line">   smtp_connect_timeout 30</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line">   vrrp_strict</span><br><span class="line">   vrrp_garp_interval 0</span><br><span class="line">   vrrp_gna_interval 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script chk_nginx &#123;</span><br><span class="line">    script &quot;&#x2F;etc&#x2F;keepalived&#x2F;nginx_pid.sh&quot;   # 检查nginx状态的脚本</span><br><span class="line">    interval 2</span><br><span class="line">    weight 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER     #备份服务器上将MASTER改为BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 101       #备份服务上将100改为小于100，可配置成90</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        172.17.0.99    #有多个vip可在下面继续增加</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>备份节点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;</span><br><span class="line">     xuad@xuad.com</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from root@xuad.com</span><br><span class="line">   smtp_server mail.xuad.com</span><br><span class="line">   smtp_connect_timeout 30</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line">   vrrp_strict</span><br><span class="line">   vrrp_garp_interval 0</span><br><span class="line">   vrrp_gna_interval 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script chk_nginx &#123;</span><br><span class="line">    script &quot;/etc/keepalived/nginx_pid.sh&quot;   # 检查nginx状态的脚本</span><br><span class="line">    interval 2</span><br><span class="line">    weight 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP     #备份服务器上将MASTER改为BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 99       #备份服务上将100改为小于100，可配置成90</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        172.17.0.99    #有多个vip可在下面继续增加</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;</span><br><span class="line">     xuad@xuad.com</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from root@xuad.com</span><br><span class="line">   smtp_server mail.xuad.com</span><br><span class="line">   smtp_connect_timeout 30</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line">   vrrp_strict</span><br><span class="line">   vrrp_garp_interval 0</span><br><span class="line">   vrrp_gna_interval 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script chk_nginx &#123;</span><br><span class="line">    script &quot;&#x2F;etc&#x2F;keepalived&#x2F;nginx_pid.sh&quot;   # 检查nginx状态的脚本</span><br><span class="line">    interval 2</span><br><span class="line">    weight 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP     #备份服务器上将MASTER改为BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 99       #备份服务上将100改为小于100，可配置成90</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        172.17.0.99    #有多个vip可在下面继续增加</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_nginx</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>nginx_pid.sh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检测nginx是否存活的脚本</span></span><br><span class="line">A=`ps -ef | grep nginx | grep -v grep | wc -l`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$A</span> -eq 0 ];<span class="keyword">then</span></span><br><span class="line">  nginx</span><br><span class="line">  sleep 2</span><br><span class="line">  <span class="keyword">if</span> [ `ps -ef | grep nginx | grep -v grep | wc -l` -eq 0 ];<span class="keyword">then</span></span><br><span class="line">      <span class="comment">#killall keepalived</span></span><br><span class="line">      ps -ef|grep keepalived|grep -v grep|awk <span class="string">'&#123;print $2&#125;'</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检测nginx是否存活的脚本</span></span><br><span class="line">A=`ps -ef | grep nginx | grep -v grep | wc -l`</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$A</span> -eq 0 ];<span class="keyword">then</span></span><br><span class="line">  nginx</span><br><span class="line">  sleep 2</span><br><span class="line">  <span class="keyword">if</span> [ `ps -ef | grep nginx | grep -v grep | wc -l` -eq 0 ];<span class="keyword">then</span></span><br><span class="line">      <span class="comment">#killall keepalived</span></span><br><span class="line">      ps -ef|grep keepalived|grep -v grep|awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span>|xargs <span class="built_in">kill</span> -9</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 
 <p>修改 nginx 显示的页面，我就修改了这一行，标示是主机还是备份机</p>
 <p>主节点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;strong&gt;nginx  master Node&lt;/strong&gt; HTTP server after it has been</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;strong&gt;nginx  master Node&lt;&#x2F;strong&gt; HTTP server after it has been</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>从节点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;strong&gt;nginx  Slave Node&lt;/strong&gt; HTTP server after it has been</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;strong&gt;nginx  Slave Node&lt;&#x2F;strong&gt; HTTP server after it has been</span><br></pre></td></tr></table></figure>
 
 <p>然后在主机运行<br><code>curl 172.17.0.99</code><br>显示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">   &lt;strong&gt;nginx   master Node&lt;/strong&gt; HTTP server after it has been</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">   &lt;strong&gt;nginx   master Node&lt;&#x2F;strong&gt; HTTP server after it has been</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>关闭主节点后<br>然后在主机运行<br><code>curl 172.17.0.99</code><br>显示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">   &lt;strong&gt;nginx   slave Node&lt;/strong&gt; HTTP server after it has been</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">   &lt;strong&gt;nginx   slave Node&lt;&#x2F;strong&gt; HTTP server after it has been</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 <p>遇到一个问题没有解决</p>
 <p>在主节点运行<br><code>nginx -s stop</code> 推出 nginx 后，没有切换到从节点，必须关闭主节点。</p>
@@ -336,7 +338,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            12
+                            15
                         </p>
                     </a>
                 </div>
@@ -467,6 +469,63 @@
         
         <article class="media">
             
+            <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="记录一次线上宕机的问题2020_02_20.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-22T09:22:37.000Z">2021-02-22</time></div>
+                    <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记录一次线上宕机的问题2020_02_20.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="多路复用IO.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-24T11:34:48.000Z">2021-01-24</time></div>
+                    <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">多路复用IO.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-04T03:14:45.310Z">2020-12-04</time></div>
+                    <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="redis_bitmap翻车的记录.md">
@@ -503,63 +562,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mybatis拦截器实现日志">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-22T07:58:23.000Z">2020-06-22</time></div>
-                    <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mybatis拦截器实现日志</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="搭建elasticsearch_kibana">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T07:42:41.000Z">2020-06-13</time></div>
-                    <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" class="title has-link-black-ter is-size-6 has-text-weight-normal">搭建elasticsearch_kibana</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="搭建docker_registry">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T08:50:28.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" class="title has-link-black-ter is-size-6 has-text-weight-normal">搭建docker_registry</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
         
@@ -570,6 +572,39 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/09/">
@@ -759,6 +794,63 @@
         
         <article class="media">
             
+            <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="记录一次线上宕机的问题2020_02_20.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-22T09:22:37.000Z">2021-02-22</time></div>
+                    <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记录一次线上宕机的问题2020_02_20.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="多路复用IO.md">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-24T11:34:48.000Z">2021-01-24</time></div>
+                    <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">多路复用IO.md</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-04T03:14:45.310Z">2020-12-04</time></div>
+                    <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="redis_bitmap翻车的记录.md">
@@ -795,63 +887,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="mybatis拦截器实现日志">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-22T07:58:23.000Z">2020-06-22</time></div>
-                    <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" class="title has-link-black-ter is-size-6 has-text-weight-normal">mybatis拦截器实现日志</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="搭建elasticsearch_kibana">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-13T07:42:41.000Z">2020-06-13</time></div>
-                    <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" class="title has-link-black-ter is-size-6 has-text-weight-normal">搭建elasticsearch_kibana</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="搭建docker_registry">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-06-12T08:50:28.000Z">2020-06-12</time></div>
-                    <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" class="title has-link-black-ter is-size-6 has-text-weight-normal">搭建docker_registry</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -862,6 +897,39 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2021/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2021</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2020/09/">
@@ -1048,7 +1116,7 @@
               
               </a>
               <p class="is-size-7">
-              &copy; 2020 relengxing&nbsp;</br>
+              &copy; 2021 relengxing&nbsp;</br>
               <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
                       href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
 
@@ -1142,7 +1210,7 @@ var IcarusThemeSettings = {
 
 <div id="outdated">
     <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update
             my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>

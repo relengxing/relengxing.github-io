@@ -7,15 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: java - relengxing blog</title>
+<title>多路复用IO.md - relengxing blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="relengxing blog">
-<meta property="og:url" content="http://yoursite.com/tags/java/index.html">
+    <meta name="description" content="多路复用的一些参考文章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多路复用IO.md">
+<meta property="og:url" content="http://yoursite.com/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/index.html">
 <meta property="og:site_name" content="relengxing blog">
+<meta property="og:description" content="多路复用的一些参考文章">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="article:published_time" content="2021-01-24T11:34:48.000Z">
+<meta property="article:modified_time" content="2021-02-09T13:22:08.751Z">
 <meta property="article:author" content="relengxing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
@@ -76,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                <img src="/images/eva06.jpg" alt="多路复用IO.md" height="28">
             
             </a>
         </div>
@@ -125,117 +129,142 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-01-24T11:34:48.000Z">2021-01-24</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 313 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                多路复用IO.md
+            
+        </h1>
+        <div class="content">
+            <p>多路复用的一些参考文章</p>
+<span id="more"></span>
+
+<h2 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h2><ol>
+<li>select 用法&amp;原理详解（源码剖析）<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhougb3/article/details/79792089">https://blog.csdn.net/zhougb3/article/details/79792089</a></li>
+<li>深入 select 多路复用内核源码加驱动实现<br><a target="_blank" rel="noopener" href="https://my.oschina.net/fileoptions/blog/911091">https://my.oschina.net/fileoptions/blog/911091</a></li>
+<li>彻底搞懂 epoll 高效运行的原理<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/y277an/article/details/97622206">https://blog.csdn.net/y277an/article/details/97622206</a></li>
+</ol>
+<h2 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h2><p>select 是通过 bitmap 来记录所有文件描述符的，所以有最大 1024 个的限制。<br>1024 是内核默认的定义，如果想突破，需要重新编译。</p>
+<h2 id="进化路线"><a href="#进化路线" class="headerlink" title="进化路线"></a>进化路线</h2><p>select ：<br>缺点：</p>
+<ol>
+<li>1024 的最大值上限。</li>
+<li>每次都需要重新构建 fdset</li>
+<li>两次用户态和内核态的拷贝，</li>
+<li>需要遍历整个 fdset</li>
+</ol>
+<p>poll：<br>使用自定义数据结构解决了 select 1024 上限的问题<br>但是还是有其他的缺点</p>
+<p>epoll：<br>epoll 底层使用红黑树和链表<br>epoll 会在内核的内存空间开辟一个存储区，通过 epoll_ctl 设置需要监听的文件描述符。当有 socket 就绪后，会通过回调函数，把文件描述符存储到就绪队列中。<br>当用户态程序调用 epoll_wait 时，返回就绪队列。<br>解决了 select 的其他缺点。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">java</a></li>
-        </ul>
-        </nav>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zhifubao.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/weixin.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
     </div>
 </div>
 
-    
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">记录一次线上宕机的问题2020_02_20.md</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/">
+                <span class="level-item"></span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
 <div class="card">
-    
-    <div class="card-content article ">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-07-10T02:42:12.000Z">2020-07-10</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1402 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/">注解实现字段自动解密</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近有个项目要传输密码，密码当然不能明文传输。需要前端加密，后端解密。<br>加密算法使用 RSA。</p>
-<p>使用注解加 AOP 实现</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '23470f956d3db70be30b',
+        clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
+        id: 'b44f17056baec2d76f61ca7bbb7deafe',
+        repo: 'relengxing.github.io',
+        owner: 'relengxing',
+        admin: "relengxing",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
     </div>
 </div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-08-13T08:20:47.000Z">2016-08-13</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    10 分钟 读完 (大约 1443 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/08/13/RxBus/">RxBus</a>
-            
-        </h1>
-        <div class="content">
-            <p>参考：用 RxJava 实现事件总线(Event Bus)<br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ca090f6e2fe2">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
-<p>我这篇基本上就是按照上面那篇写的，对 Sticky 那一块进行了一些修改。<br>写下来让自己记得更深刻。这篇文章面向有 RxJava 基础的人，要是 HelloWorld 都没写过建议先看基础部分。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2016/08/13/RxBus/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 </div>
                 
 
@@ -1055,7 +1084,7 @@
           <div class="level-start has-text-centered-mobile">
               <a class="footer-logo is-block has-mb-6" href="/">
               
-                  <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                  <img src="/images/eva06.jpg" alt="多路复用IO.md" height="28">
               
               </a>
               <p class="is-size-7">

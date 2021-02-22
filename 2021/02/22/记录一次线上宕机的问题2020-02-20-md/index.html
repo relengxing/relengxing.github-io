@@ -7,15 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: java - relengxing blog</title>
+<title>记录一次线上宕机的问题2020_02_20.md - relengxing blog</title>
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="relengxing blog">
-<meta property="og:url" content="http://yoursite.com/tags/java/index.html">
+    <meta name="description" content="今天一个核心系统宕机了，导致所有服务不可用，在自动重启后又恢复了。 下面记录整个排查过程 我们使用的环境是 dockerJDK 版本 1.8参数是 123JVM_OPTIONS&#x3D;&quot;-Xms2048M -Xmx2048M -Xss512K -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录一次线上宕机的问题2020_02_20.md">
+<meta property="og:url" content="http://yoursite.com/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/index.html">
 <meta property="og:site_name" content="relengxing blog">
+<meta property="og:description" content="今天一个核心系统宕机了，导致所有服务不可用，在自动重启后又恢复了。 下面记录整个排查过程 我们使用的环境是 dockerJDK 版本 1.8参数是 123JVM_OPTIONS&#x3D;&quot;-Xms2048M -Xmx2048M -Xss512K -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancy">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="article:published_time" content="2021-02-22T09:22:37.000Z">
+<meta property="article:modified_time" content="2021-02-22T11:38:21.701Z">
 <meta property="article:author" content="relengxing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
@@ -76,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                <img src="/images/eva06.jpg" alt="记录一次线上宕机的问题2020_02_20.md" height="28">
             
             </a>
         </div>
@@ -125,117 +129,133 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2021-02-22T09:22:37.000Z">2021-02-22</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 425 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                记录一次线上宕机的问题2020_02_20.md
+            
+        </h1>
+        <div class="content">
+            <p>今天一个核心系统宕机了，导致所有服务不可用，在自动重启后又恢复了。</p>
+<p>下面记录整个排查过程</p>
+<p>我们使用的环境是 docker<br>JDK 版本 1.8<br>参数是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JVM_OPTIONS&#x3D;&quot;-Xms2048M -Xmx2048M -Xss512K -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction&#x3D;68 -XX:ParallelGCThreads&#x3D;4 -XX:+CMSClassUnloadingEnabled -Xloggc:logs&#x2F;gc.log -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintGCDetails&quot;</span><br><span class="line">LIMIT_MEMORY&#x3D;2.5G</span><br><span class="line">SERVICE_REPLICAS&#x3D;4</span><br></pre></td></tr></table></figure>
+
+<p>新生代老年代默认比例是 1:2<br>最大内存是 2G<br>老年代是 1365M</p>
+<p>通过 JProfiler 分析 dump 文件<br><img src="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/biggestobject.png" alt="步骤"></p>
+<p>发现有一个大对象，600 多 M</p>
+<p>查看对象引用<br><img src="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/objref.png" alt="步骤"></p>
+<p>发现对象是来自于 MemoryCacheStore 这个类，然后可以定位到代码。</p>
+<p>代码发现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义缓存管理器</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SecurityMemoryCacheManager cacheManager = <span class="keyword">new</span> SecurityMemoryCacheManager();</span><br><span class="line"></span><br><span class="line">-------</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityMemoryCacheManager</span> <span class="keyword">extends</span> <span class="title">SimpleCacheManager</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Cache <span class="title">getMissingCache</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ConcurrentMapCache(CACHE_NAME_PREFIX + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-------</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ConcurrentMapCache</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>(name, <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;(<span class="number">256</span>), <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码确实发现了一个 ConcurrentHashMap</p>
+<p>进一步分析业务逻辑，<br>发现这个 map 是第一个架构师写的用于存储 token 和权限的。<br>实际上已经没有用到了，但是陈年老代码，也没有删除。</p>
+<p>为什么会在这个时间出现也分析了一下原因。<br>以前这个系统经常有功能要上线，一般一个星期就会发版重启一次，但是年前那段时间，没有新功能，也就没有发版，又过了一个年，导致内存占用越来越多。<br>直到 OOM。索性系统会自动恢复，没有造成巨大影响。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">java</a></li>
-        </ul>
-        </nav>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zhifubao.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/weixin.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
     </div>
 </div>
 
-    
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/">
+                <span class="level-item">多路复用IO.md</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
 <div class="card">
-    
-    <div class="card-content article ">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-07-10T02:42:12.000Z">2020-07-10</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1402 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/">注解实现字段自动解密</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近有个项目要传输密码，密码当然不能明文传输。需要前端加密，后端解密。<br>加密算法使用 RSA。</p>
-<p>使用注解加 AOP 实现</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '23470f956d3db70be30b',
+        clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
+        id: '9a961080f5042a16ebd4dd1df26466e5',
+        repo: 'relengxing.github.io',
+        owner: 'relengxing',
+        admin: "relengxing",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
     </div>
 </div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-08-13T08:20:47.000Z">2016-08-13</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    10 分钟 读完 (大约 1443 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/08/13/RxBus/">RxBus</a>
-            
-        </h1>
-        <div class="content">
-            <p>参考：用 RxJava 实现事件总线(Event Bus)<br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ca090f6e2fe2">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
-<p>我这篇基本上就是按照上面那篇写的，对 Sticky 那一块进行了一些修改。<br>写下来让自己记得更深刻。这篇文章面向有 RxJava 基础的人，要是 HelloWorld 都没写过建议先看基础部分。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2016/08/13/RxBus/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 </div>
                 
 
@@ -1055,7 +1075,7 @@
           <div class="level-start has-text-centered-mobile">
               <a class="footer-logo is-block has-mb-6" href="/">
               
-                  <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                  <img src="/images/eva06.jpg" alt="记录一次线上宕机的问题2020_02_20.md" height="28">
               
               </a>
               <p class="is-size-7">

@@ -7,15 +7,19 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>标签: java - relengxing blog</title>
+<title>relengxing blog</title>
 
 
-    <meta property="og:type" content="website">
+    <meta name="description" content="规划   IP 地址 主机名 角色 说明    192.168.1.39 k8s-master-lb, k8s-master-lb.jz-sz.com 负载均衡 虚拟IP   192.168.1.40 k8s-master01, k8s-master01.jz-sz.com master master 节点   192.168.1.41 k8s-master02, k8s-master02.jz-">
+<meta property="og:type" content="article">
 <meta property="og:title" content="relengxing blog">
-<meta property="og:url" content="http://yoursite.com/tags/java/index.html">
+<meta property="og:url" content="http://yoursite.com/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="relengxing blog">
+<meta property="og:description" content="规划   IP 地址 主机名 角色 说明    192.168.1.39 k8s-master-lb, k8s-master-lb.jz-sz.com 负载均衡 虚拟IP   192.168.1.40 k8s-master01, k8s-master01.jz-sz.com master master 节点   192.168.1.41 k8s-master02, k8s-master02.jz-">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="article:published_time" content="2020-12-04T03:14:45.310Z">
+<meta property="article:modified_time" content="2020-12-04T03:14:45.532Z">
 <meta property="article:author" content="relengxing">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
@@ -76,7 +80,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                <img src="/images/eva06.jpg" alt="" height="28">
             
             </a>
         </div>
@@ -125,117 +129,204 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-12-04T03:14:45.310Z">2020-12-04</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分钟 读完 (大约 1360 个字)
+                </span>
+                
+                
+                <span class="level-item has-text-grey" id="busuanzi_container_page_pv">
+                    <i class="far fa-eye"></i>
+                    <span id="busuanzi_value_page_pv">0</span>次访问
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                
+            
+        </h1>
+        <div class="content">
+            <h1 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h1><table>
+<thead>
+<tr>
+<th>IP 地址</th>
+<th>主机名</th>
+<th>角色</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.1.39</td>
+<td>k8s-master-lb, k8s-master-lb.jz-sz.com</td>
+<td>负载均衡</td>
+<td>虚拟IP</td>
+</tr>
+<tr>
+<td>192.168.1.40</td>
+<td>k8s-master01, k8s-master01.jz-sz.com</td>
+<td>master</td>
+<td>master 节点</td>
+</tr>
+<tr>
+<td>192.168.1.41</td>
+<td>k8s-master02, k8s-master02.jz-sz.com</td>
+<td>master</td>
+<td>master 节点</td>
+</tr>
+<tr>
+<td>192.168.1.42</td>
+<td>k8s-master03, k8s-master03.jz-sz.com</td>
+<td>master</td>
+<td>master 节点</td>
+</tr>
+<tr>
+<td>192.168.1.46</td>
+<td>k8s-node01, k8s-node01.jz-sz.com</td>
+<td>node</td>
+<td>node 节点</td>
+</tr>
+<tr>
+<td>192.168.1.47</td>
+<td>k8s-node02, k8s-node02.jz-sz.com</td>
+<td>node</td>
+<td>node 节点</td>
+</tr>
+<tr>
+<td>192.168.1.48</td>
+<td>k8s-node03, k8s-node03.jz-sz.com</td>
+<td>node</td>
+<td>node 节点</td>
+</tr>
+<tr>
+<td>192.168.1.49</td>
+<td>k8s-node04, k8s-node04.jz-sz.com</td>
+<td>node</td>
+<td>node 节点</td>
+</tr>
+</tbody></table>
+<h1 id="调整系统参数"><a href="#调整系统参数" class="headerlink" title="调整系统参数"></a>调整系统参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; &#x2F;etc&#x2F;sysctl.d&#x2F;k8s.conf &lt;&lt; EOF</span><br><span class="line">net.ipv4.ip_forward &#x3D; 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables &#x3D; 1</span><br><span class="line">fs.may_detach_mounts &#x3D; 1</span><br><span class="line">vm.overcommit_memory &#x3D; 1</span><br><span class="line">vm.panic_on_oom &#x3D; 0</span><br><span class="line">fs.inotify.max_user_watches &#x3D; 89100</span><br><span class="line">fs.file-max&#x3D;52706963</span><br><span class="line">fs.nr_open &#x3D; 52706963</span><br><span class="line">net.netfilter.nf_conntrack_max&#x3D;2310720</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">net.ipv4.tcp_keepalive_time &#x3D; 600</span><br><span class="line">net.ipv4.tcp_keepalive_probes &#x3D; 3</span><br><span class="line">net.ipv4.tcp_keepalive_intvl &#x3D; 15</span><br><span class="line">net.ipv4.tcp_max_tw_buckets &#x3D; 36000</span><br><span class="line">net.ipv4.tcp_tw_reuse &#x3D; 1</span><br><span class="line">net.ipv4.tcp_max_orphans &#x3D; 327680</span><br><span class="line">net.ipv4.tcp_orphans_retries &#x3D; 3</span><br><span class="line">net.ipv4.tcp_syncookies &#x3D; 1</span><br><span class="line">net.ipv4.tcp_max_syn_backlog &#x3D; 16384</span><br><span class="line">net.ipv4.tcp_conntrack_max &#x3D; 65536</span><br><span class="line">net.ipv4.tcp_max_syn_backlog &#x3D; 16384</span><br><span class="line">net.ipv4.tcp_timestamps &#x3D; 0</span><br><span class="line">net.core.somaxconn &#x3D; 16384</span><br><span class="line">EOF</span><br><span class="line"># 立即生效</span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
+<h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br><span class="line">yum-config-manager --add-repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br><span class="line">yum makecache fast</span><br><span class="line">yum list docker-ce --showduplicates</span><br><span class="line">yum install -y docker-ce-18.09.9-3.el7 docker-ce-cli-18.09.9-3.el7</span><br><span class="line">systemctl enable --now docker</span><br><span class="line">cat &gt; &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],</span><br><span class="line">  &quot;insecure-registries&quot;: [&quot;192.168.1.138:5000&quot;],</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https:&#x2F;&#x2F;3laho3y3.mirror.aliyuncs.com&quot;</span><br><span class="line">   ],</span><br><span class="line">  &quot;log-driver&quot;: &quot;json-file&quot;,</span><br><span class="line">  &quot;log-opts&quot;: &#123;</span><br><span class="line">    &quot;max-size&quot;: &quot;100m&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;storage-driver&quot;: &quot;overlay2&quot;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">systemctl restart docker</span><br><span class="line"># 测试</span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+<h1 id="安装基础组件"><a href="#安装基础组件" class="headerlink" title="安装基础组件"></a>安装基础组件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;yum.repos.d&#x2F;kubernetes.repo</span><br><span class="line">cat &lt;&lt; &#39;EOF&#39; &gt; &#x2F;etc&#x2F;yum.repos.d&#x2F;kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name&#x3D;Kubernetes</span><br><span class="line">baseurl&#x3D;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;repos&#x2F;kubernetes-el7-x86_64&#x2F;</span><br><span class="line">enable&#x3D;1</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">repo_gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;yum-key.gpg</span><br><span class="line">              https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">yum list kubeadm --showduplicates</span><br></pre></td></tr></table></figure>
+<h1 id="版本太新，阿里云镜像不支持"><a href="#版本太新，阿里云镜像不支持" class="headerlink" title="版本太新，阿里云镜像不支持"></a>版本太新，阿里云镜像不支持</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y kubelet-1.16.6-0 kubeadm-1.16.6-0 kubectl-1.16.6-0</span><br><span class="line">systemctl enable --now kubelet</span><br></pre></td></tr></table></figure>
+<h1 id="检查初始化需要的镜像"><a href="#检查初始化需要的镜像" class="headerlink" title="检查初始化需要的镜像"></a>检查初始化需要的镜像</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">kubeadm config images list</span><br><span class="line">k8s.gcr.io&#x2F;kube-apiserver:v1.16.6</span><br><span class="line">k8s.gcr.io&#x2F;kube-controller-manager:v1.16.6</span><br><span class="line">k8s.gcr.io&#x2F;kube-scheduler:v1.16.6</span><br><span class="line">k8s.gcr.io&#x2F;kube-proxy:v1.16.6</span><br><span class="line">k8s.gcr.io&#x2F;pause:3.1</span><br><span class="line">k8s.gcr.io&#x2F;etcd:3.3.15-0</span><br><span class="line">k8s.gcr.io&#x2F;coredns:1.6.2</span><br></pre></td></tr></table></figure>
+<h1 id="使用阿里云并标记"><a href="#使用阿里云并标记" class="headerlink" title="使用阿里云并标记"></a>使用阿里云并标记</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;&#123;镜像名称&#125;:&#123;版本&#125;</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;&#123;镜像名称&#125;:&#123;版本&#125; k8s.gcr.io&#x2F;&#123;镜像名称&#125;:&#123;版本&#125;</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-apiserver:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-controller-manager:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-scheduler:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-proxy:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;pause:3.1</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;etcd:3.3.15-0</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;coredns:1.6.2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-apiserver:v1.16.6 k8s.gcr.io&#x2F;kube-apiserver:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-controller-manager:v1.16.6 k8s.gcr.io&#x2F;kube-controller-manager:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-scheduler:v1.16.6 k8s.gcr.io&#x2F;kube-scheduler:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-proxy:v1.16.6 k8s.gcr.io&#x2F;kube-proxy:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;pause:3.1 k8s.gcr.io&#x2F;pause:3.1</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;etcd:3.3.15-0 k8s.gcr.io&#x2F;etcd:3.3.15-0</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;coredns:1.6.2 k8s.gcr.io&#x2F;coredns:1.6.2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker pull quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br><span class="line">docker tag quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64 quay.io&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br></pre></td></tr></table></figure>
+<h1 id="初始化-master"><a href="#初始化-master" class="headerlink" title="初始化 master"></a>初始化 master</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 添加地址，方便后续高可用，阿里云或其它云请直接使用slb</span><br><span class="line">ip addr add 192.168.122.200&#x2F;32 dev eth0</span><br><span class="line"># 可选，生成初始化yaml</span><br><span class="line">kubeadm config print init-defaults &gt; init-defaults.yaml</span><br><span class="line">kubeadm init --kubernetes-version&#x3D;1.16.6 \</span><br><span class="line">--pod-network-cidr 10.244.0.0&#x2F;16 \</span><br><span class="line">--service-cidr 172.21.0.0&#x2F;20 \</span><br><span class="line">--apiserver-advertise-address&#x3D;0.0.0.0 \</span><br><span class="line">--control-plane-endpoint &quot;192.168.122.200:6443&quot; \</span><br><span class="line">--upload-certs \</span><br><span class="line">--ignore-preflight-errors&#x3D;swap</span><br><span class="line"># 失败重置</span><br><span class="line">kubeadm reset</span><br><span class="line">rm -rf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line"># 普通用户使用 kubectl </span><br><span class="line">mkdir -p $HOME&#x2F;.kube</span><br><span class="line">sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br><span class="line"># 也可以使用环境变量</span><br><span class="line">scp k8s-master:&#x2F;etc&#x2F;kubernetes&#x2F;admin.conf &#x2F;etc&#x2F;kubernetes&#x2F;</span><br><span class="line">echo &quot;export KUBECONFIG&#x3D;&#x2F;etc&#x2F;kubernetes&#x2F;admin.conf&quot; &gt;&gt; ~&#x2F;.bash_profile</span><br><span class="line">source .bash_profile </span><br></pre></td></tr></table></figure>
+<h1 id="配置网络，使用flannel"><a href="#配置网络，使用flannel" class="headerlink" title="配置网络，使用flannel"></a>配置网络，使用flannel</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;coreos&#x2F;flannel&#x2F;master&#x2F;Documentation&#x2F;kube-flannel.yml</span><br><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;coreos&#x2F;flannel&#x2F;blob&#x2F;master&#x2F;Documentation&#x2F;kube-flannel.yml</span><br><span class="line"># 替换为对应网段</span><br><span class="line">net-conf.json: |</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;Network&quot;: &quot;10.244.0.0&#x2F;16&quot;,</span><br><span class="line">      &quot;Backend&quot;: &#123;</span><br><span class="line">        &quot;Type&quot;: &quot;vxlan&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">docker pull quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br><span class="line">docker tag quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64 quay.io&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br><span class="line">kubectl apply -f kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<h1 id="查看集群状态"><a href="#查看集群状态" class="headerlink" title="查看集群状态"></a>查看集群状态</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br><span class="line"># 检查集群配置</span><br><span class="line">kubectl -n kube-system get cm kubeadm-config -o yaml</span><br></pre></td></tr></table></figure>
+<h1 id="node-拉取镜像"><a href="#node-拉取镜像" class="headerlink" title="node 拉取镜像"></a>node 拉取镜像</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;pause:3.1</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-proxy:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;coredns:1.6.2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-proxy:v1.16.6 k8s.gcr.io&#x2F;kube-proxy:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;pause:3.1 k8s.gcr.io&#x2F;pause:3.1</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;coredns:1.6.2 k8s.gcr.io&#x2F;coredns:1.6.2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker pull quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br><span class="line">docker tag quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64 quay.io&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br></pre></td></tr></table></figure>
+<h1 id="加入集群"><a href="#加入集群" class="headerlink" title="加入集群"></a>加入集群</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 添加 master</span><br><span class="line">kubeadm init phase upload-certs --upload-certs</span><br><span class="line">kubeadm token create --print-join-command</span><br><span class="line"># 合并</span><br><span class="line">kubeadm join 192.168.122.252:6443 --token qmihb0.2j6ikktkew8ch3vz     --discovery-token-ca-cert-hash sha256:db586028c918052bfb1b657472a4bee3d114de93b809b5ff8b53b3b7bded665a \</span><br><span class="line">--control-plane --certificate-key 0b84889916022953e6777da8babe9b643131d104a1d7f91db1a6ae7ddc60d18b</span><br><span class="line"># 添加 node</span><br><span class="line">kubeadm token create --print-join-command</span><br><span class="line">kubeadm join 192.168.122.252:6443 --token uopfdg.haazo24wvd8qxxxd \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:db586028c918052bfb1b657472a4bee3d114de93b809b5ff8b53b3b7bded665a</span><br><span class="line"># 删除节点</span><br><span class="line">kubectl drain NODE_ID --delete-local-data --force --ignore-daemonsets</span><br><span class="line">kubectl delete node NODE_ID</span><br><span class="line">kubeadm reset</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#  查看集群版本信息</span><br><span class="line">kubectl version --short&#x3D;true</span><br><span class="line">kubectl cluster-info</span><br><span class="line"># 查看所有pod 状态</span><br><span class="line">kubectl get pods --namespace&#x3D;kube-system</span><br><span class="line"># 查看 pod 状态</span><br><span class="line">kubectl describe pod kub-proxy-t64ab --namespace&#x3D;kube-system</span><br></pre></td></tr></table></figure>
+<h1 id="安装-helm"><a href="#安装-helm" class="headerlink" title="安装 helm"></a>安装 helm</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">helm version</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;kubernetes-helm&#x2F;tiller:1.6.2</span><br><span class="line">docker tag quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64 quay.io&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker pull quay.mirrors.ustc.edu.cn quay 镜像错误：net&#x2F;http: TLS handshake timeout ，将https:&#x2F;&#x2F;quay.mirrors.ustc.edu.cn&quot; 加入&#x2F;etc&#x2F;docker&#x2F;daemon.json register-mirrors</span><br><span class="line">cgdriver 不一致导致不能启动问题</span><br><span class="line">cat &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br><span class="line">cat &#x2F;etc&#x2F;sysconfig&#x2F;kubelet</span><br><span class="line">KUBELET_EXTRA_ARGS&#x3D;--cgroup-driver&#x3D;systemd</span><br><span class="line">重启 pod</span><br><span class="line">kubectl get pod &#123;podname&#125; -n &#123;namespace&#125; -o yaml | kubectl replace --force -f -</span><br><span class="line">kubectl delete pod -n &#123;namespace&#125; &#123;podname&#125;s</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
-        <ul>
-            <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">java</a></li>
-        </ul>
-        </nav>
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/zhifubao.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/weixin.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
     </div>
 </div>
 
-    
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">多路复用IO.md</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/">
+                <span class="level-item">redis_bitmap翻车的记录.md</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
 <div class="card">
-    
-    <div class="card-content article ">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">评论</h3>
         
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-07-10T02:42:12.000Z">2020-07-10</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1402 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/">注解实现字段自动解密</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近有个项目要传输密码，密码当然不能明文传输。需要前端加密，后端解密。<br>加密算法使用 RSA。</p>
-<p>使用注解加 AOP 实现</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
+<div id="comment-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.2/dist/gitalk.min.js"></script>
+<script>
+    var gitalk = new Gitalk({
+        clientID: '23470f956d3db70be30b',
+        clientSecret: '568ca38025914fbd72de11deac7fa68f7d1bed6b',
+        id: 'd37d5c1a3aa5cd55a94671545228a07a',
+        repo: 'relengxing.github.io',
+        owner: 'relengxing',
+        admin: "relengxing",
+        createIssueManually: false,
+        distractionFreeMode: false
+    })
+    gitalk.render('comment-container')
+</script>
+
     </div>
 </div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2016-08-13T08:20:47.000Z">2016-08-13</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    10 分钟 读完 (大约 1443 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2016/08/13/RxBus/">RxBus</a>
-            
-        </h1>
-        <div class="content">
-            <p>参考：用 RxJava 实现事件总线(Event Bus)<br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ca090f6e2fe2">http://www.jianshu.com/p/ca090f6e2fe2</a></p>
-<p>我这篇基本上就是按照上面那篇写的，对 Sticky 那一块进行了一些修改。<br>写下来让自己记得更深刻。这篇文章面向有 RxJava 基础的人，要是 HelloWorld 都没写过建议先看基础部分。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2016/08/13/RxBus/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 </div>
                 
 
@@ -1055,7 +1146,7 @@
           <div class="level-start has-text-centered-mobile">
               <a class="footer-logo is-block has-mb-6" href="/">
               
-                  <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
+                  <img src="/images/eva06.jpg" alt="" height="28">
               
               </a>
               <p class="is-size-7">
