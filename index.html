@@ -1,1723 +1,749 @@
+
+
 <!DOCTYPE html>
-<html  lang="zh">
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
 <head>
-    <meta charset="utf-8" />
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="relengxing">
+  <meta name="keywords" content="">
+  
+  <title>relengxing blog</title>
 
-<meta name="generator" content="Hexo 5.4.0" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>relengxing blog</title>
 
+<!-- 主题依赖的图标库，不要自行修改 -->
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="relengxing blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="relengxing blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
-<meta property="article:author" content="relengxing">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
 
 
 
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 
+<link  rel="stylesheet" href="/css/main.css" />
 
+<!-- 自定义样式保持在最底部 -->
 
-<link rel="icon" href="/images/eva06.jpg">
 
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
 
-
-    
-    
-<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
-
-    
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
-
-    
-    
-    
-    
-<link rel="stylesheet" href="/css/back-to-top.css">
-
-    
-    
-    
-    
-    
-    
-    
-    <link rel="stylesheet" href="/css/progressbar.css">
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
-    
-    <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-
-
-<link rel="stylesheet" href="/css/style.css">
-</head>
-<body class="is-3-column">
-    <nav class="navbar navbar-main">
-    <div class="container">
-        <div class="navbar-brand is-flex-center">
-            <a class="navbar-item navbar-logo" href="/">
-            
-                <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
-            
-            </a>
-        </div>
-        <div class="navbar-menu">
-            
-            <div class="navbar-start">
-                
-                <a class="navbar-item is-active"
-                href="/">主页</a>
-                
-                <a class="navbar-item"
-                href="/archives">归档</a>
-                
-                <a class="navbar-item"
-                href="/categories">分类</a>
-                
-                <a class="navbar-item"
-                href="/tags">标签</a>
-                
-                <a class="navbar-item"
-                href="/about">关于</a>
-                
-            </div>
-            
-            <div class="navbar-end">
-                
-                    
-                    <a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/relengxing">
-                        
-                        <i class="fab fa-github"></i>
-                        
-                    </a>
-                    
-                
-                
-                
-                <a class="navbar-item search" title="搜索" href="javascript:;">
-                    <i class="fas fa-search"></i>
-                </a>
-                
-            </div>
-        </div>
-    </div>
-</nav>
-    
-    <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2021-02-22T09:22:37.000Z">2021-02-22</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 425 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/">记录一次线上宕机的问题2020_02_20.md</a>
-            
-        </h1>
-        <div class="content">
-            <p>今天一个核心系统宕机了，导致所有服务不可用，在自动重启后又恢复了。</p>
-<p>下面记录整个排查过程</p>
-<p>我们使用的环境是 docker<br>JDK 版本 1.8<br>参数是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JVM_OPTIONS&#x3D;&quot;-Xms2048M -Xmx2048M -Xss512K -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction&#x3D;68 -XX:ParallelGCThreads&#x3D;4 -XX:+CMSClassUnloadingEnabled -Xloggc:logs&#x2F;gc.log -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+PrintGCDetails&quot;</span><br><span class="line">LIMIT_MEMORY&#x3D;2.5G</span><br><span class="line">SERVICE_REPLICAS&#x3D;4</span><br></pre></td></tr></table></figure>
-
-<p>新生代老年代默认比例是 1:2<br>最大内存是 2G<br>老年代是 1365M</p>
-<p>通过 JProfiler 分析 dump 文件<br><img src="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/biggestobject.png" alt="步骤"></p>
-<p>发现有一个大对象，600 多 M</p>
-<p>查看对象引用<br><img src="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/objref.png" alt="步骤"></p>
-<p>发现对象是来自于 MemoryCacheStore 这个类，然后可以定位到代码。</p>
-<p>代码发现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自定义缓存管理器</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> SecurityMemoryCacheManager cacheManager = <span class="keyword">new</span> SecurityMemoryCacheManager();</span><br><span class="line"></span><br><span class="line">-------</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SecurityMemoryCacheManager</span> <span class="keyword">extends</span> <span class="title">SimpleCacheManager</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Cache <span class="title">getMissingCache</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ConcurrentMapCache(CACHE_NAME_PREFIX + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-------</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ConcurrentMapCache</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>(name, <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;(<span class="number">256</span>), <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码确实发现了一个 ConcurrentHashMap</p>
-<p>进一步分析业务逻辑，<br>发现这个 map 是第一个架构师写的用于存储 token 和权限的。<br>实际上已经没有用到了，但是陈年老代码，也没有删除。</p>
-<p>为什么会在这个时间出现也分析了一下原因。<br>以前这个系统经常有功能要上线，一般一个星期就会发版重启一次，但是年前那段时间，没有新功能，也就没有发版，又过了一个年，导致内存占用越来越多。<br>直到 OOM。索性系统会自动恢复，没有造成巨大影响。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2021-01-24T11:34:48.000Z">2021-01-24</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 313 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/">多路复用IO.md</a>
-            
-        </h1>
-        <div class="content">
-            <p>多路复用的一些参考文章</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-12-04T03:14:45.310Z">2020-12-04</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1360 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/"></a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h1><table>
-<thead>
-<tr>
-<th>IP 地址</th>
-<th>主机名</th>
-<th>角色</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>192.168.1.39</td>
-<td>k8s-master-lb, k8s-master-lb.jz-sz.com</td>
-<td>负载均衡</td>
-<td>虚拟IP</td>
-</tr>
-<tr>
-<td>192.168.1.40</td>
-<td>k8s-master01, k8s-master01.jz-sz.com</td>
-<td>master</td>
-<td>master 节点</td>
-</tr>
-<tr>
-<td>192.168.1.41</td>
-<td>k8s-master02, k8s-master02.jz-sz.com</td>
-<td>master</td>
-<td>master 节点</td>
-</tr>
-<tr>
-<td>192.168.1.42</td>
-<td>k8s-master03, k8s-master03.jz-sz.com</td>
-<td>master</td>
-<td>master 节点</td>
-</tr>
-<tr>
-<td>192.168.1.46</td>
-<td>k8s-node01, k8s-node01.jz-sz.com</td>
-<td>node</td>
-<td>node 节点</td>
-</tr>
-<tr>
-<td>192.168.1.47</td>
-<td>k8s-node02, k8s-node02.jz-sz.com</td>
-<td>node</td>
-<td>node 节点</td>
-</tr>
-<tr>
-<td>192.168.1.48</td>
-<td>k8s-node03, k8s-node03.jz-sz.com</td>
-<td>node</td>
-<td>node 节点</td>
-</tr>
-<tr>
-<td>192.168.1.49</td>
-<td>k8s-node04, k8s-node04.jz-sz.com</td>
-<td>node</td>
-<td>node 节点</td>
-</tr>
-</tbody></table>
-<h1 id="调整系统参数"><a href="#调整系统参数" class="headerlink" title="调整系统参数"></a>调整系统参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; &#x2F;etc&#x2F;sysctl.d&#x2F;k8s.conf &lt;&lt; EOF</span><br><span class="line">net.ipv4.ip_forward &#x3D; 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables &#x3D; 1</span><br><span class="line">fs.may_detach_mounts &#x3D; 1</span><br><span class="line">vm.overcommit_memory &#x3D; 1</span><br><span class="line">vm.panic_on_oom &#x3D; 0</span><br><span class="line">fs.inotify.max_user_watches &#x3D; 89100</span><br><span class="line">fs.file-max&#x3D;52706963</span><br><span class="line">fs.nr_open &#x3D; 52706963</span><br><span class="line">net.netfilter.nf_conntrack_max&#x3D;2310720</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">net.ipv4.tcp_keepalive_time &#x3D; 600</span><br><span class="line">net.ipv4.tcp_keepalive_probes &#x3D; 3</span><br><span class="line">net.ipv4.tcp_keepalive_intvl &#x3D; 15</span><br><span class="line">net.ipv4.tcp_max_tw_buckets &#x3D; 36000</span><br><span class="line">net.ipv4.tcp_tw_reuse &#x3D; 1</span><br><span class="line">net.ipv4.tcp_max_orphans &#x3D; 327680</span><br><span class="line">net.ipv4.tcp_orphans_retries &#x3D; 3</span><br><span class="line">net.ipv4.tcp_syncookies &#x3D; 1</span><br><span class="line">net.ipv4.tcp_max_syn_backlog &#x3D; 16384</span><br><span class="line">net.ipv4.tcp_conntrack_max &#x3D; 65536</span><br><span class="line">net.ipv4.tcp_max_syn_backlog &#x3D; 16384</span><br><span class="line">net.ipv4.tcp_timestamps &#x3D; 0</span><br><span class="line">net.core.somaxconn &#x3D; 16384</span><br><span class="line">EOF</span><br><span class="line"># 立即生效</span><br><span class="line">sysctl --system</span><br></pre></td></tr></table></figure>
-<h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br><span class="line">yum-config-manager --add-repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br><span class="line">yum makecache fast</span><br><span class="line">yum list docker-ce --showduplicates</span><br><span class="line">yum install -y docker-ce-18.09.9-3.el7 docker-ce-cli-18.09.9-3.el7</span><br><span class="line">systemctl enable --now docker</span><br><span class="line">cat &gt; &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  &quot;exec-opts&quot;: [&quot;native.cgroupdriver&#x3D;systemd&quot;],</span><br><span class="line">  &quot;insecure-registries&quot;: [&quot;192.168.1.138:5000&quot;],</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https:&#x2F;&#x2F;3laho3y3.mirror.aliyuncs.com&quot;</span><br><span class="line">   ],</span><br><span class="line">  &quot;log-driver&quot;: &quot;json-file&quot;,</span><br><span class="line">  &quot;log-opts&quot;: &#123;</span><br><span class="line">    &quot;max-size&quot;: &quot;100m&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;storage-driver&quot;: &quot;overlay2&quot;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">systemctl restart docker</span><br><span class="line"># 测试</span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
-<h1 id="安装基础组件"><a href="#安装基础组件" class="headerlink" title="安装基础组件"></a>安装基础组件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;yum.repos.d&#x2F;kubernetes.repo</span><br><span class="line">cat &lt;&lt; &#39;EOF&#39; &gt; &#x2F;etc&#x2F;yum.repos.d&#x2F;kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name&#x3D;Kubernetes</span><br><span class="line">baseurl&#x3D;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;repos&#x2F;kubernetes-el7-x86_64&#x2F;</span><br><span class="line">enable&#x3D;1</span><br><span class="line">gpgcheck&#x3D;1</span><br><span class="line">repo_gpgcheck&#x3D;1</span><br><span class="line">gpgkey&#x3D;https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;yum-key.gpg</span><br><span class="line">              https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;yum&#x2F;doc&#x2F;rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">yum list kubeadm --showduplicates</span><br></pre></td></tr></table></figure>
-<h1 id="版本太新，阿里云镜像不支持"><a href="#版本太新，阿里云镜像不支持" class="headerlink" title="版本太新，阿里云镜像不支持"></a>版本太新，阿里云镜像不支持</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y kubelet-1.16.6-0 kubeadm-1.16.6-0 kubectl-1.16.6-0</span><br><span class="line">systemctl enable --now kubelet</span><br></pre></td></tr></table></figure>
-<h1 id="检查初始化需要的镜像"><a href="#检查初始化需要的镜像" class="headerlink" title="检查初始化需要的镜像"></a>检查初始化需要的镜像</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">kubeadm config images list</span><br><span class="line">k8s.gcr.io&#x2F;kube-apiserver:v1.16.6</span><br><span class="line">k8s.gcr.io&#x2F;kube-controller-manager:v1.16.6</span><br><span class="line">k8s.gcr.io&#x2F;kube-scheduler:v1.16.6</span><br><span class="line">k8s.gcr.io&#x2F;kube-proxy:v1.16.6</span><br><span class="line">k8s.gcr.io&#x2F;pause:3.1</span><br><span class="line">k8s.gcr.io&#x2F;etcd:3.3.15-0</span><br><span class="line">k8s.gcr.io&#x2F;coredns:1.6.2</span><br></pre></td></tr></table></figure>
-<h1 id="使用阿里云并标记"><a href="#使用阿里云并标记" class="headerlink" title="使用阿里云并标记"></a>使用阿里云并标记</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;&#123;镜像名称&#125;:&#123;版本&#125;</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;&#123;镜像名称&#125;:&#123;版本&#125; k8s.gcr.io&#x2F;&#123;镜像名称&#125;:&#123;版本&#125;</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-apiserver:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-controller-manager:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-scheduler:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-proxy:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;pause:3.1</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;etcd:3.3.15-0</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;coredns:1.6.2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-apiserver:v1.16.6 k8s.gcr.io&#x2F;kube-apiserver:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-controller-manager:v1.16.6 k8s.gcr.io&#x2F;kube-controller-manager:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-scheduler:v1.16.6 k8s.gcr.io&#x2F;kube-scheduler:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-proxy:v1.16.6 k8s.gcr.io&#x2F;kube-proxy:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;pause:3.1 k8s.gcr.io&#x2F;pause:3.1</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;etcd:3.3.15-0 k8s.gcr.io&#x2F;etcd:3.3.15-0</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;coredns:1.6.2 k8s.gcr.io&#x2F;coredns:1.6.2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker pull quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br><span class="line">docker tag quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64 quay.io&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br></pre></td></tr></table></figure>
-<h1 id="初始化-master"><a href="#初始化-master" class="headerlink" title="初始化 master"></a>初始化 master</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 添加地址，方便后续高可用，阿里云或其它云请直接使用slb</span><br><span class="line">ip addr add 192.168.122.200&#x2F;32 dev eth0</span><br><span class="line"># 可选，生成初始化yaml</span><br><span class="line">kubeadm config print init-defaults &gt; init-defaults.yaml</span><br><span class="line">kubeadm init --kubernetes-version&#x3D;1.16.6 \</span><br><span class="line">--pod-network-cidr 10.244.0.0&#x2F;16 \</span><br><span class="line">--service-cidr 172.21.0.0&#x2F;20 \</span><br><span class="line">--apiserver-advertise-address&#x3D;0.0.0.0 \</span><br><span class="line">--control-plane-endpoint &quot;192.168.122.200:6443&quot; \</span><br><span class="line">--upload-certs \</span><br><span class="line">--ignore-preflight-errors&#x3D;swap</span><br><span class="line"># 失败重置</span><br><span class="line">kubeadm reset</span><br><span class="line">rm -rf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line"># 普通用户使用 kubectl </span><br><span class="line">mkdir -p $HOME&#x2F;.kube</span><br><span class="line">sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br><span class="line"># 也可以使用环境变量</span><br><span class="line">scp k8s-master:&#x2F;etc&#x2F;kubernetes&#x2F;admin.conf &#x2F;etc&#x2F;kubernetes&#x2F;</span><br><span class="line">echo &quot;export KUBECONFIG&#x3D;&#x2F;etc&#x2F;kubernetes&#x2F;admin.conf&quot; &gt;&gt; ~&#x2F;.bash_profile</span><br><span class="line">source .bash_profile </span><br></pre></td></tr></table></figure>
-<h1 id="配置网络，使用flannel"><a href="#配置网络，使用flannel" class="headerlink" title="配置网络，使用flannel"></a>配置网络，使用flannel</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;coreos&#x2F;flannel&#x2F;master&#x2F;Documentation&#x2F;kube-flannel.yml</span><br><span class="line">wget https:&#x2F;&#x2F;github.com&#x2F;coreos&#x2F;flannel&#x2F;blob&#x2F;master&#x2F;Documentation&#x2F;kube-flannel.yml</span><br><span class="line"># 替换为对应网段</span><br><span class="line">net-conf.json: |</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;Network&quot;: &quot;10.244.0.0&#x2F;16&quot;,</span><br><span class="line">      &quot;Backend&quot;: &#123;</span><br><span class="line">        &quot;Type&quot;: &quot;vxlan&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">docker pull quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br><span class="line">docker tag quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64 quay.io&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br><span class="line">kubectl apply -f kube-flannel.yml</span><br></pre></td></tr></table></figure>
-<h1 id="查看集群状态"><a href="#查看集群状态" class="headerlink" title="查看集群状态"></a>查看集群状态</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl get nodes</span><br><span class="line"># 检查集群配置</span><br><span class="line">kubectl -n kube-system get cm kubeadm-config -o yaml</span><br></pre></td></tr></table></figure>
-<h1 id="node-拉取镜像"><a href="#node-拉取镜像" class="headerlink" title="node 拉取镜像"></a>node 拉取镜像</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;pause:3.1</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-proxy:v1.16.6</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;coredns:1.6.2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;kube-proxy:v1.16.6 k8s.gcr.io&#x2F;kube-proxy:v1.16.6</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;pause:3.1 k8s.gcr.io&#x2F;pause:3.1</span><br><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com&#x2F;google_containers&#x2F;coredns:1.6.2 k8s.gcr.io&#x2F;coredns:1.6.2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker pull quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br><span class="line">docker tag quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64 quay.io&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br></pre></td></tr></table></figure>
-<h1 id="加入集群"><a href="#加入集群" class="headerlink" title="加入集群"></a>加入集群</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 添加 master</span><br><span class="line">kubeadm init phase upload-certs --upload-certs</span><br><span class="line">kubeadm token create --print-join-command</span><br><span class="line"># 合并</span><br><span class="line">kubeadm join 192.168.122.252:6443 --token qmihb0.2j6ikktkew8ch3vz     --discovery-token-ca-cert-hash sha256:db586028c918052bfb1b657472a4bee3d114de93b809b5ff8b53b3b7bded665a \</span><br><span class="line">--control-plane --certificate-key 0b84889916022953e6777da8babe9b643131d104a1d7f91db1a6ae7ddc60d18b</span><br><span class="line"># 添加 node</span><br><span class="line">kubeadm token create --print-join-command</span><br><span class="line">kubeadm join 192.168.122.252:6443 --token uopfdg.haazo24wvd8qxxxd \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:db586028c918052bfb1b657472a4bee3d114de93b809b5ff8b53b3b7bded665a</span><br><span class="line"># 删除节点</span><br><span class="line">kubectl drain NODE_ID --delete-local-data --force --ignore-daemonsets</span><br><span class="line">kubectl delete node NODE_ID</span><br><span class="line">kubeadm reset</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#  查看集群版本信息</span><br><span class="line">kubectl version --short&#x3D;true</span><br><span class="line">kubectl cluster-info</span><br><span class="line"># 查看所有pod 状态</span><br><span class="line">kubectl get pods --namespace&#x3D;kube-system</span><br><span class="line"># 查看 pod 状态</span><br><span class="line">kubectl describe pod kub-proxy-t64ab --namespace&#x3D;kube-system</span><br></pre></td></tr></table></figure>
-<h1 id="安装-helm"><a href="#安装-helm" class="headerlink" title="安装 helm"></a>安装 helm</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">helm version</span><br><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com&#x2F;kubernetes-helm&#x2F;tiller:1.6.2</span><br><span class="line">docker tag quay.mirrors.ustc.edu.cn&#x2F;coreos&#x2F;flannel:v0.12.0-amd64 quay.io&#x2F;coreos&#x2F;flannel:v0.12.0-amd64</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker pull quay.mirrors.ustc.edu.cn quay 镜像错误：net&#x2F;http: TLS handshake timeout ，将https:&#x2F;&#x2F;quay.mirrors.ustc.edu.cn&quot; 加入&#x2F;etc&#x2F;docker&#x2F;daemon.json register-mirrors</span><br><span class="line">cgdriver 不一致导致不能启动问题</span><br><span class="line">cat &#x2F;etc&#x2F;docker&#x2F;daemon.json</span><br><span class="line">cat &#x2F;etc&#x2F;sysconfig&#x2F;kubelet</span><br><span class="line">KUBELET_EXTRA_ARGS&#x3D;--cgroup-driver&#x3D;systemd</span><br><span class="line">重启 pod</span><br><span class="line">kubectl get pod &#123;podname&#125; -n &#123;namespace&#125; -o yaml | kubectl replace --force -f -</span><br><span class="line">kubectl delete pod -n &#123;namespace&#125; &#123;podname&#125;s</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-09-16T08:45:37.000Z">2020-09-16</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 299 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/">redis_bitmap翻车的记录.md</a>
-            
-        </h1>
-        <div class="content">
-            <p>今天做一个需求，广告页，要求一天仅显示一次。</p>
-<p>数据是存在redis的，当时想着用bitmap可以节约空间，一个用户仅需要 1 bit。<br>但是实际使用中，遇到了几个坑。userId是long型的。bitmap只能用int。</p>
-<p>这里把long hash成 int，能解决，但是有hash碰撞的风险。不过就算发生了hash碰撞也无所谓，</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-07-10T02:42:12.000Z">2020-07-10</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1402 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/">注解实现字段自动解密</a>
-            
-        </h1>
-        <div class="content">
-            <p>最近有个项目要传输密码，密码当然不能明文传输。需要前端加密，后端解密。<br>加密算法使用 RSA。</p>
-<p>使用注解加 AOP 实现</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-22T07:58:23.000Z">2020-06-22</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 518 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/">mybatis拦截器实现日志</a>
-            
-        </h1>
-        <div class="content">
-            <p>直接贴代码<br>关于事务还没测试，等以后再更新</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-13T07:42:41.000Z">2020-06-13</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 28 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/">搭建elasticsearch_kibana</a>
-            
-        </h1>
-        <div class="content">
-            <p>docker network create elk<br>docker run -d –name elasticsearch –net elk -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” elasticsearch:6.5.4<br>docker run -d –name kibana –net elk -p 5601:5601 kibana:6.5.4</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-12T08:50:28.000Z">2020-06-12</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 36 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/">搭建docker_registry</a>
-            
-        </h1>
-        <div class="content">
-            <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/gcgc/p/10489385.html">https://www.cnblogs.com/gcgc/p/10489385.html</a></p>
-<p>docker pull registry</p>
-<p>docker run -d -v /opt/registry:/var/lib/registry -p 5000:5000 –restart=always –name registry registry:latest</p>
-<p>{<br>“registry-mirrors”: [ “<a href="https://pee6w651.mirror.aliyuncs.com&quot;],&quot;insecure-registries&quot;">https://pee6w651.mirror.aliyuncs.com&quot;],&quot;insecure-registries&quot;</a>: [“192.168.179.128:5000”]<br>}</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-12T07:09:12.000Z">2020-06-12</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    1 分钟 读完 (大约 135 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/12/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Nginx/">编译安装Nginx</a>
-            
-        </h1>
-        <div class="content">
-            <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/dmedaa/article/details/89885889">https://blog.csdn.net/dmedaa/article/details/89885889</a></p>
-<p>./configure –prefix=/usr/local/nginx –with-http_stub_status_module</p>
-<p><a target="_blank" rel="noopener" href="http://blog.oneapm.com/apm-tech/412.html">http://blog.oneapm.com/apm-tech/412.html</a></p>
-<p>nginx status 详解<br>active connections – 活跃的连接数量<br>server accepts handled requests — 总共处理了 11989 个连接 , 成功创建 11989 次握手, 总共处理了 11991 个请求<br>reading — 读取客户端的连接数.<br>writing — 响应数据到客户端的数量<br>waiting — 开启 keep-alive 的情况下,这个值等于 active – (reading+writing), 意思就是 Nginx 已经处理完正在等候下一次请求指令的驻留连接.</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-06-12T02:27:41.000Z">2020-06-12</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 805 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2020/06/12/keepalive-docker-nginx%E5%AE%9E%E8%B7%B5/">keepalive_docker_nginx实践</a>
-            
-        </h1>
-        <div class="content">
-            <p>我的本地环境，一台 Unbuntu 18.04 系统的物理机<br>想实践下 虚拟 ip，keepalive<br>就一台机器，所以用 docker 来实践一下。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2020/06/12/keepalive-docker-nginx%E5%AE%9E%E8%B7%B5/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-    
-<div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/page/0/">上一页</a>
-        </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/page/2/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link is-current" href="/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
-</div>
-</div>
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="/images/eva06.jpg" alt="relengxing">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        relengxing
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        relengxing的博客
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>深圳</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <a href="/archives">
-                        <p class="title has-text-weight-normal">
-                            15
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分类
-                    </p>
-                    <a href="/categories">
-                        <p class="title has-text-weight-normal">
-                            0
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        标签
-                    </p>
-                    <a href="/tags">
-                        <p class="title has-text-weight-normal">
-                            9
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="https://github.com/relengxing" target="_blank" rel="noopener">
-                关注我</a>
-        </div>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="Github" href="https://github.com/relengxing">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank" rel="noopener"
-                title="RSS" href="/">
-                
-                <i class="fas fa-rss"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
-    
-        
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            链接
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://github.com/relengxing" target="_blank" rel="noopener">
-                    <span class="level-left">
-                        <span class="level-item">github</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">github.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://www.jianshu.com/u/d7acd6530ab6" target="_blank" rel="noopener">
-                    <span class="level-left">
-                        <span class="level-item">简书</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">www.jianshu.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            
-            </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            标签云
-        </h3>
-        <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/rxjava/" style="font-size: 10px;">rxjava</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/" style="font-size: 10px;">一致性哈希</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 10px;">分布式</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/" style="font-size: 10px;">树莓派</a>
-    </div>
-</div>
-    
-    
-        <div class="column-right-shadow is-hidden-widescreen ">
-        
-            <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="记录一次线上宕机的问题2020_02_20.md">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-22T09:22:37.000Z">2021-02-22</time></div>
-                    <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记录一次线上宕机的问题2020_02_20.md</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="多路复用IO.md">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-24T11:34:48.000Z">2021-01-24</time></div>
-                    <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">多路复用IO.md</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-04T03:14:45.310Z">2020-12-04</time></div>
-                    <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="redis_bitmap翻车的记录.md">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-16T08:45:37.000Z">2020-09-16</time></div>
-                    <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">redis_bitmap翻车的记录.md</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="注解实现字段自动解密">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-10T02:42:12.000Z">2020-07-10</time></div>
-                    <a href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">注解实现字段自动解密</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2021/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2021</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2021/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2021</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">十月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Java/">
-                        <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/SpringBoot/">
-                        <span class="tag">SpringBoot</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/java/">
-                        <span class="tag">java</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/linux/">
-                        <span class="tag">linux</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/rxjava/">
-                        <span class="tag">rxjava</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
-                        <span class="tag">一致性哈希</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
-                        <span class="tag">分布式</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%93%88%E5%B8%8C/">
-                        <span class="tag">哈希</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">
-                        <span class="tag">树莓派</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-        
-        </div>
-    
-</div>
-
-                
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
-    
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            最新文章
-        </h3>
-        
-        <article class="media">
-            
-            <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="记录一次线上宕机的问题2020_02_20.md">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-02-22T09:22:37.000Z">2021-02-22</time></div>
-                    <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">记录一次线上宕机的问题2020_02_20.md</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="多路复用IO.md">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2021-01-24T11:34:48.000Z">2021-01-24</time></div>
-                    <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" class="title has-link-black-ter is-size-6 has-text-weight-normal">多路复用IO.md</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-04T03:14:45.310Z">2020-12-04</time></div>
-                    <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" class="title has-link-black-ter is-size-6 has-text-weight-normal"></a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="redis_bitmap翻车的记录.md">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-09-16T08:45:37.000Z">2020-09-16</time></div>
-                    <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" class="title has-link-black-ter is-size-6 has-text-weight-normal">redis_bitmap翻车的记录.md</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="注解实现字段自动解密">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-10T02:42:12.000Z">2020-07-10</time></div>
-                    <a href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/" class="title has-link-black-ter is-size-6 has-text-weight-normal">注解实现字段自动解密</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            归档
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2021/02/">
-                <span class="level-start">
-                    <span class="level-item">二月 2021</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2021/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2021</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/07/">
-                <span class="level-start">
-                    <span class="level-item">七月 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/06/">
-                <span class="level-start">
-                    <span class="level-item">六月 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">十月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2016/08/">
-                <span class="level-start">
-                    <span class="level-item">八月 2016</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                标签
-            </h3>
-            <div class="field is-grouped is-grouped-multiline">
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Java/">
-                        <span class="tag">Java</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/SpringBoot/">
-                        <span class="tag">SpringBoot</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/java/">
-                        <span class="tag">java</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/linux/">
-                        <span class="tag">linux</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/rxjava/">
-                        <span class="tag">rxjava</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">
-                        <span class="tag">一致性哈希</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">
-                        <span class="tag">分布式</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E5%93%88%E5%B8%8C/">
-                        <span class="tag">哈希</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">
-                        <span class="tag">树莓派</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</div>
-    
-    
-</div>
-
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-      <div class="level">
-          <div class="level-start has-text-centered-mobile">
-              <a class="footer-logo is-block has-mb-6" href="/">
-              
-                  <img src="/images/eva06.jpg" alt="relengxing blog" height="28">
-              
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>relengxing</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
               </a>
-              <p class="is-size-7">
-              &copy; 2021 relengxing&nbsp;</br>
-              <!-- Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
-                      href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> -->
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
 
-                <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span></br>
-                <script>
-                    var now = new Date(); 
-                    function createtime() { 
-                        var grt= new Date("12/28/2018 12:49:00");//此处修改你的建站时间或者网站上线时间 
-                        now.setTime(now.getTime()+250); 
-                        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
-                        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
-                        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
-                        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
-                        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
-                        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
-                        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
-                        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
-                    } 
-                setInterval("createtime()",250);
-                </script>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="subtitle">
+              
+            </span>
+
             
-                <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-                本站总访问量<span id="busuanzi_value_site_pv"></span>次</br>
-                本站访客数<span id="busuanzi_value_site_uv"></span>人次</br>
-                本文总阅读量<span id="busuanzi_value_page_pv"></span>次</br>
-          
-              
-              <br>
-              <span id="busuanzi_container_site_uv">
-              共<span id="busuanzi_value_site_uv">0</span>个访客
-              </span>
-              
-              </p>
           </div>
-          <div class="level-end">
-          
-              <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
-              
-              <p class="control">
-                  <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/relengxing">
-                      
-                      <i class="fab fa-github"></i>
-                      
-                  </a>
-              </p>
-              
-              </div>
-          
 
-          </div>
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
       </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/06/jenkins-CIC%E9%83%A8%E7%BD%B2-md/" target="_self">
+          jenkins_CIC部署.md
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/06/jenkins-CIC%E9%83%A8%E7%BD%B2-md/" target="_self">
+          
+          
+            
+          
+          
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-06 12:12" pubdate>
+              2021-08-06
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
   </div>
 
-</footer>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
-<script>moment.locale("zh-CN");</script>
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" target="_self">
+          记录一次线上宕机的问题2020_02_20.md
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" target="_self">
+          
+          
+            
+          
+          今天一个核心系统宕机了，导致所有服务不可用，在自动重启后又恢复了。
+下面记录整个排查过程
+我们使用的环境是 dockerJDK 版本 1.8参数是
+123JVM_OPTIONS&#x3D;&quot;-Xms2048M -Xmx2048M -Xss512K -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancy
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-22 17:22" pubdate>
+              2021-02-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" target="_self">
+          多路复用IO.md
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/24/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8IO-md/" target="_self">
+          
+          
+            
+          
+          多路复用的一些参考文章
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-24 19:34" pubdate>
+              2021-01-24
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" target="_self">
+          
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/12/04/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" target="_self">
+          
+          
+            
+          
+          规划
 
 
-<script>
-var IcarusThemeSettings = {
-    site: {
-        url: 'http://yoursite.com',
-        external_link: {"enable":true,"exclude":[]}
-    },
-    article: {
-        highlight: {
-            clipboard: true,
-            fold: 'unfolded'
-        }
-    }
-};
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+IP 地址
+主机名
+角色
+说明
 
 
 
+192.168.1.39
+k8s-master-lb, k8s-master-lb.jz-sz.com
+负载均衡
+虚拟IP
 
 
-<script src="/js/animation.js"></script>
+192.168.1.40
+k8s-master01, k8s-master01.jz-sz.com
+master
+master 节点
+
+
+192.168.1.41
+k8s-master02, k8s-master02.jz-
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-04 11:14" pubdate>
+              2020-12-04
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" target="_self">
+          redis_bitmap翻车的记录.md
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" target="_self">
+          
+          
+            
+          
+          今天做一个需求，广告页，要求一天仅显示一次。
+数据是存在redis的，当时想着用bitmap可以节约空间，一个用户仅需要 1 bit。但是实际使用中，遇到了几个坑。userId是long型的。bitmap只能用int。
+这里把long hash成 int，能解决，但是有hash碰撞的风险。不过就算发生了hash碰撞也无所谓，
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-09-16 16:45" pubdate>
+              2020-09-16
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/" target="_self">
+          注解实现字段自动解密
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/07/10/%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0%E5%AD%97%E6%AE%B5%E8%87%AA%E5%8A%A8%E8%A7%A3%E5%AF%86/" target="_self">
+          
+          
+            
+          
+          最近有个项目要传输密码，密码当然不能明文传输。需要前端加密，后端解密。加密算法使用 RSA。
+使用注解加 AOP 实现
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-07-10 10:42" pubdate>
+              2020-07-10
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/java/">java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" target="_self">
+          mybatis拦截器实现日志
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/22/mybatis%E6%8B%A6%E6%88%AA%E5%99%A8%E5%AE%9E%E7%8E%B0%E6%97%A5%E5%BF%97/" target="_self">
+          
+          
+            
+          
+          直接贴代码关于事务还没测试，等以后再更新
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-22 15:58" pubdate>
+              2020-06-22
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" target="_self">
+          搭建elasticsearch_kibana
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/13/%E6%90%AD%E5%BB%BAelasticsearch-kibana/" target="_self">
+          
+          
+            
+          
+          docker network create elkdocker run -d –name elasticsearch –net elk -p 9200:9200 -p 9300:9300 -e “discovery.type=single-node” elasticsearch:6.5.4docker run -d –name kibana –net elk -p 5601:5601 kibana
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-13 15:42" pubdate>
+              2020-06-13
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" target="_self">
+          搭建docker_registry
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/12/%E6%90%AD%E5%BB%BAdocker-registry/" target="_self">
+          
+          
+            
+          
+          https://www.cnblogs.com/gcgc/p/10489385.html
+docker pull registry
+docker run -d -v /opt/registry:/var/lib/registry -p 5000:5000 –restart=always –name registry registry:latest
+{“registry-mirrors”: [ “h
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-12 16:50" pubdate>
+              2020-06-12
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/12/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Nginx/" target="_self">
+          编译安装Nginx
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/06/12/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85Nginx/" target="_self">
+          
+          
+            
+          
+          https://blog.csdn.net/dmedaa/article/details/89885889
+./configure –prefix=/usr/local/nginx –with-http_stub_status_module
+http://blog.oneapm.com/apm-tech/412.html
+nginx status 详解active connections – 活跃
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-12 15:09" pubdate>
+              2020-06-12
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
-<script src="/js/gallery.js" defer></script>
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
 
 
 
-<div id="outdated">
-    <h6>Your browser is out-of-date!</h6>
-    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update
-            my browser now </a></p>
-    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        outdatedBrowser({
-            bgColor: '#f25648',
-            color: '#ffffff',
-            lowerThan: 'flex'
-        });
-    });
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    MathJax.Hub.Config({
-        'HTML-CSS': {
-            matchFontHeight: false
-        },
-        SVG: {
-            matchFontHeight: false
-        },
-        CommonHTML: {
-            matchFontHeight: false
-        },
-        tex2jax: {
-            inlineMath: [
-                ['$','$'],
-                ['\\(','\\)']
-            ]
-        }
-    });
-});
-</script>
-
-
-<a id="back-to-top" title="回到顶端" href="javascript:;">
-    <i class="fas fa-chevron-up"></i>
-</a>
-<script src="/js/back-to-top.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="/js/main.js" defer></script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
 
     
-    <div class="searchbox ins-search">
-    <div class="searchbox-container ins-search-container">
-        <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
-            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
-        <div class="searchbox-result-wrapper ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
+  </div>
 </div>
-<script>
-    (function (window) {
-        var INSIGHT_CONFIG = {
-            TRANSLATION: {
-                POSTS: '文章',
-                PAGES: '页面',
-                CATEGORIES: '分类',
-                TAGS: '标签',
-                UNTITLED: '(无标题)',
-            },
-            CONTENT_URL: '/content.json',
-        };
-        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-    })(window);
-</script>
-<script src="/js/insight.js" defer></script>
-<link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css">
     
 
-<!-- 雪花特效 -->
-<script type="text/javascript">
-  var windowWidth = $(window).width();
-  if (windowWidth > 480) {
-    document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
-  }
-</script>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      $.ajax({
+        type: 'GET',
+        url: 'https://v1.hitokoto.cn/',
+        headers: {},
+        dataType: 'json',
+        success: function (result) {
+          var text;
+          if (result) {
+            var keys = 'hitokoto'.split('.')
+            if (result instanceof Array) {
+              result = result[0]
+            }
+            for (const k of keys) {
+              var value = result[k]
+              if (typeof value === 'string') {
+                text = value
+                break
+              } else if (value instanceof Object) {
+                result = value
+              }
+            }
+          }
+          text ? typing(text) : typing(title);
+        },
+        error: function () {
+          typing(title)
+        }
+      })
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
 </html>
