@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一套基于 jenkins 的部署方法">
+  <meta name="author" content="relengxing">
+  <meta name="keywords" content="">
+  
+  <title>jenkins_CIC部署.md - relengxing blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>relengxing</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="jenkins_CIC部署.md">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-06 12:12" pubdate>
+        2021年8月6日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      758 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">jenkins_CIC部署.md</h1>
+            
+            <div class="markdown-body">
+              <h1 id="一套基于-jenkins-的部署方法"><a href="#一套基于-jenkins-的部署方法" class="headerlink" title="一套基于 jenkins 的部署方法"></a>一套基于 jenkins 的部署方法</h1><span id="more"></span>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以我个人使用经验来说，Jenkins 使用的很痛苦。目前只是做了一套简单的方案，还有更多复杂的东西并没有做。<br>目前做到的是，本地搭建 jenkins 环境，使用 BlueOcean，Jenkins pipeline，shared library 多环境部署<br>主要精力在标准 SpringBoot 项目的部署。</p>
+<h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><p>内部定义的标准的 Springboot 项目，最外层应该有一个<br>pom.xml 文件，该文件是 maven 的配置文件<br>Dockerfile 文件，Docker 容器文件<br>jenkinsfile 文件，jenkins pipeline 文件。</p>
+<p>然后开发一个公共库，这里命名为 jenkins-pipeline-lib，并在 Jenkins 全局配置 Global Pipeline Libraries</p>
+<p>jenkinsfile</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs groovy">library <span class="hljs-string">&#x27;relengxing-library&#x27;</span> <span class="hljs-comment">// 在Global Pipeline Libraries中配置的library name</span><br><span class="hljs-keyword">def</span> map = [:]<br><span class="hljs-comment">// 此处可以添加参数，会传入方法</span><br>build_v2(map)<br></code></pre></td></tr></table></figure>
+
+<p>dockerfile<br>底层容器</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">FROM</span> java:<span class="hljs-number">8</span>-jdk-alpine<br><span class="hljs-keyword">RUN</span><span class="bash"> apk add --update ttf-dejavu fontconfig</span><br><span class="hljs-keyword">VOLUME</span><span class="bash"> /tmp</span><br><span class="hljs-keyword">RUN</span><span class="bash"> mkdir -p /application/agent</span><br><span class="hljs-comment"># 挂载时区</span><br><span class="hljs-keyword">ENV</span> TZ=Asia/Shanghai<br><span class="hljs-keyword">RUN</span><span class="bash"> ln -snf /usr/share/zoneinfo/<span class="hljs-variable">$TZ</span> /etc/localtime &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-variable">$TZ</span> &gt; /etc/timezone</span><br><span class="hljs-comment">#定义jvm参数变量</span><br><span class="hljs-keyword">ENV</span> JAVA_OPTS=<span class="hljs-string">&quot;&quot;</span><br><span class="hljs-comment"># 复制SkyWalking</span><br><span class="hljs-keyword">ADD</span><span class="bash"> agent/ /application/agent/</span><br><span class="hljs-comment">#启动命令</span><br><span class="hljs-comment">#ENTRYPOINT cd /application &amp;&amp; java $&#123;JAVA_OPTS&#125; -Djava.security.egd=file:/dev/./urandom -jar app.jar</span><br></code></pre></td></tr></table></figure>
+
+<p>自定义容器</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-comment">#FROM 192.168.1.138:5000/supay-java8-base:latest</span><br><span class="hljs-keyword">FROM</span> <span class="hljs-number">192.168</span>.<span class="hljs-number">1.138</span>:<span class="hljs-number">5000</span>/xxxx-java8-skywalking-base:latest<br><br><span class="hljs-keyword">ARG</span> JAR_FILE<br><span class="hljs-keyword">COPY</span><span class="bash"> <span class="hljs-variable">$&#123;JAR_FILE&#125;</span> /application/app.jar</span><br><br><span class="hljs-comment">#启动命令</span><br><span class="hljs-keyword">ENTRYPOINT</span><span class="bash"> <span class="hljs-built_in">cd</span> /application &amp;&amp; java <span class="hljs-variable">$&#123;JAVA_OPTS&#125;</span> -Djava.security.egd=file:/dev/./urandom -jar app.jar</span><br><br><span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">20002</span><br><br></code></pre></td></tr></table></figure>
+
+<p>build_v2.groovy 文件<br>groovy 仅作为胶水语言，实际的编译执行等，通过 sh 和 python 来完成<br>一些参考文章：<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2cdc8efedf2f">Jenkins pipeline 中优雅的执行 shell/python/groovy 脚本</a></p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><code class="hljs groovy"><span class="hljs-keyword">def</span> call(configMap) &#123;<br><br>    pipeline &#123;<br>        agent any<br>        options &#123;<br>            <span class="hljs-comment">// 禁止同时运行多个流水线</span><br>            disableConcurrentBuilds()<br>        &#125;<br>        <span class="hljs-comment">//常量参数，初始确定后一般不需更改</span><br><span class="hljs-comment">//        environment &#123;</span><br><span class="hljs-comment">//            projectName = &quot;$&#123;configMap.projectName&#125;&quot;</span><br><span class="hljs-comment">//            java_opts = &quot;$&#123;configMap.java_opts&#125;&quot;</span><br><span class="hljs-comment">//        &#125;</span><br><br>        stages &#123;<br>            stage(<span class="hljs-string">&quot;Pre work&quot;</span>) &#123;<br>                input &#123;<br>                    message <span class="hljs-string">&quot;请输入版本号?&quot;</span><br>                    ok <span class="hljs-string">&quot;确定&quot;</span><br><span class="hljs-comment">//                    submitter &quot;alice,bob&quot;</span><br>                    parameters &#123;<br>                        string(<span class="hljs-attr">name:</span> <span class="hljs-string">&#x27;OLD_VERSION&#x27;</span>, <span class="hljs-attr">defaultValue:</span> <span class="hljs-string">&#x27;latest&#x27;</span>, <span class="hljs-attr">description:</span> <span class="hljs-string">&#x27;旧版本号?&#x27;</span>)<br>                        string(<span class="hljs-attr">name:</span> <span class="hljs-string">&#x27;NEW_VERSION&#x27;</span>, <span class="hljs-attr">defaultValue:</span> <span class="hljs-string">&#x27;latest&#x27;</span>, <span class="hljs-attr">description:</span> <span class="hljs-string">&#x27;新版本号?&#x27;</span>)<br>                    &#125;<br>                &#125;<br><br>                steps &#123;<br>                    echo <span class="hljs-string">&quot;Pre work echo&quot;</span><br>                    dir(<span class="hljs-string">&quot;cicddir&quot;</span>) &#123;<br>                        git <span class="hljs-attr">credentialsId:</span> <span class="hljs-string">&#x27;bf518420-f0a5-4259-89a3-229462e5bdce&#x27;</span>, <span class="hljs-attr">url:</span> <span class="hljs-string">&#x27;https://gitee.com/superpay/jenkins-pipeline-lib.git&#x27;</span><br>                        sh(<span class="hljs-string">&quot;chmod -R +x ./cicd/*&quot;</span>)<br><span class="hljs-comment">//                        sh(&quot;cicd/pre.sh&quot;)</span><br>                        sh(<span class="hljs-string">&quot;python3 cicd/read_project_info.py $&#123;env.BRANCH_NAME&#125; $&#123;OLD_VERSION&#125; $&#123;NEW_VERSION&#125;&quot;</span>)<br>                    &#125;<br>                &#125;<br>            &#125;<br><br>            stage(<span class="hljs-string">&#x27;Docker Build&#x27;</span>) &#123;<br>                steps &#123;<br>                    script &#123;<br>                        dir(<span class="hljs-string">&quot;cicddir&quot;</span>) &#123;<br>                            sh(<span class="hljs-string">&quot;python3 cicd/build.py&quot;</span>)<br>                        &#125;<br>                        echo <span class="hljs-string">&quot;Docker镜像 编译完成&quot;</span><br>                    &#125;<br><br>                &#125;<br>            &#125;<br><br>            stage(<span class="hljs-string">&quot;Deploy&quot;</span>) &#123;<br>                steps &#123;<br>                    script &#123;<br>                        dir(<span class="hljs-string">&quot;cicddir&quot;</span>) &#123;<br>                            sh(<span class="hljs-string">&quot;python3 cicd/deploy.py&quot;</span>)<br>                        &#125;<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br>        post &#123;<br>            always &#123;<br>                echo <span class="hljs-string">&#x27;I will always say Hello!&#x27;</span><br>            &#125;<br>            aborted &#123;<br>                echo <span class="hljs-string">&#x27;I was aborted&#x27;</span><br>            &#125;<br>            failure &#123;<br>                echo <span class="hljs-string">&#x27;I was failure&#x27;</span><br>            &#125;<br>        &#125;<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>read_project_info.py 会从 pom 文件中读取项目名称等信息，从 dockerfile 读端口号, 从全局配置中读取配置信息，生成一个本地文件，供后面的脚本使用<br>build.py 执行编译命令，并推送镜像到服务器<br>deploy.py 执行部署命令，可部署到普通 docker 服务器和 K8s 服务器</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/06/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/">
+                        <span class="hidden-mobile">kubernetes kubeadm 安装.md</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":false},"log":false});</script></body>
+</html>
