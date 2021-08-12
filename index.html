@@ -242,7 +242,7 @@ IP 地址
 192.168.1.39
 k8s-master-lb, k8s-master-lb.jz-sz.com
 负载均衡
-虚拟IP
+虚拟 IP
 
 
 192.168.1.40
@@ -252,7 +252,7 @@ master 节点
 
 
 192.168.1.41
-k8s-master02, k8s-master02.jz-
+k8s-master02, k8s-master02.jz
         </a>
       </p>
 
@@ -364,8 +364,8 @@ k8s-master02, k8s-master02.jz-
             
           
           今天做一个需求，广告页，要求一天仅显示一次。
-数据是存在redis的，当时想着用bitmap可以节约空间，一个用户仅需要 1 bit。但是实际使用中，遇到了几个坑。userId是long型的。bitmap只能用int。
-这里把long hash成 int，能解决，但是有hash碰撞的风险。不过就算发生了hash碰撞也无所谓，
+数据是存在 redis 的，当时想着用 bitmap 可以节约空间，一个用户仅需要 1 bit。但是实际使用中，遇到了几个坑。userId 是 long 型的。bitmap 只能用 int。
+这里把 long hash 成 int，能解决，但是有 hash 碰撞的风险。不过就算发生了 hash 碰撞也无所谓，
         </a>
       </p>
 

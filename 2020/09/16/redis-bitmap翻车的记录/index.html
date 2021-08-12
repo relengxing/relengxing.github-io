@@ -15,8 +15,8 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="今天做一个需求，广告页，要求一天仅显示一次。
-数据是存在redis的，当时想着用bitmap可以节约空间，一个用户仅需要 1 bit。但是实际使用中，遇到了几个坑。userId是long型的。bitmap只能用int。
-这里把long hash成 int，能解决，但是有hash碰撞的风险。不过就算发生了hash碰撞也无所谓，">
+数据是存在 redis 的，当时想着用 bitmap 可以节约空间，一个用户仅需要 1 bit。但是实际使用中，遇到了几个坑。userId 是 long 型的。bitmap 只能用 int。
+这里把 long hash 成 int，能解决，但是有 hash 碰撞的风险。不过就算发生了 hash 碰撞也无所谓，">
   <meta name="author" content="relengxing">
   <meta name="keywords" content="">
   
@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      263 字
+      266 字
     </span>
   
 
@@ -231,16 +231,16 @@
             
             <div class="markdown-body">
               <p>今天做一个需求，广告页，要求一天仅显示一次。</p>
-<p>数据是存在redis的，当时想着用bitmap可以节约空间，一个用户仅需要 1 bit。<br>但是实际使用中，遇到了几个坑。userId是long型的。bitmap只能用int。</p>
-<p>这里把long hash成 int，能解决，但是有hash碰撞的风险。不过就算发生了hash碰撞也无所谓，</p>
+<p>数据是存在 redis 的，当时想着用 bitmap 可以节约空间，一个用户仅需要 1 bit。<br>但是实际使用中，遇到了几个坑。userId 是 long 型的。bitmap 只能用 int。</p>
+<p>这里把 long hash 成 int，能解决，但是有 hash 碰撞的风险。不过就算发生了 hash 碰撞也无所谓，</p>
 <span id="more"></span>
 
 <p>然后按这个方案继续。能成功，一切正常。</p>
-<p>但是无意中去redis看的时候，这个key 的 大小有 100M。<br>只存一个用户也是100M。<br>然后我还是按不同的商户存不同的bitmap。<br>还好是在测试环境发现了，如果上了生产，就可以直接找工作了。。。</p>
+<p>但是无意中去 redis 看的时候，这个 key 的 大小有 100M。<br>只存一个用户也是 100M。<br>然后我还是按不同的商户存不同的 bitmap。<br>还好是在测试环境发现了，如果上了生产，就可以直接找工作了。。。</p>
 <p>这里分析一下。</p>
-<p>bitmap缺失可以节约空间，一个用户最多是256M,一亿个用户也是256M。</p>
+<p>bitmap 缺失可以节约空间，一个用户最多是 256M,一亿个用户也是 256M。</p>
 <p>但是我们用户少啊。。用这个方案就不太合适了</p>
-<p>然后 我们的用户Id是雪花算法Id，不是连续的，其实用bitmap也不适合</p>
+<p>然后 我们的用户 Id 是雪花算法 Id，不是连续的，其实用 bitmap 也不适合</p>
 
             </div>
             <hr>
