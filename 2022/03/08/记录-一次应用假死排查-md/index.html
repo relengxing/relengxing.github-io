@@ -14,13 +14,29 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="记录:一次应用假死排查">
   <meta name="author" content="relengxing">
   <meta name="keywords" content="">
   
-  <title>归档 - relengxing blog</title>
+  <title>记录:一次应用假死排查.md - relengxing blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,9 +163,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="记录:一次应用假死排查.md">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-08 22:12" pubdate>
+        2022年3月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      735 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -162,40 +215,86 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 19 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2016</p>
-    
-    <a href="/2016/08/13/RxBus/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">RxBus</span>
-      <time style="float: right;">08-13</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">记录:一次应用假死排查.md</h1>
+            
+            <div class="markdown-body">
+              <p>记录:一次应用假死排查</p>
+<span id="more"></span>
 
+<h2 id="起因："><a href="#起因：" class="headerlink" title="起因："></a>起因：</h2><p>最近几天，发现测试环境经常假死。复现需要很久的时间，一般得过一个晚上。</p>
+<h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><p>正常情况，应用会每隔几秒注册到Redis上。异常后发现Redis上没有注册信息，但是有一些其他的工作线程会有正常的工作信息输出。<br>代码逻辑为，新建一个线程，然后线程中会注册到Redis。<br>伪代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">Thread th = <span class="hljs-keyword">new</span> Thread()&#123;<br>  <span class="hljs-keyword">while</span>(<span class="hljs-keyword">true</span>)&#123;<br>    register();<br>    <span class="hljs-comment">// 一些业务处理</span><br>    Thread.sleep();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这段假死的代码已经在线上运行了一年了，改动极少，按理来说应该很问题了，而且业务逻辑很简单。</p>
+<h2 id="排查："><a href="#排查：" class="headerlink" title="排查："></a>排查：</h2><p>第一反应，先看看CPU,内存等信息是否正常。经检查，服务器的CPU,内存并无异常。<br>然后使用 arthas 连接应用，看应用工作情况<br>dashboard如下<br><img src="/2022/03/08/%E8%AE%B0%E5%BD%95-%E4%B8%80%E6%AC%A1%E5%BA%94%E7%94%A8%E5%81%87%E6%AD%BB%E6%8E%92%E6%9F%A5-md/dashboard.jpg" srcset="/img/loading.gif" lazyload alt="步骤"><br>如图所示,gc、内存、CPU占用都极其正常。但是有大量 TIMED_WAITING 的线程。<br>使用 thead -b 未发现死锁的情况。</p>
+<p>这时想到看一下我关注的线程到底在干嘛，堆栈信息如下<br><img src="/2022/03/08/%E8%AE%B0%E5%BD%95-%E4%B8%80%E6%AC%A1%E5%BA%94%E7%94%A8%E5%81%87%E6%AD%BB%E6%8E%92%E6%9F%A5-md/thread.jpg" srcset="/img/loading.gif" lazyload alt="步骤"><br>发现是在从 Redis 连接池获取 Connection。<br>但是一直在这里没有动静，没有超时。这里随后查看了配置，发现这里设置的是 -1,也就是永不超时。事实上这里设置超时时间也不能解决问题。<br>随后查看了Redis服务器的信息，发现也没有什么异常。<br>而且其他应用也都在使用这台Redis服务，所以推断还是应用的问题。在应用服务器使用 netstat 查看连接信息，发现有100个 redis 的连接处于 established。数量和我们配置的数量是匹配的。</p>
+<p>内心OS：连接池获取连接一直阻塞，说明连接池没有就绪的连接，但是实际上已经创建到上限了，说明连接一直没有归还，难道有慢查询？但是从Redis服务端来看，并没有发现慢查询，而且我确定这里设置了超时时间3s。<br>暂时没有发现，但是我们能确定这次不是玄学问题，肯定和Redis连接池有关系。</p>
+<p>我们是使用的 RedisTemplate，按理来说这种框架无数人验证过了，不应该会有连接使用完不归还的情况。</p>
+<p>然后开始看源码，发现 RedisTemplate 大部分命令都是有释放的。<br>但是 scan 命令不会。<br><code>使用 scan 命令切记关闭 Cursor ！！！，否则连接不会释放，导致异常（Could not get a resource from the pool）</code><br>事实上我们的代码也有调用 cursor.close() 方法，但是没有在finally 块中，然后中间如果抛出异常就没有运行 close 代码。到最后就出现了连接池耗尽，然后一直阻塞等待的假死现象。</p>
 
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/30/Mybatis%E6%8F%92%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%E8%AE%B0%E5%BD%95-md/">
+                        <span class="hidden-mobile">Mybatis插件进行数据库操作记录.md</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -275,9 +374,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
