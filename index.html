@@ -372,7 +372,7 @@ k8s-master02, k8s-master02.jz
           今天一个核心系统宕机了，导致所有服务不可用，在自动重启后又恢复了。
 下面记录整个排查过程
 我们使用的环境是 dockerJDK 版本 1.8参数是
-123JVM_OPTIONS&#x3D;&quot;-Xms2048M -Xmx2048M -Xss512K -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancy
+123JVM_OPTIONS=&quot;-Xms2048M -Xmx2048M -Xss512K -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancyOnly 
         </a>
       </p>
 
