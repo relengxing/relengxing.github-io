@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="记录:一次应用假死排查">
+  <meta name="description" content="自己封装了一个GORM的分页插件">
   <meta name="author" content="relengxing">
   <meta name="keywords" content="">
   
-  <title>记录:一次应用假死排查.md - relengxing blog</title>
+  <title>GORM分页插件 - relengxing blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="记录:一次应用假死排查.md">
+            <span class="h2" id="subtitle" title="GORM分页插件">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-08 22:12" pubdate>
-        2022年3月8日 晚上
+      <time datetime="2022-08-29 14:30" pubdate>
+        2022年8月29日 下午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      735 字
+      350 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      6
        分钟
     </span>
   
@@ -225,21 +225,13 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">记录:一次应用假死排查.md</h1>
+            <h1 style="display: none">GORM分页插件</h1>
             
             <div class="markdown-body">
-              <p>记录:一次应用假死排查</p>
+              <p>自己封装了一个GORM的分页插件</p>
 <span id="more"></span>
 
-<h2 id="起因："><a href="#起因：" class="headerlink" title="起因："></a>起因：</h2><p>最近几天，发现测试环境经常假死。复现需要很久的时间，一般得过一个晚上。</p>
-<h2 id="现象："><a href="#现象：" class="headerlink" title="现象："></a>现象：</h2><p>正常情况，应用会每隔几秒注册到Redis上。异常后发现Redis上没有注册信息，但是有一些其他的工作线程会有正常的工作信息输出。<br>代码逻辑为，新建一个线程，然后线程中会注册到Redis。<br>伪代码如下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">Thread th = <span class="hljs-keyword">new</span> Thread()&#123;<br>  <span class="hljs-keyword">while</span>(<span class="hljs-keyword">true</span>)&#123;<br>    register();<br>    <span class="hljs-comment">// 一些业务处理</span><br>    Thread.sleep();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>这段假死的代码已经在线上运行了一年了，改动极少，按理来说应该很问题了，而且业务逻辑很简单。</p>
-<h2 id="排查："><a href="#排查：" class="headerlink" title="排查："></a>排查：</h2><p>第一反应，先看看CPU,内存等信息是否正常。经检查，服务器的CPU,内存并无异常。<br>然后使用 arthas 连接应用，看应用工作情况<br>dashboard如下<br><img src="/2022/03/08/%E8%AE%B0%E5%BD%95-%E4%B8%80%E6%AC%A1%E5%BA%94%E7%94%A8%E5%81%87%E6%AD%BB%E6%8E%92%E6%9F%A5-md/dashboard.jpg" srcset="/img/loading.gif" lazyload alt="步骤"><br>如图所示,gc、内存、CPU占用都极其正常。但是有大量 TIMED_WAITING 的线程。<br>使用 thead -b 未发现死锁的情况。</p>
-<p>这时想到看一下我关注的线程到底在干嘛，堆栈信息如下<br><img src="/2022/03/08/%E8%AE%B0%E5%BD%95-%E4%B8%80%E6%AC%A1%E5%BA%94%E7%94%A8%E5%81%87%E6%AD%BB%E6%8E%92%E6%9F%A5-md/thread.jpg" srcset="/img/loading.gif" lazyload alt="步骤"><br>发现是在从 Redis 连接池获取 Connection。<br>但是一直在这里没有动静，没有超时。这里随后查看了配置，发现这里设置的是 -1,也就是永不超时。事实上这里设置超时时间也不能解决问题。<br>随后查看了Redis服务器的信息，发现也没有什么异常。<br>而且其他应用也都在使用这台Redis服务，所以推断还是应用的问题。在应用服务器使用 netstat 查看连接信息，发现有100个 redis 的连接处于 established。数量和我们配置的数量是匹配的。</p>
-<p>内心OS：连接池获取连接一直阻塞，说明连接池没有就绪的连接，但是实际上已经创建到上限了，说明连接一直没有归还，难道有慢查询？但是从Redis服务端来看，并没有发现慢查询，而且我确定这里设置了超时时间3s。<br>暂时没有发现，但是我们能确定这次不是玄学问题，肯定和Redis连接池有关系。</p>
-<p>我们是使用的 RedisTemplate，按理来说这种框架无数人验证过了，不应该会有连接使用完不归还的情况。</p>
-<p>然后开始看源码，发现 RedisTemplate 大部分命令都是有释放的。<br>但是 scan 命令不会。<br><code>使用 scan 命令切记关闭 Cursor ！！！，否则连接不会释放，导致异常（Could not get a resource from the pool）</code><br>事实上我们的代码也有调用 cursor.close() 方法，但是没有在finally 块中，然后中间如果抛出异常就没有运行 close 代码。到最后就出现了连接池耗尽，然后一直阻塞等待的假死现象。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> paginate<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">使用方法</span><br><span class="hljs-comment">	var demo entity.Demo</span><br><span class="hljs-comment">	pageReq := paginate.PageReq&#123;Page: 1, PageSize: 10&#125;</span><br><span class="hljs-comment">	pageResp, err := paginate.Page(db, &amp;pageReq, &amp;demo)</span><br><span class="hljs-comment">	for i, i2 := range pageResp.Data &#123;</span><br><span class="hljs-comment">		fmt.Println(i)</span><br><span class="hljs-comment">		fmt.Println(i2)</span><br><span class="hljs-comment">	&#125;</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;gorm.io/gorm&quot;</span><br>	<span class="hljs-string">&quot;math&quot;</span><br>)<br><br><span class="hljs-comment">// PageResp 分页返回值</span><br><span class="hljs-comment">// data: 使用范型，返回值是数组</span><br><span class="hljs-keyword">type</span> PageResp[T any] <span class="hljs-keyword">struct</span> &#123;<br>	TotalCount <span class="hljs-keyword">int64</span> <span class="hljs-string">`json:&quot;total_count&quot;`</span> <span class="hljs-comment">// 总条数</span><br>	TotalPage  <span class="hljs-keyword">int</span>   <span class="hljs-string">`json:&quot;total_page&quot;`</span>  <span class="hljs-comment">// 总页数</span><br>	Data       []T   <span class="hljs-string">`json:&quot;data&quot;`</span>        <span class="hljs-comment">// 消息实体</span><br>	PageSize   <span class="hljs-keyword">int</span>   <span class="hljs-string">`json:&quot;page_size&quot;`</span>   <span class="hljs-comment">// 每页条数</span><br>	Page       <span class="hljs-keyword">int</span>   <span class="hljs-string">`json:&quot;page&quot;`</span>        <span class="hljs-comment">// 当前页数</span><br>&#125;<br><br><span class="hljs-comment">// PageReq 分页输入参数</span><br><span class="hljs-keyword">type</span> PageReq <span class="hljs-keyword">struct</span> &#123;<br>	Page     <span class="hljs-keyword">int</span> <span class="hljs-string">`json:&quot;page&quot; form:&quot;page&quot;`</span>           <span class="hljs-comment">// 第几页</span><br>	PageSize <span class="hljs-keyword">int</span> <span class="hljs-string">`json:&quot;page_size&quot; form:&quot;page_size&quot;`</span> <span class="hljs-comment">// 每页条数</span><br>	Sort     <span class="hljs-keyword">int</span> <span class="hljs-string">`json:&quot;sort&quot; form:&quot;sort&quot;`</span>           <span class="hljs-comment">// 排序</span><br>&#125;<br><br><span class="hljs-comment">// Page 分页插件</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Page</span>[<span class="hljs-title">T</span> <span class="hljs-title">any</span>]<span class="hljs-params">(db *gorm.DB, pageReq *PageReq, model T)</span> <span class="hljs-params">(*PageResp[T], error)</span></span> &#123;<br>	<span class="hljs-keyword">var</span> (<br>		err    error<br>		count  <span class="hljs-keyword">int64</span><br>		result PageResp[T]<br>		data   []T<br>	)<br>	err = db.Model(model).Count(&amp;count).Error<br>	fmt.Println(count)<br>	<span class="hljs-keyword">if</span> err := db.Model(model).Scopes(paginate(pageReq)).Scan(&amp;data).Error; err != <span class="hljs-literal">nil</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, err<br>	&#125;<br>	result.TotalCount = count<br>	result.Data = data<br>	result.Page = pageReq.Page<br>	result.PageSize = pageReq.PageSize<br>	result.TotalPage = <span class="hljs-keyword">int</span>(math.Ceil(<span class="hljs-keyword">float64</span>(count) / <span class="hljs-keyword">float64</span>(pageReq.PageSize)))<br>	<span class="hljs-keyword">return</span> &amp;result, err<br>&#125;<br><br><span class="hljs-comment">// 使用方法：db.Scopes(Paginate(pageReq)).Find(&amp;users)</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">paginate</span><span class="hljs-params">(pageReq *PageReq)</span> <span class="hljs-title">func</span><span class="hljs-params">(db *gorm.DB)</span> *<span class="hljs-title">gorm</span>.<span class="hljs-title">DB</span></span> &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(db *gorm.DB)</span> *<span class="hljs-title">gorm</span>.<span class="hljs-title">DB</span></span> &#123;<br>		<span class="hljs-keyword">var</span> (<br>			page     = pageReq.Page<br>			pageSize = pageReq.PageSize<br>		)<br>		<span class="hljs-keyword">if</span> page == <span class="hljs-number">0</span> &#123;<br>			page = <span class="hljs-number">1</span><br>		&#125;<br>		<span class="hljs-keyword">switch</span> &#123;<br>		<span class="hljs-keyword">case</span> pageSize &gt; <span class="hljs-number">1000</span>:<br>			pageSize = <span class="hljs-number">1000</span><br>		<span class="hljs-keyword">case</span> pageSize &lt;= <span class="hljs-number">0</span>:<br>			pageSize = <span class="hljs-number">10</span><br>		&#125;<br>		offset := (page - <span class="hljs-number">1</span>) * pageSize<br>		<span class="hljs-keyword">return</span> db.Offset(offset).Limit(pageSize)<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
             </div>
             <hr>
@@ -260,18 +252,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/29/GORM_page/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GORM分页插件</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/17/dynamic-datasource/">
-                        <span class="hidden-mobile">动态数据源</span>
+                      <a href="/2022/03/08/%E8%AE%B0%E5%BD%95-%E4%B8%80%E6%AC%A1%E5%BA%94%E7%94%A8%E5%81%87%E6%AD%BB%E6%8E%92%E6%9F%A5-md/">
+                        <span class="hidden-mobile">记录:一次应用假死排查.md</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
