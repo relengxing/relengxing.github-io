@@ -182,6 +182,43 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/10/04/%E5%A4%9A%E8%BF%AD%E4%BB%A3%E5%B9%B6%E8%A1%8C%E7%BB%8F%E9%AA%8C/" target="_self">
+          多迭代并行经验
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/10/04/%E5%A4%9A%E8%BF%AD%E4%BB%A3%E5%B9%B6%E8%A1%8C%E7%BB%8F%E9%AA%8C/" target="_self">
+          
+          
+            
+          
+          多个迭代并行开发，一种可行的办法是使用泳道，把一个迭代作为一个泳道隔离开来。但是如果受限于基础设施和成本，只有一套开发环境，势必会需要合并到同一个分支。这个分支，如dev，它的版本号全部是 dev0.0.1-SNAPSHOT，不因为有新迭代合并上来而改变。
+合并到一个分支会遇到代码冲突问题。业务代码冲突是无法解决的，这个只能从架构设计的角度，尽量让每次迭代不要修改同一个文件，除了业务代码还有一些公
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-04 09:14" pubdate>
+              2023-10-04
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/11/05/%E5%8A%A8%E6%80%81%E5%88%B7%E6%96%B0%E5%AF%BC%E8%87%B4%E5%81%87%E6%AD%BB/" target="_self">
           动态刷新导致假死.md
         </a>
@@ -526,44 +563,6 @@ k8s-master02, k8s-master02.jz
             <i class="iconfont icon-date"></i>
             <time datetime="2021-01-24 19:34" pubdate>
               2021-01-24
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" target="_self">
-          redis_bitmap翻车的记录.md
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/09/16/redis-bitmap%E7%BF%BB%E8%BD%A6%E7%9A%84%E8%AE%B0%E5%BD%95/" target="_self">
-          
-          
-            
-          
-          今天做一个需求，广告页，要求一天仅显示一次。
-数据是存在 redis 的，当时想着用 bitmap 可以节约空间，一个用户仅需要 1 bit。但是实际使用中，遇到了几个坑。userId 是 long 型的。bitmap 只能用 int。
-这里把 long hash 成 int，能解决，但是有 hash 碰撞的风险。不过就算发生了 hash 碰撞也无所谓，
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-16 16:45" pubdate>
-              2020-09-16
             </time>
           </div>
         
