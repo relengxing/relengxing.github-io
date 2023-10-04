@@ -14,7 +14,8 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="多个迭代并行开发，一种可行的办法是使用泳道，把一个迭代作为一个泳道隔离开来。但是如果受限于基础设施和成本，只有一套开发环境，势必会需要合并到同一个分支。这个分支，如dev，它的版本号全部是 dev0.0.1-SNAPSHOT，不因为有新迭代合并上来而改变。
+合并到一个分支会遇到代码冲突问题。业务代码冲突是无法解决的，这个只能从架构设计的角度，尽量让每次迭代不要修改同一个文件，除了业务代码还有一些公">
   <meta name="author" content="relengxing">
   <meta name="keywords" content="">
   
@@ -232,6 +233,7 @@
 <p>合并到一个分支会遇到代码冲突问题。业务代码冲突是无法解决的，这个只能从架构设计的角度，尽量让每次迭代不要修改同一个文件，除了业务代码还有一些公共文件，例如 pom.xml </p>
 <p>首先项目要有版本号，这样在本地开发时可以使用本次迭代的版本号，这样别人在公共分支合并代码推包不会影响你的本地分支。在合并到公共分支后，pom.xml 合并冲突的问题就需要解决了。</p>
 <p>这里分情况讨论。pom.xml 会有哪些冲突。</p>
+<span id="more"></span>
 <h1 id="parent-version-version"><a href="#parent-version-version" class="headerlink" title="parent.version,version"></a>parent.version,version</h1><p>git 合并的原理是：首先有一个 公共的祖先分支(ancestor),当前分支(current),其它分支(other), 当这三个不一样时，会使用特殊标记字符来标识。<br>底层是调用 git merge-file 命令，传入三个文件。<br>参考:  <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/section/1138705">https://cloud.tencent.com/developer/section/1138705</a></p>
 <p>这样如果 parent.version 和 version 冲突，我们知道肯定是要使用当前分支的版本号（dev0.0.1-SNAPSHOT）。<br>要实现自定义合并策略，我们需要借住 git 提供的自定义合并驱动(custom merge driver)<br>简单的说</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span> 执行下面两行命令<br>git config <span class="hljs-params">--global</span> merge.<span class="hljs-keyword">version</span>_current.name <span class="hljs-string">&quot;choose current when parent version and version conflict&quot;</span><br>git config <span class="hljs-params">--global</span> merge.<span class="hljs-keyword">version</span>_current.driver <span class="hljs-string">&quot;/home/relengxing/app/version_current %O %A %B&quot;</span><br><br><br><span class="hljs-string">//</span> 根目录添加 <span class="hljs-string">.gitattributes</span> 文件<br><span class="hljs-string">//</span> 复制以下内容到文件<br>pom.xml merge=<span class="hljs-keyword">version</span>_current<br><br><span class="hljs-string">//</span> 当 parent.<span class="hljs-keyword">version</span> 和 <span class="hljs-keyword">version</span> 有冲突时，会直接使用当前分支的版本的内容<br></code></pre></td></tr></table></figure>
