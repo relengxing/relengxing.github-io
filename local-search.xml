@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>JUC线程池和Tomcat线程池</title>
+    <link href="/2023/12/01/JUC%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%92%8CTomcat%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+    <url>/2023/12/01/JUC%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%92%8CTomcat%E7%BA%BF%E7%A8%8B%E6%B1%A0/</url>
+    
+    <content type="html"><![CDATA[<p>这篇主要讲一下JUC线程池和Tomcat线程池的使用。</p><span id="more"></span><p>简单的讲，<br>JUC 线程池的工作过程是，优先使用核心线程数，然后填充队列，如果队列填满了，再启用最大线程数。<br>Tomcat 线程池则是，优先使用核心线程数，然后再使用最大线程数，如果满了，再填充队列。<br>所以 JUC 线程池适合计算密集型的任务， Tomcat线程池则适合IO密集型的任务。</p><p>JUC 线程池</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">threadPoolExecutor = <span class="hljs-keyword">new</span> ThreadPoolExecutor(<br>    <span class="hljs-number">4</span>,<br>    <span class="hljs-number">32</span>,<br>    <span class="hljs-number">1L</span>,<br>    TimeUnit.MINUTES,<br>    taskQueue,<br>    tf, <span class="hljs-keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());<br><br></code></pre></td></tr></table></figure><p>Tomcat 线程池</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java">tomcat创建线程池<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">createExecutor</span><span class="hljs-params">()</span> </span>&#123;<br>  internalExecutor = <span class="hljs-keyword">true</span>;<br>  <span class="hljs-comment">// 任务队列和普通的队列有所区别，后续分析 </span><br>  TaskQueue taskqueue = <span class="hljs-keyword">new</span> TaskQueue();<br>  <span class="hljs-comment">// 线程工厂用于创建线程  本地项目name=http-nio-port-exec-序号</span><br>  TaskThreadFactory tf = <span class="hljs-keyword">new</span> TaskThreadFactory(getName() + <span class="hljs-string">&quot;-exec-&quot;</span>, daemon, getThreadPriority());<br>  <span class="hljs-comment">// 创建线程池，注意这个ThreadPoolExecutor和java.util.concurrent包下的ThreadPoolExecutor有所区别</span><br>  executor = <span class="hljs-keyword">new</span> ThreadPoolExecutor(getMinSpareThreads(), getMaxThreads(), <span class="hljs-number">60</span>, TimeUnit.SECONDS,taskqueue, tf);<br>  <span class="hljs-comment">// 给任务队列设置线程池，用于后续任务来了判断是创建线程执行还是将线程添加到任务队列</span><br>  taskqueue.setParent( (ThreadPoolExecutor) executor);<br>&#125;<br><br><br>threadPoolExecutor = <span class="hljs-keyword">new</span> ThreadPoolExecutor(<br>    <span class="hljs-number">0</span>,<br>    <span class="hljs-number">32</span>,<br>    <span class="hljs-number">1L</span>,<br>    TimeUnit.MINUTES,<br>    taskQueue,<br>    tf, <span class="hljs-keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());<br></code></pre></td></tr></table></figure><p><a href="https://www.cnblogs.com/monianxd/p/16579339.html">参考文章</a></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>多迭代并行经验</title>
     <link href="/2023/10/04/%E5%A4%9A%E8%BF%AD%E4%BB%A3%E5%B9%B6%E8%A1%8C%E7%BB%8F%E9%AA%8C/"/>
     <url>/2023/10/04/%E5%A4%9A%E8%BF%AD%E4%BB%A3%E5%B9%B6%E8%A1%8C%E7%BB%8F%E9%AA%8C/</url>
