@@ -304,14 +304,14 @@
 <li><strong>GTC，分布式事务</strong><br>参考 Seata 开发的分布式事务，实现了 AT 和 Saga 模式。负责整个 JAVA 的SDK开发和协调中心开发。</li>
 </ul>
 </li>
-<li><h3 id="Staffum（贝深科技）2017-02-–-2020-02"><a href="#Staffum（贝深科技）2017-02-–-2020-02" class="headerlink" title="Staffum（贝深科技）2017.02 – 2020.02"></a>Staffum（贝深科技）2017.02 – 2020.02</h3><p>项目介绍：该系统由 <strong>店铺管理服务</strong>，<strong>设备管理服务</strong>，人员权限管理服务，<strong>数据导入服务</strong>，<strong>数据导出服务</strong>，<strong>任务发布服务</strong>，视频采集服务，排班算法服务，预测算法服务，人流量视频解析算法服务 等模块组成。（加粗部分为我负责开发）<br>主要架构技术包括：<br>SpringBoot+MySQL+Redis+Mongodb+RabbitMQ+Docker+Kubernetes 等</p>
-</li>
-</ul>
+<li><h3 id="Staffum（贝深科技）2017-02-–-2020-02"><a href="#Staffum（贝深科技）2017-02-–-2020-02" class="headerlink" title="Staffum（贝深科技）2017.02 – 2020.02"></a>Staffum（贝深科技）2017.02 – 2020.02</h3><p>项目介绍：该系统由 <strong>店铺管理服务</strong>，<strong>设备管理服务</strong>，人员权限管理服务，<strong>数据导入服务</strong>，<strong>数据导出服务</strong>，<strong>任务发布服务</strong>，视频采集服务，排班算法服务，预测算法服务，人流量视频解析算法服务 等模块组成。（加粗部分为我负责开发）<br>主要架构技术包括：SpringBoot+MySQL+Redis+Mongodb+RabbitMQ+Docker+Kubernetes 等</p>
 <ul>
 <li>店铺管理服务，设备管理服务，人员权限管理服务 是主要的业务模块，对商铺、设备、人员的数据进行管理。服务与服务之间使用 Restful API 进行通讯。</li>
 <li>数据导入服务，是一套用 JAVA 写的解析客户上传的 EXCEL 数据并存储到数据库，后来开发了一套基于 Google 大数据处理工具的 ETL pipeline 替换这个服务。数据导出服务 允许客户使用 API 下载人流量数据，排班数据，预测数据等数据。</li>
 <li>任务发布服务 是基于 K8S SDK 开发的，公司每天有数千个 docker 封装的任务要在 K8S 上运行，算法服务会把任务发布到 Redis 上，任务发布服务会把任务根据优先级发布到 K8S，任务结束后会发送消息到 Slack。同时会根据任务的多少对 K8S 进行扩缩容来节约成本，任务过多时还会主动告警。</li>
 <li>预测算法服务，人流量视频解析算法服务 这两个算法服务就是通过任务系统发布到 K8S 上运行的。排班算法服务 从 RabbitMQ 获取店铺管理服务发布过来的任务数据，生成结果写入 Redis 中。</li>
+</ul>
+</li>
 </ul>
 
 
