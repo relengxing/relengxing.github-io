@@ -14,7 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="全链路灰度是一个很基础架构的项目，在我看来，能独立完成全链路灰度的方案设计和代码编写，那基础架构算是入门了。">
+  <meta name="description" content="前言全链路灰度是一个很基础架构的项目，在我看来，能独立完成全链路灰度的方案设计和代码编写，那基础架构算是入门了。">
   <meta name="author" content="relengxing">
   <meta name="keywords" content="">
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      50 字
+      179 字
     </span>
   
 
@@ -228,17 +228,24 @@
             <h1 style="display: none">全链路灰度</h1>
             
             <div class="markdown-body">
-              <p>全链路灰度是一个很基础架构的项目，在我看来，能独立完成全链路灰度的方案设计和代码编写，那基础架构算是入门了。</p>
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>全链路灰度是一个很基础架构的项目，在我看来，能独立完成全链路灰度的方案设计和代码编写，那基础架构算是入门了。</p>
 <span id="more"></span>
 
-
-
-
+<p>全链路灰度的实现有很多方案，比如大火的 service mesh，通过修改容器的iptable来实现流量的拦截和转发，可以说这是终极的解决方案，真正实现代码 0 侵入。<br>这种方式优点明显缺点也明显，最关键的就是复杂度和性能。</p>
+<p>当然还有其他的实现方式，比如在入口流量染色，在调用时根据流量路由。<br>本文讲的就是这种。</p>
+<h1 id="方案设计"><a href="#方案设计" class="headerlink" title="方案设计"></a>方案设计</h1>
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/java/">java</a>
+                    
+                  </div>
                 
               </div>
               
