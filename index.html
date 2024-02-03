@@ -182,6 +182,78 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/02/02/%E5%85%A8%E9%93%BE%E8%B7%AF%E7%81%B0%E5%BA%A6/" target="_self">
+          全链路灰度
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2024/02/02/%E5%85%A8%E9%93%BE%E8%B7%AF%E7%81%B0%E5%BA%A6/" target="_self">
+          
+          
+            
+          
+          全链路灰度是一个很基础架构的项目，在我看来，能独立完成全链路灰度的方案设计和代码编写，那基础架构算是入门了。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-02-02 23:38" pubdate>
+              2024-02-02
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/02/01/%E5%9F%BA%E4%BA%8Emmap%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/" target="_self">
+          基于mmap的存储方案
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2024/02/01/%E5%9F%BA%E4%BA%8Emmap%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E6%A1%88/" target="_self">
+          
+          
+            
+          
+          技术服务于业务，选择一种技术要看这个技术是不适合业务需求。mmap内存映射的文件存储，是一项典型的中间件技术，一般的业务开发是想不到这种做法的。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-02-01 23:40" pubdate>
+              2024-02-01
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/12/01/JUC%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%92%8CTomcat%E7%BA%BF%E7%A8%8B%E6%B1%A0/" target="_self">
           JUC线程池和Tomcat线程池
         </a>
@@ -476,104 +548,6 @@
               <a href="/tags/cicd/">cicd</a>
             
           </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/06/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" target="_self">
-          kubernetes kubeadm 安装.md
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/06/kubernetes%20kubeadm%20%E5%AE%89%E8%A3%85/" target="_self">
-          
-          
-            
-          
-          规划
-
-
-IP 地址
-主机名
-角色
-说明
-
-
-
-192.168.1.39
-k8s-master-lb, k8s-master-lb.jz-sz.com
-负载均衡
-虚拟 IP
-
-
-192.168.1.40
-k8s-master01, k8s-master01.jz-sz.com
-master
-master 节点
-
-
-192.168.1.41
-k8s-master02, k8s-master02.jz
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-06 12:12" pubdate>
-              2021-06-06
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" target="_self">
-          记录一次线上宕机的问题2020_02_20.md
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/22/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E7%BA%BF%E4%B8%8A%E5%AE%95%E6%9C%BA%E7%9A%84%E9%97%AE%E9%A2%982020-02-20-md/" target="_self">
-          
-          
-            
-          
-          今天一个核心系统宕机了，导致所有服务不可用，在自动重启后又恢复了。
-下面记录整个排查过程
-我们使用的环境是 dockerJDK 版本 1.8参数是
-123JVM_OPTIONS=&quot;-Xms2048M -Xmx2048M -Xss512K -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancyOnly 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-22 17:22" pubdate>
-              2021-02-22
-            </time>
-          </div>
-        
-        
         
       </div>
     </article>
